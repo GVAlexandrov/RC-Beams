@@ -21,7 +21,7 @@ const Footer = () => {
 const FooterStyled = styled.footer`
 background:black;
 color:white;
-height:100px;
+height:101px;
 
 `;
 
