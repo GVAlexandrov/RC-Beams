@@ -1,5 +1,7 @@
 // import logo from './logo.svg';
 import { Routes, Route } from 'react-router-dom';
+import styled from 'styled-components';
+
 
 import Header from './Components/Header/Header';
 
@@ -15,11 +17,9 @@ import Frames from './Components/Frames/Frames';
 import Footer from './Components/Footer/Footer';
 
 
-import './App.css';
-
 function App() {
   return (
-    <div className="App">
+    <WrapperDivStyled>
       <Header />
 
       <Routes>
@@ -35,8 +35,16 @@ function App() {
 
 
       <Footer />
-    </div>
+    </WrapperDivStyled>
   );
 }
+
+const WrapperDivStyled = styled.div`
+    background-color: gray;
+    border: 2px solid black;
+    margin: auto ;
+    text-align: center;
+    max-width:1100px;
+`;
 
 export default App;

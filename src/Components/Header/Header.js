@@ -5,33 +5,54 @@ const Header = () => {
 
     return (
         <NavStyled >
-            <ul>
-                <li><NavLink to="/beams">RC Beams</NavLink></li>
-                <li><NavLink to="/beams/new-beam">New Beam</NavLink></li>
+            <UlStyled>
+                <LiStyled><NavLinkStyled to="/beams">RC Beams</NavLinkStyled></LiStyled>
+                <LiStyled><NavLinkStyled to="/beams/new-beam">New Beam</NavLinkStyled></LiStyled>
 
-                <li><NavLink to="/register">Register</NavLink></li>
-                <li><NavLink to="/login">Login</NavLink></li>
-                <li><NavLink to="/">Logout</NavLink></li>
-            </ul>
-        </NavStyled>
+                <LiStyled><NavLinkStyled to="/register">Register</NavLinkStyled></LiStyled>
+                <LiStyled><NavLinkStyled to="/login">Login</NavLinkStyled></LiStyled>
+                <LiStyled><NavLinkStyled to="/">Logout</NavLinkStyled></LiStyled>
+            </UlStyled>
+        </NavStyled >
     )
 }
 
 const NavStyled = styled.nav`
 background: black;
-color:white;
 height:80px;
 display:flex;
-justify-content:center;
+justify-content:end;
 align-items:center;
-font-size: 1.2rem;
+font-size: 1.5rem;
 position: sticky;
-top:0;
-z-index:1;
+/* top:0; */
+/* z-index:1; */
 
 &:hover{
     color:red;
+    
 }
 `
+
+const UlStyled = styled.ul`
+list-style:none;
+text-align:right;
+`;
+
+const LiStyled = styled.li`
+display:inline;
+margin:1rem;
+`;
+
+const NavLinkStyled = styled(NavLink)`
+  text-decoration:none;
+  color: white;
+
+  
+  &:hover{
+    color:red;
+}
+`;
+
 
 export default Header;
