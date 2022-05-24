@@ -1,24 +1,23 @@
+import styled from 'styled-components';
 
 const Beams = () => {
 
     return (
         <main >
 
-            <table >
-                <thead>
-                    <tr>
+            <TableStyled >
+                <THeadStyled>
+                    <TrStyled>
                         <th>Height</th>
                         <th>Width</th>
                         <th>Concrete</th>
                         <th>Steel</th>
                         <th>Rebars</th>
-                    </tr>
-
-                </thead>
+                    </TrStyled>
+                </THeadStyled>
 
                 <tbody>
-
-                    <tr>
+                    <TrStyled>
                         <td>
                             <p>600</p>
                         </td>
@@ -34,16 +33,52 @@ const Beams = () => {
                         <td>
                             <p>12</p>
                         </td>
-                    </tr>
+                    </TrStyled>
 
+                    <TrStyled>
+                        <td>
+                            <p>400</p>
+                        </td>
+                        <td>
+                            <p>250</p>
+                        </td>
+                        <td>
+                            <p>C20/25</p>
+                        </td>
+                        <td>
+                            <p>B500B</p>
+                        </td>
+                        <td>
+                            <p>4</p>
+                        </td>
+                    </TrStyled>
                 </tbody>
-            </table>
+            </TableStyled>
 
             <h1 >No RC Beams designed so far...</h1>
 
         </main>
     );
 
+};
+
+const TableStyled = styled.table`
+width:600px;
+margin:auto;
+margin-top:25px;
+/* border: 2px solid black; */
+`
+
+const THeadStyled = styled.thead`
+text-transform:capitalize;
+font-size:20px;
+`
+
+const TrStyled = styled.tr`
+&:hover{
+    background:black;
+    color:white;
 }
+`
 
 export default Beams;
