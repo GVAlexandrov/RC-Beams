@@ -4,7 +4,7 @@ const NewBeam = () => {
 
     return (
         <main>
-            <form>
+            <FormStyled>
                 <h1>New Beam</h1>
 
                 <DivStyled >
@@ -53,16 +53,26 @@ const NewBeam = () => {
 
                 <button type="Submit">Save</button>
 
-            </form>
+            </FormStyled>
         </main>
     );
 
 }
 
 const DivStyled = styled.div`
-margin: 1rem;
 font-size: 20px;
+height:40px;
+vertical-align:bottom;
 
-`
+&:hover{
+    background:black;
+    color:white;
+}
+`;
+
+const FormStyled = styled.form`
+margin:auto;
+max-width:400px;
+`;
 
 export default NewBeam;
