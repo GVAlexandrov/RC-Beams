@@ -42,7 +42,7 @@ const WrapperDivStyled = styled.div`
     border: 2px solid black;
     margin: auto ;
     text-align: center;
-    max-width:1100px;
+    height:99vh;
 `;
 
 export default App;
