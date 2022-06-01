@@ -1,5 +1,15 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { register, activeUser } from '../../services/authService';
+
 
 const Login = () => {
+    const navigat = useNavigate();
+
+    const [emailError, setEmailError] = useState("");
+    const [passError, setPassError] = useState("");
+    const [repassError, setRepassError] = useState("");
 
     return (
         <main>
