@@ -1,0 +1,1 @@
+export const URL = 'https://rc-beams-default-rtdb.europe-west1.firebasedatabase.app/';
