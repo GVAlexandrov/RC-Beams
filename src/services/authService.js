@@ -1,20 +1,20 @@
 import { firebaseLogin, firebaseRegister, firebaseSignOut } from '../config/firebaseInit';
 
-export function register(username, pass) {
-    return firebaseRegister(username, pass)
-        .then(() => login(username, pass))
+export function register(email, pass) {
+    return firebaseRegister(email, pass)
+        .then(() => login(email, pass))
         .catch((error) => console.log(error))
 }
 
-export function login(username, pass) {
-    return firebaseLogin(username, pass);
+export function login(email, pass) {
+    return firebaseLogin(email, pass);
 }
 
 export function logout() {
     return firebaseSignOut;
 }
 
-export function activeUser(uid, username) {
+export function activeUser(uid, email) {
     localStorage.setItem('uid', uid);
-    localStorage.setItem('username', username);
+    localStorage.setItem('email', email);
 }
