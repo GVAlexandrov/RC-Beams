@@ -48,6 +48,8 @@ const Header = ({
                                     <LiStyled><NavLinkStyled to={link.path}>{link.menuName}</NavLinkStyled></LiStyled>
                                 )
                             }
+
+                            return '';
                         })
                     }
 
