@@ -1,19 +1,65 @@
 import { NavLink, useNavigate } from 'react-router-dom';
+import { logout } from '../../services/authService';
 import styled from 'styled-components';
 
-const Header = () => {
+const Header = ({
+    userEmail,
+    setUserEmail
+}) => {
+
+    const links = [
+        { menuName: "Register", path: "/register", isAuth: false },
+        { menuName: "Login", path: "/login", isAuth: false },
+        { menuName: "RC Beams", path: "/beams", isAuth: true },
+        { menuName: "New Beam", path: "/beams/new-beam", isAuth: true },
+    ]
+
+    const navigate = useNavigate();
+
+    const logoutHandler = (e) => {
+        e.preventDefault();
+        logout();
+        setUserEmail(null);
+        localStorage.removeItem('email');
+        localStorage.removeItem('uid');
+        navigate('/');
+    };
+
+    console.log(userEmail);
+
 
     return (
-        <NavStyled >
-            <UlStyled>
-                <LiStyled><NavLinkStyled to="/beams">RC Beams</NavLinkStyled></LiStyled>
-                <LiStyled><NavLinkStyled to="/beams/new-beam">New Beam</NavLinkStyled></LiStyled>
+        <header>
+            <NavStyled >
+                <UlStyled>
+                    {(userEmail !== null)
+                        ? <NavLinkStyled to='/beams'><LiStyled>Hello, {localStorage.getItem('email')}</LiStyled></NavLinkStyled>
+                        : ''
+                    }
 
-                <LiStyled><NavLinkStyled to="/register">Register</NavLinkStyled></LiStyled>
-                <LiStyled><NavLinkStyled to="/login">Login</NavLinkStyled></LiStyled>
-                <LiStyled><NavLinkStyled to="/">Logout</NavLinkStyled></LiStyled>
-            </UlStyled>
-        </NavStyled >
+                    {
+                        links.map(link => {
+                            if (userEmail !== null && link.isAuth) {
+                                return (
+                                    <LiStyled><NavLinkStyled to={link.path}>{link.menuName}</NavLinkStyled></LiStyled>
+                                )
+                            } else if (userEmail === null && !link.isAuth) {
+                                return (
+                                    <LiStyled><NavLinkStyled to={link.path}>{link.menuName}</NavLinkStyled></LiStyled>
+                                )
+                            }
+                        })
+                    }
+
+                    {(userEmail !== null)
+                        ? <LiStyled><NavLinkStyled onClick={logoutHandler} to="/">Logout</NavLinkStyled></LiStyled>
+                        : ''
+                    }
+
+                    {/* <LiStyled><NavLinkStyled onClick={logoutHandler} to="/">Logout</NavLinkStyled></LiStyled> */}
+                </UlStyled>
+            </NavStyled >
+        </header>
     )
 }
 
