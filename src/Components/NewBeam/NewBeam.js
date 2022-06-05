@@ -1,26 +1,50 @@
+import * as beamService from '../../services/services';
+
 import styled from 'styled-components';
+// import Beams from '../Beams/Beams';
 
 const NewBeam = () => {
 
+    const onNewBeamSubmitHandler = (e) => {
+        e.preventDefault();
+
+        const { height, width, concrete, steel, rebar } = e.target;
+
+        beamService
+            .addNewBeam(
+                height.value,
+                width.value,
+                concrete.value,
+                steel.value,
+                rebar.value,
+            )
+            .then(responce => {
+                if (responce.statusText === 'OK') {
+                    console.log('BEAM SAVED');
+                }
+            })
+            .catch(console.log);
+    }
+
     return (
         <main>
-            <FormStyled>
+            <FormStyled onSubmit={onNewBeamSubmitHandler}>
                 <h1>New Beam</h1>
 
                 <DivStyled >
                     <label htmlFor="height">Height</label>
-                    <input id="height" type="text" placeholder="500" />
+                    <input id="height" name='height' type="text" placeholder="500" />
                     <label htmlFor="height">[mm]</label>
                 </DivStyled>
 
                 <DivStyled>
                     <label htmlFor="width">Width</label>
-                    <input id="width" type="text" placeholder="250" />
+                    <input id="width" name='width' type="text" placeholder="250" />
                     <label htmlFor="width">[mm]</label>
                 </DivStyled>
 
                 <DivStyled>
-                    <label htmlFor="rebar">Concrete</label>
+                    <label htmlFor="concrete">Concrete</label>
                     <select name="concrete" id="concrete">
                         <option disabled selected value="default">Select concrete...</option>
 
@@ -33,7 +57,7 @@ const NewBeam = () => {
 
                 <DivStyled>
                     <label htmlFor="steel">Steel</label>
-                    <select name="concrete" id="concrete">
+                    <select name="steel" id="steel">
                         <option disabled selected value="default">Select steel...</option>
 
                         <option value="B420">B420</option>
@@ -46,9 +70,13 @@ const NewBeam = () => {
                     <select name="rebar" id="rebar">
                         <option disabled selected value="default">Select rebar...</option>
 
+                        <option value="6.5">6.5</option>
                         <option value="8">8</option>
                         <option value="10">10</option>
+                        <option value="10">12</option>
+                        <option value="10">14</option>
                     </select>
+                    <label htmlFor="rebar">[mm]</label>
                 </DivStyled>
 
                 <button type="Submit">Save</button>
