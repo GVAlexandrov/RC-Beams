@@ -41,7 +41,10 @@ const Login = () => {
         if (emailError || passError) return;
 
         login(credentials.email, credentials.pass)
-            .then(res => activeUser(res.user.uid, res.user.email))
+            .then(res => {
+                activeUser(res.user.uid, res.user.email);
+                return;
+            })
             .then(() => navigate('/beams'))
             .catch(error => console.log(error));
     }
