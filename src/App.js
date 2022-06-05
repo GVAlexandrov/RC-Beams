@@ -1,25 +1,32 @@
 // import logo from './logo.svg';
 import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
+import { auth } from './config/firebaseInit';
+import { useEffect, useState } from 'react';
 
 
 import Header from './Components/Header/Header';
-
 import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
-
 import MyBeams from './Components/Beams/Beams';
 import NewBeam from './Components/NewBeam/NewBeam';
 import Frames from './Components/Frames/Frames';
-
 import Footer from './Components/Footer/Footer';
 
 
 function App() {
+  const [userEmail, setUserEmail] = useState(null);
+
+  useEffect(() => {
+    auth.onAuthStateChanged(setUserEmail);
+  }, []);
+
+  console.log(userEmail);
+
   return (
     <WrapperDivStyled>
-      <Header />
+      <Header userEmail={userEmail} setUserEmail={setUserEmail} />
 
       <Routes>
         <Route path='/' element={<Home />} />
