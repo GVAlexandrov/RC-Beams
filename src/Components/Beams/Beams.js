@@ -1,6 +1,21 @@
+import ExistingBeam from '../ExistingBeam/ExistingBeam';
+import * as services from '../../services/services';
+import { URL } from '../../config/config';
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 
 const Beams = () => {
+
+    let [beams, setBeams] = useState({});
+
+    useEffect(() => {
+        services.getAllBeams()
+            .then(res => {
+                setBeams(res);
+            });
+    }, []);
+
+    console.log(Object.entries(beams));
 
     return (
         <main >
@@ -13,45 +28,14 @@ const Beams = () => {
                         <th>Concrete</th>
                         <th>Steel</th>
                         <th>Rebars</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </TrStyled>
                 </THeadStyled>
 
                 <tbody>
-                    <TrStyled>
-                        <td>
-                            <p>600</p>
-                        </td>
-                        <td>
-                            <p>300</p>
-                        </td>
-                        <td>
-                            <p>C25/30</p>
-                        </td>
-                        <td>
-                            <p>B500B</p>
-                        </td>
-                        <td>
-                            <p>12</p>
-                        </td>
-                    </TrStyled>
+                    <ExistingBeam />
 
-                    <TrStyled>
-                        <td>
-                            <p>400</p>
-                        </td>
-                        <td>
-                            <p>250</p>
-                        </td>
-                        <td>
-                            <p>C20/25</p>
-                        </td>
-                        <td>
-                            <p>B500B</p>
-                        </td>
-                        <td>
-                            <p>4</p>
-                        </td>
-                    </TrStyled>
                 </tbody>
             </TableStyled>
 
