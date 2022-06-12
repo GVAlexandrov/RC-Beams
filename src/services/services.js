@@ -22,3 +22,15 @@ export const addNewBeam = (height, width, concrete, steel, rebar) => {
         })
 
 }
+
+export const getAllBeams = () => {
+    const uid = localStorage.uid;
+    // console.log(URL + `beams/${uid}.json`);
+
+    return fetch(`${URL}beams/${uid}/.json`)
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+        })
+        .catch(error => console.log(error));
+}
