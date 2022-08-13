@@ -1,6 +1,6 @@
 import ExistingBeam from '../ExistingBeam/ExistingBeam';
 import * as services from '../../services/services';
-import { URL } from '../../config/config';
+// import { URL } from '../../config/config';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 
@@ -12,10 +12,13 @@ const Beams = () => {
         services.getAllBeams()
             .then(res => {
                 setBeams(res);
-            });
+            })
     }, []);
 
-    console.log(Object.entries(beams));
+    let beamsArr = Object.entries(beams);
+
+    console.log(beams);
+    console.log(beamsArr);
 
     return (
         <main >
@@ -32,18 +35,25 @@ const Beams = () => {
                         <th>Delete</th>
                     </TrStyled>
                 </THeadStyled>
-
-                <tbody>
-                    <ExistingBeam />
-
-                </tbody>
+                {beamsArr.length
+                    ? (
+                        <tbody>
+                            {beamsArr.map(beam => <ExistingBeam beam={beam} />)}
+                        </tbody>
+                    )
+                    : ''
+                }
             </TableStyled>
 
-            <h1 >No RC Beams designed so far...</h1>
+            {!beamsArr.length
+                ? (
+                    <h1 >No RC Beams designed so far...</h1>
+                )
+                : ''
+            }
 
         </main>
     );
-
 };
 
 const TableStyled = styled.table`
