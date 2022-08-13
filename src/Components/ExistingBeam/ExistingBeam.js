@@ -1,25 +1,25 @@
-import { Link } from 'react-router-dom';
-import * as beamServices from '../../services/services';
 import styled from 'styled-components';
 
 
-const ExistingBeam = () => {
+const ExistingBeam = (beamObj) => {
+    console.log(beamObj.beam[1]);
+
     return (
         <TrStyled>
             <td>
-                <p>600</p>
+                <p>{beamObj.beam[1].height}</p>
             </td>
             <td>
-                <p>300</p>
+                <p>{beamObj.beam[1].width}</p>
             </td>
             <td>
-                <p>C25/30</p>
+                <p>{beamObj.beam[1].concrete}</p>
             </td>
             <td>
-                <p>B500B</p>
+                <p>{beamObj.beam[1].steel}</p>
             </td>
             <td>
-                <p>12</p>
+                <p>{beamObj.beam[1].rebar}</p>
             </td>
             <td>
                 <p>Details</p>
