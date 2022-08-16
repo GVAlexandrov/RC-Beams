@@ -26,7 +26,7 @@ const EditBeam = () => {
             })
     }, [beamId]);
 
-    const onNewBeamSubmitHandler = (e) => {
+    const onEditBeamSubmitHandler = (e) => {
         e.preventDefault();
 
         const { height, width, concrete, steel, rebar } = e.target;
@@ -75,15 +75,16 @@ const EditBeam = () => {
         if (heightTextError || widthTextError || concreteTextError || steelTextError || rebarTextError) return;
 
         beamService
-            .addNewBeam(
+            .editBeam(
                 Number(height.value),
                 width.value,
                 concrete.value,
                 steel.value,
                 rebar.value,
+                beamId
             )
-            .then(responce => {
-                if (responce.statusText === 'OK') {
+            .then(response => {
+                if (response.statusText === 'OK') {
                     navigate('/beams');
                 }
             })
@@ -92,7 +93,7 @@ const EditBeam = () => {
 
     return (
         <main>
-            <FormStyled onSubmit={onNewBeamSubmitHandler}>
+            <FormStyled onSubmit={onEditBeamSubmitHandler}>
                 <h1>Edit Beam</h1>
 
                 <DivStyled >
