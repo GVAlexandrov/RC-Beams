@@ -23,12 +23,11 @@ const Beams = () => {
     function deleteOrEditBeam(event) {
         let elementId = event.target.nodeName === 'TD' ? event.target.parentNode.id : event.target.parentNode.parentNode.id;
 
-        console.log(elementId);
+        // console.log(elementId);
 
         if (event.target.textContent === 'X') {
-            services.deleteOneBeam(event);
-        } else if (event.target.textContent === 'Edit') {
-
+            services.deleteOneBeam(event, elementId);
+        } else {
             navigate(`/beams/edit-beam/${elementId}`);
         }
     }
