@@ -2,10 +2,8 @@ import styled from 'styled-components';
 
 
 const ExistingBeam = (beamObj) => {
-    console.log(beamObj.beam[1]);
-
     return (
-        <TrStyled>
+        <TrStyled key={beamObj.beam[0]} id={beamObj.beam[0]}>
             <td>
                 <p>{beamObj.beam[1].height}</p>
             </td>
@@ -22,9 +20,9 @@ const ExistingBeam = (beamObj) => {
                 <p>{beamObj.beam[1].rebar}</p>
             </td>
             <td>
-                <p>Details</p>
+                <p>Edit</p>
             </td>
-            <td>
+            <td >
                 <p>X</p>
             </td>
         </TrStyled>
