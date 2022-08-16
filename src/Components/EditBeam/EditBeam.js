@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import * as beamService from '../../services/services';
 import validateNewElements from '../../validations/newDataValidations';
@@ -13,8 +13,18 @@ const EditBeam = () => {
     let [concreteError, setConcreteError] = useState('');
     let [steelError, setSteelError] = useState('');
     let [rebarError, setRebarError] = useState('');
+    let [beam, setBeam] = useState('');
 
     const navigate = useNavigate();
+
+    let { beamId } = useParams();
+
+    useEffect(() => {
+        beamService.getOneBeam(beamId)
+            .then(beamObj => {
+                setBeam(beamObj);
+            })
+    }, [beamId]);
 
     const onNewBeamSubmitHandler = (e) => {
         e.preventDefault();
@@ -87,7 +97,7 @@ const EditBeam = () => {
 
                 <DivStyled >
                     <label htmlFor="height">Height</label>
-                    <input id="height" name='height' type="number" placeholder="500" />
+                    <input id="height" name='height' type="number" placeholder="500" value={beam.height} />
                     <label htmlFor="height">[mm]</label>
                 </DivStyled>
 
@@ -102,7 +112,7 @@ const EditBeam = () => {
 
                 <DivStyled>
                     <label htmlFor="width">Width</label>
-                    <input id="width" name='width' type="number" placeholder="250" />
+                    <input id="width" name='width' type="number" placeholder="250" value={beam.width} />
                     <label htmlFor="width">[mm]</label>
                 </DivStyled>
 
@@ -118,7 +128,7 @@ const EditBeam = () => {
                 <DivStyled>
                     <label htmlFor="concrete">Concrete</label>
                     <select name="concrete" id="concrete">
-                        <option disabled selected value="default">Select concrete...</option>
+                        <option selected value={beam.concrete}>{beam.concrete}</option>
 
                         <option value="C20/25">C20/25</option>
                         <option value="C25/30">C25/30</option>
@@ -139,7 +149,7 @@ const EditBeam = () => {
                 <DivStyled>
                     <label htmlFor="steel">Steel</label>
                     <select name="steel" id="steel">
-                        <option disabled selected value="default">Select steel...</option>
+                        <option selected value={beam.steel}>{beam.steel}</option>
 
                         <option value="B420">B420</option>
                         <option value="B500">B500</option>
@@ -158,7 +168,7 @@ const EditBeam = () => {
                 <DivStyled>
                     <label htmlFor="rebar">Rebar</label>
                     <select name="rebar" id="rebar">
-                        <option disabled selected value="default">Select rebar...</option>
+                        <option selected value={beam.rebar}>{beam.rebar}</option>
 
                         <option value="6.5">6.5</option>
                         <option value="8">8</option>
