@@ -11,6 +11,7 @@ import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import MyBeams from './Components/Beams/Beams';
 import NewBeam from './Components/NewBeam/NewBeam';
+import EditBeam from './Components/EditBeam/EditBeam';
 import Frames from './Components/Frames/Frames';
 import Footer from './Components/Footer/Footer';
 
@@ -21,8 +22,6 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged(setUserEmail);
   }, []);
-
-  console.log(userEmail);
 
   return (
     <WrapperDivStyled>
@@ -35,6 +34,7 @@ function App() {
 
         <Route path='/beams' element={<MyBeams />} />
         <Route path='/beams/new-beam' element={<NewBeam />} />
+        <Route path='/beams/edit-beam/:beamId' element={<EditBeam />} />
         <Route path='/frames' element={<Frames />} />
       </Routes>
 
