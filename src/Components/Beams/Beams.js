@@ -3,6 +3,7 @@ import * as services from '../../services/services';
 // import { URL } from '../../config/config';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const Beams = () => {
 
@@ -15,10 +16,22 @@ const Beams = () => {
             })
     }, []);
 
+    const navigate = useNavigate();
+
     let beamsArr = Object.entries(beams);
 
-    console.log(beams);
-    console.log(beamsArr);
+    function deleteOrEditBeam(event) {
+        let elementId = event.target.nodeName === 'TD' ? event.target.parentNode.id : event.target.parentNode.parentNode.id;
+
+        console.log(elementId);
+
+        if (event.target.textContent === 'X') {
+            services.deleteOneBeam(event);
+        } else if (event.target.textContent === 'Edit') {
+
+            navigate(`/beams/edit-beam/${elementId}`);
+        }
+    }
 
     return (
         <main >
@@ -37,7 +50,7 @@ const Beams = () => {
                 </THeadStyled>
                 {beamsArr.length
                     ? (
-                        <tbody>
+                        <tbody onClick={deleteOrEditBeam} setBeams={setBeams}>
                             {beamsArr.map(beam => <ExistingBeam beam={beam} />)}
                         </tbody>
                     )
