@@ -33,7 +33,7 @@ export const getOneBeam = (beamId) => {
         .catch(error => console.log(error));
 }
 
-export const deleteOneBeam = (event, elementId) => {
+export const deleteOneBeam = (event, elementId, refresh) => {
     // let parentNode = event.target.nodeName === 'TD' ? event.target.parentNode.parentNode : event.target.parentNode.parentNode.parentNode;
 
     return auth.currentUser.getIdToken(false)
@@ -42,9 +42,9 @@ export const deleteOneBeam = (event, elementId) => {
                 method: "DELETE",
             })
         })
-    // .then(() => {
-    //     getAllBeams()
-    // })
+        .then(() => {
+            refresh();
+        })
     // .then(res => {
     //     parentNode.setBeams(res);
     // })    

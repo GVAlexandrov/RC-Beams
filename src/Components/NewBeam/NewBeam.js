@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import * as beamService from '../../services/services';
 import validateNewElements from '../../validations/newDataValidations';
@@ -12,6 +13,8 @@ const NewBeam = () => {
     let [concreteError, setConcreteError] = useState('');
     let [steelError, setSteelError] = useState('');
     let [rebarError, setRebarError] = useState('');
+
+    const navigate = useNavigate();
 
     const onNewBeamSubmitHandler = (e) => {
         e.preventDefault();
@@ -64,14 +67,14 @@ const NewBeam = () => {
         beamService
             .addNewBeam(
                 Number(height.value),
-                width.value,
+                Number(width.value),
                 concrete.value,
                 steel.value,
-                rebar.value,
+                Number(rebar.value),
             )
             .then(responce => {
                 if (responce.statusText === 'OK') {
-                    console.log('BEAM SAVED');
+                    navigate('/beams');
                 }
             })
             .catch(console.log);
