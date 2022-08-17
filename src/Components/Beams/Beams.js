@@ -16,9 +16,19 @@ const Beams = () => {
             })
     }, []);
 
+    function refresh() {
+        services.getAllBeams()
+            .then(res => {
+                setBeams(res);
+            })
+    }
+
     const navigate = useNavigate();
 
-    let beamsArr = Object.entries(beams);
+    let beamsArr = [];
+    if (beams !== null) {
+        beamsArr = Object.entries(beams);
+    }
 
     function deleteOrEditBeam(event) {
         let elementId = event.target.nodeName === 'TD' ? event.target.parentNode.id : event.target.parentNode.parentNode.id;
@@ -26,7 +36,7 @@ const Beams = () => {
         // console.log(elementId);
 
         if (event.target.textContent === 'X') {
-            services.deleteOneBeam(event, elementId);
+            services.deleteOneBeam(event, elementId, refresh);
         } else {
             navigate(`/beams/edit-beam/${elementId}`);
         }
@@ -34,28 +44,26 @@ const Beams = () => {
 
     return (
         <main >
+            {beamsArr.length
+                ? (<TableStyled >
+                    <THeadStyled>
+                        <TrStyled>
+                            <th>Height</th>
+                            <th>Width</th>
+                            <th>Concrete</th>
+                            <th>Steel</th>
+                            <th>Rebars</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </TrStyled>
+                    </THeadStyled>
 
-            <TableStyled >
-                <THeadStyled>
-                    <TrStyled>
-                        <th>Height</th>
-                        <th>Width</th>
-                        <th>Concrete</th>
-                        <th>Steel</th>
-                        <th>Rebars</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </TrStyled>
-                </THeadStyled>
-                {beamsArr.length
-                    ? (
-                        <tbody onClick={deleteOrEditBeam} setBeams={setBeams}>
-                            {beamsArr.map(beam => <ExistingBeam beam={beam} />)}
-                        </tbody>
-                    )
-                    : ''
-                }
-            </TableStyled>
+                    <tbody onClick={deleteOrEditBeam} setBeams={setBeams}>
+                        {beamsArr.map(beam => <ExistingBeam beam={beam} />)}
+                    </tbody>
+                </TableStyled>)
+                : ''
+            }
 
             {!beamsArr.length
                 ? (
