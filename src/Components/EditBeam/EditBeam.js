@@ -26,6 +26,8 @@ const EditBeam = () => {
             })
     }, [beamId]);
 
+    console.log(beam);
+
     const onEditBeamSubmitHandler = (e) => {
         e.preventDefault();
 
@@ -98,7 +100,7 @@ const EditBeam = () => {
 
                 <DivStyled >
                     <label htmlFor="height">Height</label>
-                    <input id="height" name='height' type="number" placeholder="500" value={beam.height} />
+                    <input id="height" name='height' type="number" placeholder="500" defaultValue={beam.height} />
                     <label htmlFor="height">[mm]</label>
                 </DivStyled>
 
@@ -113,7 +115,7 @@ const EditBeam = () => {
 
                 <DivStyled>
                     <label htmlFor="width">Width</label>
-                    <input id="width" name='width' type="number" placeholder="250" value={beam.width} />
+                    <input id="width" name='width' type="number" placeholder="250" defaultValue={beam.width} />
                     <label htmlFor="width">[mm]</label>
                 </DivStyled>
 
@@ -128,9 +130,7 @@ const EditBeam = () => {
 
                 <DivStyled>
                     <label htmlFor="concrete">Concrete</label>
-                    <select name="concrete" id="concrete">
-                        <option selected value={beam.concrete}>{beam.concrete}</option>
-
+                    <select name="concrete" id="concrete" defaultValue={beam.concrete}>
                         <option value="C20/25">C20/25</option>
                         <option value="C25/30">C25/30</option>
                         <option value="C30/37">C30/37</option>
@@ -149,9 +149,7 @@ const EditBeam = () => {
 
                 <DivStyled>
                     <label htmlFor="steel">Steel</label>
-                    <select name="steel" id="steel">
-                        <option selected value={beam.steel}>{beam.steel}</option>
-
+                    <select name="steel" id="steel" defaultValue={beam.steel}>
                         <option value="B420">B420</option>
                         <option value="B500">B500</option>
                     </select>
@@ -168,14 +166,12 @@ const EditBeam = () => {
 
                 <DivStyled>
                     <label htmlFor="rebar">Rebar</label>
-                    <select name="rebar" id="rebar">
-                        <option selected value={beam.rebar}>{beam.rebar}</option>
-
+                    <select name="rebar" id="rebar" defaultValue={beam.rebar}>
                         <option value="6.5">6.5</option>
                         <option value="8">8</option>
                         <option value="10">10</option>
-                        <option value="10">12</option>
-                        <option value="10">14</option>
+                        <option value="12">12</option>
+                        <option value="14">14</option>
                     </select>
                     <label htmlFor="rebar">[mm]</label>
                 </DivStyled>
