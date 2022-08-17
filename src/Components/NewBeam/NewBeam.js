@@ -64,6 +64,8 @@ const NewBeam = () => {
 
         if (heightTextError || widthTextError || concreteTextError || steelTextError || rebarTextError) return;
 
+        console.log(rebar.value);
+
         beamService
             .addNewBeam(
                 Number(height.value),
@@ -163,8 +165,8 @@ const NewBeam = () => {
                         <option value="6.5">6.5</option>
                         <option value="8">8</option>
                         <option value="10">10</option>
-                        <option value="10">12</option>
-                        <option value="10">14</option>
+                        <option value="12">12</option>
+                        <option value="14">14</option>
                     </select>
                     <label htmlFor="rebar">[mm]</label>
                 </DivStyled>
