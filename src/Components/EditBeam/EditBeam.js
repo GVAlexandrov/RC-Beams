@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import * as beamService from '../../services/services';
 import validateNewElements from '../../validations/newDataValidations';
+import * as structuralData from '../../services/structuralData';
 
 import styled from 'styled-components';
 // import Beams from '../Beams/Beams';
@@ -25,8 +26,6 @@ const EditBeam = () => {
                 setBeam(beamObj);
             })
     }, [beamId]);
-
-    console.log(beam);
 
     const onEditBeamSubmitHandler = (e) => {
         e.preventDefault();
@@ -93,10 +92,6 @@ const EditBeam = () => {
             .catch(console.log);
     }
 
-    const concreteArr = ['C20/25', 'C25/30', 'C30/37', 'C35/45', 'C50/60'];
-    const steelArr = ['B420', 'B500'];
-    const rebarArr = [6.5, 8, 10, 12, 14, 16, 18, 20, 22, 25, 28, 32];
-
     return (
         <main>
             <FormStyled onSubmit={onEditBeamSubmitHandler}>
@@ -137,12 +132,13 @@ const EditBeam = () => {
                 <DivStyled>
                     <label htmlFor="concrete">Concrete</label>
                     <select name="concrete" id="concrete">
-                        {concreteArr.map((concreteGrade) => {
+                        {structuralData.concreteArr.map((concreteGrade) => {
                             return beam.concrete === concreteGrade
                                 ? <option selected value={concreteGrade}>{concreteGrade}</option>
                                 : <option value={concreteGrade}>{concreteGrade}</option>
                         })}
                     </select>
+                    <label htmlFor="concrete">[MPa]</label>
                 </DivStyled>
 
                 {
@@ -158,12 +154,13 @@ const EditBeam = () => {
                 <DivStyled>
                     <label htmlFor="steel">Steel</label>
                     <select name="steel" id="steel">
-                        {steelArr.map((steelGrade) => {
+                        {structuralData.steelArr.map((steelGrade) => {
                             return beam.steel === steelGrade
                                 ? <option selected value={steelGrade}>{steelGrade}</option>
                                 : <option value={steelGrade}>{steelGrade}</option>
                         })}
                     </select>
+                    <label htmlFor="steel">[MPa]</label>
                 </DivStyled>
 
                 {steelError
@@ -176,9 +173,9 @@ const EditBeam = () => {
                 }
 
                 <DivStyled>
-                    <label htmlFor="rebar">Rebar</label>
+                    <label htmlFor="rebar">Rebar diameter</label>
                     <select name="rebar" id="rebar" >
-                        {rebarArr.map((rebarDiameter) => {
+                        {structuralData.rebarArr.map((rebarDiameter) => {
                             return Number(beam.rebar) === rebarDiameter
                                 ? <option selected value={rebarDiameter}>{rebarDiameter}</option>
                                 : <option value={rebarDiameter}>{rebarDiameter}</option>
