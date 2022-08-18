@@ -93,6 +93,10 @@ const EditBeam = () => {
             .catch(console.log);
     }
 
+    const concreteArr = ['C20/25', 'C25/30', 'C30/37', 'C35/45', 'C50/60'];
+    const steelArr = ['B420', 'B500'];
+    const rebarArr = [6.5, 8, 10, 12, 14, 16, 18, 20, 22, 25, 28, 32];
+
     return (
         <main>
             <FormStyled onSubmit={onEditBeamSubmitHandler}>
@@ -104,13 +108,14 @@ const EditBeam = () => {
                     <label htmlFor="height">[mm]</label>
                 </DivStyled>
 
-                {heightError
-                    ? (
-                        <DivErrStyled >
-                            <p>{heightError}</p>
-                        </DivErrStyled>
-                    )
-                    : (<></>)
+                {
+                    heightError
+                        ? (
+                            <DivErrStyled >
+                                <p>{heightError}</p>
+                            </DivErrStyled>
+                        )
+                        : (<></>)
                 }
 
                 <DivStyled>
@@ -119,39 +124,45 @@ const EditBeam = () => {
                     <label htmlFor="width">[mm]</label>
                 </DivStyled>
 
-                {widthError
-                    ? (
-                        <DivErrStyled >
-                            <p>{widthError}</p>
-                        </DivErrStyled>
-                    )
-                    : (<></>)
+                {
+                    widthError
+                        ? (
+                            <DivErrStyled >
+                                <p>{widthError}</p>
+                            </DivErrStyled>
+                        )
+                        : (<></>)
                 }
 
                 <DivStyled>
                     <label htmlFor="concrete">Concrete</label>
-                    <select name="concrete" id="concrete" defaultValue={beam.concrete}>
-                        <option value="C20/25">C20/25</option>
-                        <option value="C25/30">C25/30</option>
-                        <option value="C30/37">C30/37</option>
-                        <option value="C35/45">C35/45</option>
+                    <select name="concrete" id="concrete">
+                        {concreteArr.map((concreteGrade) => {
+                            return beam.concrete === concreteGrade
+                                ? <option selected value={concreteGrade}>{concreteGrade}</option>
+                                : <option value={concreteGrade}>{concreteGrade}</option>
+                        })}
                     </select>
                 </DivStyled>
 
-                {concreteError
-                    ? (
-                        <DivErrStyled >
-                            <p>{concreteError}</p>
-                        </DivErrStyled>
-                    )
-                    : (<></>)
+                {
+                    concreteError
+                        ? (
+                            <DivErrStyled >
+                                <p>{concreteError}</p>
+                            </DivErrStyled>
+                        )
+                        : (<></>)
                 }
 
                 <DivStyled>
                     <label htmlFor="steel">Steel</label>
-                    <select name="steel" id="steel" defaultValue={beam.steel}>
-                        <option value="B420">B420</option>
-                        <option value="B500">B500</option>
+                    <select name="steel" id="steel">
+                        {steelArr.map((steelGrade) => {
+                            return beam.steel === steelGrade
+                                ? <option selected value={steelGrade}>{steelGrade}</option>
+                                : <option value={steelGrade}>{steelGrade}</option>
+                        })}
                     </select>
                 </DivStyled>
 
@@ -166,12 +177,12 @@ const EditBeam = () => {
 
                 <DivStyled>
                     <label htmlFor="rebar">Rebar</label>
-                    <select name="rebar" id="rebar" defaultValue={beam.rebar}>
-                        <option value="6.5">6.5</option>
-                        <option value="8">8</option>
-                        <option value="10">10</option>
-                        <option value="12">12</option>
-                        <option value="14">14</option>
+                    <select name="rebar" id="rebar" >
+                        {rebarArr.map((rebarDiameter) => {
+                            return Number(beam.rebar) === rebarDiameter
+                                ? <option selected value={rebarDiameter}>{rebarDiameter}</option>
+                                : <option value={rebarDiameter}>{rebarDiameter}</option>
+                        })}
                     </select>
                     <label htmlFor="rebar">[mm]</label>
                 </DivStyled>
@@ -187,7 +198,7 @@ const EditBeam = () => {
                 <button type="Submit">Save</button>
 
             </FormStyled>
-        </main>
+        </main >
     );
 
 }
