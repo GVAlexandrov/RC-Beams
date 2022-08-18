@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import * as beamService from '../../services/services';
 import validateNewElements from '../../validations/newDataValidations';
+import * as structuralData from '../../services/structuralData';
 
 import styled from 'styled-components';
 // import Beams from '../Beams/Beams';
@@ -64,8 +65,6 @@ const NewBeam = () => {
 
         if (heightTextError || widthTextError || concreteTextError || steelTextError || rebarTextError) return;
 
-        console.log(rebar.value);
-
         beamService
             .addNewBeam(
                 Number(height.value),
@@ -120,13 +119,12 @@ const NewBeam = () => {
                 <DivStyled>
                     <label htmlFor="concrete">Concrete</label>
                     <select name="concrete" id="concrete">
-                        <option disabled selected value="default">Select concrete...</option>
-
-                        <option value="C20/25">C20/25</option>
-                        <option value="C25/30">C25/30</option>
-                        <option value="C30/37">C30/37</option>
-                        <option value="C35/45">C35/45</option>
+                        <option disabled selected hidden value="default">Select concrete...</option>
+                        {structuralData.concreteArr.map((concreteGrade) => {
+                            return <option value={concreteGrade}>{concreteGrade}</option>
+                        })}
                     </select>
+                    <label htmlFor="concrete">[MPa]</label>
                 </DivStyled>
 
                 {concreteError
@@ -141,11 +139,12 @@ const NewBeam = () => {
                 <DivStyled>
                     <label htmlFor="steel">Steel</label>
                     <select name="steel" id="steel">
-                        <option disabled selected value="default">Select steel...</option>
-
-                        <option value="B420">B420</option>
-                        <option value="B500">B500</option>
+                        <option disabled selected hidden value="default">Select steel...</option>
+                        {structuralData.steelArr.map((steelGrade) => {
+                            return <option value={steelGrade}>{steelGrade}</option>
+                        })}
                     </select>
+                    <label htmlFor="steel">[MPa]</label>
                 </DivStyled>
 
                 {steelError
@@ -158,15 +157,12 @@ const NewBeam = () => {
                 }
 
                 <DivStyled>
-                    <label htmlFor="rebar">Rebar</label>
+                    <label htmlFor="rebar">Rebar diameter</label>
                     <select name="rebar" id="rebar">
-                        <option disabled selected value="default">Select rebar...</option>
-
-                        <option value="6.5">6.5</option>
-                        <option value="8">8</option>
-                        <option value="10">10</option>
-                        <option value="12">12</option>
-                        <option value="14">14</option>
+                        <option disabled selected hidden value="default">Select rebar...</option>
+                        {structuralData.rebarArr.map((rebarDiameter) => {
+                            return <option value={rebarDiameter}>{rebarDiameter}</option>
+                        })}
                     </select>
                     <label htmlFor="rebar">[mm]</label>
                 </DivStyled>
