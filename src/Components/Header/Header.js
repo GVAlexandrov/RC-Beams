@@ -27,7 +27,7 @@ const Header = ({
 
 
     return (
-        <header>
+        <HeaderStyled>
             <NavStyled >
                 <UlStyled>
                     {(userEmail !== null)
@@ -59,41 +59,58 @@ const Header = ({
                     {/* <LiStyled><NavLinkStyled onClick={logoutHandler} to="/">Logout</NavLinkStyled></LiStyled> */}
                 </UlStyled>
             </NavStyled >
-        </header>
+        </HeaderStyled>
     )
 }
 
+const HeaderStyled = styled.header`
+position: absolute;
+width: 100%;
+top:0px;
+`;
+
 const NavStyled = styled.nav`
-background: black;
-height:80px;
+background-color: black;
+width:100%;
+min-height:80px;
+margin:0px;
+border:1px;
+border-bottom-left-radius:80px;
+
 display:flex;
 justify-content:end;
 align-items:center;
-font-size: 1.5rem;
-position: sticky;
-/* top:0; */
+font-size: 26px;
+top:0px;
+left:0px;
+min-width:690px;
 /* z-index:1; */
 
 &:hover{
-    color:red;
-    
+    color:red;    
 }
 `
 
 const UlStyled = styled.ul`
+position:relative;
 list-style:none;
 text-align:right;
+right:15px;
+display:flex;
+
+@media only screen and (max-width: 690px) {
+    flex-direction: column;    
+  }
 `;
 
 const LiStyled = styled.li`
-display:inline;
-margin:1rem;
+display:inline-block;
+margin:15px;
 `;
 
 const NavLinkStyled = styled(NavLink)`
   text-decoration:none;
   color: white;
-
   
   &:hover{
     color:red;
