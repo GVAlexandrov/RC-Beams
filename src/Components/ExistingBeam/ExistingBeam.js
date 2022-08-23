@@ -18,19 +18,36 @@ const ExistingBeam = (beamObj) => {
             }
 
             <td>
-                <button>Edit</button>
+                <ButtonStyled>Edit</ButtonStyled>
             </td>
             <td >
-                <button>X</button>
+                <ButtonStyled>X</ButtonStyled>
             </td>
         </TrStyled>
     )
 }
 
 const TrStyled = styled.tr`
+background:gray;
 &:hover{
     background:black;
     color:white;
+    font-weight:bold;
+}
+`
+
+const ButtonStyled = styled.button`
+font-weight:bold;
+color:white;
+background:black;
+padding: 10px 10px;
+border-radius:5px;
+border-color:red;
+
+&:hover{
+    color:red;
+    cursor: pointer;
+    border-color:white;
 }
 `
 
