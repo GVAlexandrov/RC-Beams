@@ -19,13 +19,15 @@ const Footer = () => {
 }
 
 const FooterStyled = styled.footer`
+position:relative;
+top:40px;
+display:inline-block;
+padding-top:20px;
+padding-bottom:20px;
 background:black;
 color:white;
-position:absolute;
-bottom:0;
-width:98%;
-height:7rem;
-
+left:0px;
+width:100%;
 `;
 
 const AStyled = styled.a`
