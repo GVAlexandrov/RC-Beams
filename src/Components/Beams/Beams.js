@@ -42,7 +42,7 @@ const Beams = () => {
     }
 
     return (
-        <main >
+        <>
             {beamsArr.length
                 ? (<TableStyled >
                     <THeadStyledMain>
@@ -78,30 +78,36 @@ const Beams = () => {
                 : ''
             }
 
-        </main>
+        </>
     );
 };
 
 const TableStyled = styled.table`
-width:600px;
+/* display: flex;
+  flex-direction: column; */
+min-width:600px;
+width:60%;
+padding:20px;
 margin:auto;
-margin-top:25px;
-/* border: 2px solid black; */
+margin-top:35px;
+border: 2px solid black;
+border-top-left-radius:30px;
+border-bottom-right-radius:30px;
 `
-
 const THeadStyledMain = styled.thead`
 text-transform:capitalize;
 font-size:20px;
 `
 const THeadStyledSecond = styled.thead`
 font-size:16px;
+font-style:italic;
 `
-
 const TrStyled = styled.tr`
 &:hover{
     background:black;
     color:white;
 }
 `
+
 
 export default Beams;
