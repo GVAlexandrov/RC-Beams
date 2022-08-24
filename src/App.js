@@ -63,9 +63,9 @@ display:flex;
 
 const MainStyled = styled.main`
 position:relative;
-top:20px;
+/* top:20px; */
 width:100%;
-min-height:65vh;
+min-height:calc(100vh - 60px - 122px );
 `;
 
 export default App;
