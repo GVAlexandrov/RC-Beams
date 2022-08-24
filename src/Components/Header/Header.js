@@ -64,15 +64,16 @@ const Header = ({
 }
 
 const HeaderStyled = styled.header`
-position: absolute;
+position: fixed;
 width: 100%;
 top:0px;
+z-index:10;
 `;
 
 const NavStyled = styled.nav`
 background-color: black;
 width:100%;
-min-height:80px;
+height:60px;
 margin:0px;
 border:1px;
 border-bottom-left-radius:80px;
@@ -80,7 +81,7 @@ border-bottom-left-radius:80px;
 display:flex;
 justify-content:end;
 align-items:center;
-font-size: 26px;
+font-size: 23px;
 top:0px;
 left:0px;
 min-width:690px;
