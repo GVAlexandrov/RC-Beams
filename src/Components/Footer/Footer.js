@@ -20,21 +20,30 @@ const Footer = () => {
 
 const FooterStyled = styled.footer`
 position:relative;
-top:40px;
+/* margin-top:20px; */
+height:100px;
 display:inline-block;
-padding-top:20px;
-padding-bottom:20px;
+padding-top:10px;
+padding-bottom:10px;
 background:black;
 color:white;
 left:0px;
 width:100%;
+border:1px;
+border-top-right-radius:80px;
+
+&:hover{
+    color:red;    
+}
 `;
 
 const AStyled = styled.a`
 vertical-align:middle;
 color:white;
 text-decoration:none;
-
+&:hover{
+    color:red;    
+}
 `;
 
 export default Footer;
