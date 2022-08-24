@@ -10,19 +10,19 @@ const ExistingBeam = (beamObj) => {
             {
                 beamArr.map((x) => {
                     return (
-                        <td>
+                        <TdStyled>
                             <p>{x}</p>
-                        </td>
+                        </TdStyled>
                     )
                 })
             }
 
-            <td>
+            <TdStyled>
                 <ButtonStyled>Edit</ButtonStyled>
-            </td>
-            <td >
+            </TdStyled>
+            <TdStyled >
                 <ButtonStyled>X</ButtonStyled>
-            </td>
+            </TdStyled>
         </TrStyled>
     )
 }
@@ -49,6 +49,12 @@ border-color:red;
     cursor: pointer;
     border-color:white;
 }
+`
+
+const TdStyled = styled.td`
+padding:0px;
+border:1px solid;
+border-color:#585858;
 `
 
 export default ExistingBeam;
