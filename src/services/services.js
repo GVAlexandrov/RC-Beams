@@ -1,10 +1,11 @@
 import { URL } from '../config/config';
 import { auth } from '../config/firebaseInit';
 
-const uid = localStorage.uid;
+let uid = localStorage.uid;
 
 export const addNewBeam = (height, width, concrete, steel, rebar) => {
     let newBeam = { height, width, concrete, steel, rebar }
+    uid = localStorage.uid;
 
     return auth.currentUser.getIdToken(false)
         .then((token) => {
@@ -16,6 +17,7 @@ export const addNewBeam = (height, width, concrete, steel, rebar) => {
 }
 
 export const getAllBeams = () => {
+    uid = localStorage.uid;
     return fetch(`${URL}beams/${uid}/.json`)
         .then(response => response.json())
         .then(result => {
@@ -25,6 +27,7 @@ export const getAllBeams = () => {
 }
 
 export const getOneBeam = (beamId) => {
+    uid = localStorage.uid;
     return fetch(`${URL}beams/${uid}/${beamId}/.json`)
         .then(response => response.json())
         .then(result => {
@@ -35,6 +38,7 @@ export const getOneBeam = (beamId) => {
 
 export const deleteOneBeam = (event, elementId, refresh) => {
     // let parentNode = event.target.nodeName === 'TD' ? event.target.parentNode.parentNode : event.target.parentNode.parentNode.parentNode;
+    uid = localStorage.uid;
 
     return auth.currentUser.getIdToken(false)
         .then((token) => {
@@ -52,6 +56,7 @@ export const deleteOneBeam = (event, elementId, refresh) => {
 
 export const editBeam = (height, width, concrete, steel, rebar, beamId) => {
     let newBeam = { height, width, concrete, steel, rebar }
+    uid = localStorage.uid;
 
     return auth.currentUser.getIdToken(false)
         .then((token) => {
