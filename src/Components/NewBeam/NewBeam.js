@@ -190,13 +190,13 @@ vertical-align:bottom;
 
 &:hover{
     background:black;
-    color:white;
+    color:red;
 }
 `;
 
 const FormStyled = styled.form`
 margin:auto;
-max-width:400px;
+max-width:500px;
 `;
 
 const DivErrStyled = styled.div`
