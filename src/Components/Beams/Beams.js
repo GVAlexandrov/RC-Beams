@@ -85,11 +85,13 @@ const Beams = () => {
 const TableStyled = styled.table`
 /* display: flex;
   flex-direction: column; */
+  position:relative;
 min-width:600px;
 width:60%;
 padding:20px;
 margin:auto;
-margin-top:35px;
+margin-bottom:20px;
+/* margin-top:35px; */
 border: 2px solid black;
 border-top-left-radius:30px;
 border-bottom-right-radius:30px;
@@ -103,10 +105,10 @@ font-size:16px;
 font-style:italic;
 `
 const TrStyled = styled.tr`
-&:hover{
+/* &:hover{
     background:black;
     color:white;
-}
+} */
 `
 
 
