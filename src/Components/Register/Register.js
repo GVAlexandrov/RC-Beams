@@ -73,7 +73,7 @@ const Register = () => {
     }
 
     return (
-        <main>
+        <MainStyled>
             <StyledForm id='registerForm' onSubmit={onRegister}>
                 <h1>Register</h1>
 
@@ -94,14 +94,36 @@ const Register = () => {
                     <input id="repeat-password" type="password" placeholder="******" name="repass" />
                 </div>
 
-                <button type="submit">Register</button>
+                <ButtonStyled type="submit">Register</ButtonStyled>
             </StyledForm>
-        </main>
+        </MainStyled>
     );
 
 }
 
+const MainStyled = styled.main`
+position:relative;
+margin:auto;
+padding-bottom:20px;
+width:60%;
+max-width:500px;
+min-width:300px;
+border: 2px solid black;
+border-top-left-radius:30px;
+border-bottom-right-radius:30px;
+`;
+
 const StyledForm = styled.form`
+`;
+
+const ButtonStyled = styled.button`
+font-weight:bold;
+color:white;
+background:black;
+padding: 10px 10px;
+border-radius:5px;
+border-color:red;
+cursor: pointer;
 `;
 
 export default Register;
