@@ -30,7 +30,7 @@ const EditBeam = () => {
     const onEditBeamSubmitHandler = (e) => {
         e.preventDefault();
 
-        const { height, width, concrete, steel, rebar } = e.target;
+        const { height, width, bendingMoment, concrete, steel, rebar } = e.target;
 
         const heightTextError = validateNewElements.height(height.value);
         const widthTextError = validateNewElements.width(width.value);
@@ -78,7 +78,8 @@ const EditBeam = () => {
         beamService
             .editBeam(
                 Number(height.value),
-                width.value,
+                Number(width.value),
+                Number(bendingMoment.value),
                 concrete.value,
                 steel.value,
                 rebar.value,
@@ -93,7 +94,7 @@ const EditBeam = () => {
     }
 
     return (
-        <main>
+        <MainStyled>
             <FormStyled onSubmit={onEditBeamSubmitHandler}>
                 <h1>Edit Beam</h1>
 
@@ -128,6 +129,22 @@ const EditBeam = () => {
                         )
                         : (<></>)
                 }
+
+                <DivStyled>
+                    <label htmlFor="bendingMoment">BM</label>
+                    <input id="bendingMoment" name='bendingMoment' type="number" placeholder="250" defaultValue={beam.bendingMoment} />
+                    <label htmlFor="bendingMoment">[kN.m]</label>
+                </DivStyled>
+
+                {/* {
+                    widthError
+                        ? (
+                            <DivErrStyled >
+                                <p>{widthError}</p>
+                            </DivErrStyled>
+                        )
+                        : (<></>)
+                } */}
 
                 <DivStyled>
                     <label htmlFor="concrete">Concrete</label>
@@ -192,15 +209,28 @@ const EditBeam = () => {
                     : (<></>)
                 }
 
-                <button type="Submit">Save</button>
+                <ButtonStyled type="Submit">Save</ButtonStyled>
 
             </FormStyled>
-        </main >
+        </MainStyled >
     );
 
 }
 
+const MainStyled = styled.main`
+position:relative;
+margin:auto;
+padding-bottom:20px;
+width:60%;
+max-width:500px;
+min-width:300px;
+border: 2px solid black;
+border-top-left-radius:30px;
+border-bottom-right-radius:30px;
+`;
+
 const DivStyled = styled.div`
+padding:5px 0px;
 font-size: 20px;
 height:40px;
 vertical-align:bottom;
@@ -221,5 +251,15 @@ const DivErrStyled = styled.div`
     font-style: italic;
     margin-top:0px;
 `
+
+const ButtonStyled = styled.button`
+font-weight:bold;
+color:white;
+background:black;
+padding: 10px 10px;
+border-radius:5px;
+border-color:red;
+cursor: pointer;
+`;
 
 export default EditBeam;
