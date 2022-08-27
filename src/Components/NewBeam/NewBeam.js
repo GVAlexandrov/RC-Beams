@@ -4,9 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import * as beamService from '../../services/services';
 import validateNewElements from '../../validations/newDataValidations';
 import * as structuralData from '../../services/structuralData';
+import { MainStyled, DivStyled, FormStyled, LabelStyledName, LabelStyledDimension, DivErrStyled, ButtonStyled } from './newBeamStyled'
 
-import styled from 'styled-components';
-// import Beams from '../Beams/Beams';
 
 const NewBeam = () => {
     let [heightError, setHeightError] = useState('');
@@ -20,7 +19,7 @@ const NewBeam = () => {
     const onNewBeamSubmitHandler = (e) => {
         e.preventDefault();
 
-        const { height, width, concrete, steel, rebar } = e.target;
+        const { height, width, bendingMoment, concrete, steel, rebar } = e.target;
 
         const heightTextError = validateNewElements.height(height.value);
         const widthTextError = validateNewElements.width(width.value);
@@ -69,6 +68,7 @@ const NewBeam = () => {
             .addNewBeam(
                 Number(height.value),
                 Number(width.value),
+                Number(bendingMoment.value),
                 concrete.value,
                 steel.value,
                 Number(rebar.value),
@@ -82,14 +82,14 @@ const NewBeam = () => {
     }
 
     return (
-        <main>
+        <MainStyled>
             <FormStyled onSubmit={onNewBeamSubmitHandler}>
                 <h1>New Beam</h1>
 
                 <DivStyled >
-                    <label htmlFor="height">Height</label>
+                    <LabelStyledName htmlFor="height">Height</LabelStyledName>
                     <input id="height" name='height' type="number" placeholder="500" />
-                    <label htmlFor="height">[mm]</label>
+                    <LabelStyledDimension htmlFor="height">[mm]</LabelStyledDimension>
                 </DivStyled>
 
                 {heightError
@@ -102,9 +102,9 @@ const NewBeam = () => {
                 }
 
                 <DivStyled>
-                    <label htmlFor="width">Width</label>
+                    <LabelStyledName htmlFor="width">Width</LabelStyledName>
                     <input id="width" name='width' type="number" placeholder="250" />
-                    <label htmlFor="width">[mm]</label>
+                    <LabelStyledDimension htmlFor="width">[mm]</LabelStyledDimension>
                 </DivStyled>
 
                 {widthError
@@ -117,14 +117,29 @@ const NewBeam = () => {
                 }
 
                 <DivStyled>
-                    <label htmlFor="concrete">Concrete</label>
+                    <LabelStyledName htmlFor="bendingMoment">BM</LabelStyledName>
+                    <input id="bendingMoment" name='bendingMoment' type="number" placeholder="10" />
+                    <LabelStyledDimension htmlFor="bendingMoment">[kN.m]</LabelStyledDimension>
+                </DivStyled>
+
+                {/* {widthError
+                    ? (
+                        <DivErrStyled >
+                            <p>{widthError}</p>
+                        </DivErrStyled>
+                    )
+                    : (<></>)
+                } */}
+
+                <DivStyled>
+                    <LabelStyledName htmlFor="concrete">Concrete</LabelStyledName>
                     <select name="concrete" id="concrete">
                         <option disabled selected hidden value="default">Select concrete...</option>
                         {structuralData.concreteArr.map((concreteGrade) => {
                             return <option value={concreteGrade}>{concreteGrade}</option>
                         })}
                     </select>
-                    <label htmlFor="concrete">[MPa]</label>
+                    <LabelStyledDimension htmlFor="concrete">[MPa]</LabelStyledDimension>
                 </DivStyled>
 
                 {concreteError
@@ -137,14 +152,14 @@ const NewBeam = () => {
                 }
 
                 <DivStyled>
-                    <label htmlFor="steel">Steel</label>
+                    <LabelStyledName htmlFor="steel">Steel</LabelStyledName>
                     <select name="steel" id="steel">
                         <option disabled selected hidden value="default">Select steel...</option>
                         {structuralData.steelArr.map((steelGrade) => {
                             return <option value={steelGrade}>{steelGrade}</option>
                         })}
                     </select>
-                    <label htmlFor="steel">[MPa]</label>
+                    <LabelStyledDimension htmlFor="steel">[MPa]</LabelStyledDimension>
                 </DivStyled>
 
                 {steelError
@@ -157,14 +172,14 @@ const NewBeam = () => {
                 }
 
                 <DivStyled>
-                    <label htmlFor="rebar">Rebar diameter</label>
+                    <LabelStyledName htmlFor="rebar">Rebar diameter</LabelStyledName>
                     <select name="rebar" id="rebar">
                         <option disabled selected hidden value="default">Select rebar...</option>
                         {structuralData.rebarArr.map((rebarDiameter) => {
                             return <option value={rebarDiameter}>{rebarDiameter}</option>
                         })}
                     </select>
-                    <label htmlFor="rebar">[mm]</label>
+                    <LabelStyledDimension htmlFor="rebar">[mm]</LabelStyledDimension>
                 </DivStyled>
                 {rebarError
                     ? (
@@ -175,34 +190,12 @@ const NewBeam = () => {
                     : (<></>)
                 }
 
-                <button type="Submit">Save</button>
+                <ButtonStyled type="Submit">Save</ButtonStyled>
 
             </FormStyled>
-        </main>
+        </MainStyled>
     );
 
 }
-
-const DivStyled = styled.div`
-font-size: 20px;
-height:40px;
-vertical-align:bottom;
-
-&:hover{
-    background:black;
-    color:red;
-}
-`;
-
-const FormStyled = styled.form`
-margin:auto;
-max-width:500px;
-`;
-
-const DivErrStyled = styled.div`
-    color:darkred;
-    font-style: italic;
-    margin-top:0px;
-`
 
 export default NewBeam;
