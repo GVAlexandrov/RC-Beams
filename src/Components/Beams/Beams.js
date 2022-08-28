@@ -53,8 +53,7 @@ const Beams = () => {
                                 })
                             }
                         </TrStyled>
-                    </THeadStyledMain>
-                    <THeadStyledSecond>
+
                         <TrStyled>
                             {
                                 structuralData.tableHeadingsDimensionsArr.map((heading) => {
@@ -62,7 +61,16 @@ const Beams = () => {
                                 })
                             }
                         </TrStyled>
-                    </THeadStyledSecond>
+                    </THeadStyledMain>
+                    {/* <THeadStyledSecond>
+                        <TrStyled>
+                            {
+                                structuralData.tableHeadingsDimensionsArr.map((heading) => {
+                                    return <th>{heading}</th>;
+                                })
+                            }
+                        </TrStyled>
+                    </THeadStyledSecond> */}
 
                     <tbody onClick={deleteOrEditBeam} setBeams={setBeams}>
                         {beamsArr.map(beam => <ExistingBeam beam={beam} />)}
@@ -85,7 +93,7 @@ const Beams = () => {
 const TableStyled = styled.table`
 /* display: flex;
   flex-direction: column; */
-  position:relative;
+position:relative;
 min-width:600px;
 width:60%;
 padding:20px;
@@ -97,18 +105,17 @@ border-top-left-radius:30px;
 border-bottom-right-radius:30px;
 `
 const THeadStyledMain = styled.thead`
+position:sticky;
+top:70px;
 text-transform:capitalize;
-font-size:20px;
+font-size:18px;
+z-index:500;
+background:gray;
 `
-const THeadStyledSecond = styled.thead`
-font-size:16px;
-font-style:italic;
-`
+
 const TrStyled = styled.tr`
-/* &:hover{
-    background:black;
-    color:white;
-} */
+padding:0px;
+margin:0px;
 `
 
 
