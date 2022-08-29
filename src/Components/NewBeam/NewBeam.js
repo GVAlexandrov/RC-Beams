@@ -5,6 +5,7 @@ import * as beamService from '../../services/services';
 import validateNewElements from '../../validations/newDataValidations';
 import * as structuralData from '../../services/structuralData';
 import { MainStyled, DivStyled, FormStyled, LabelStyledName, LabelStyledDimension, DivErrStyled, ButtonStyled } from './newBeamStyled'
+import { fcdCalculate, fcmCalculate, fydCalculate } from '../../services/formulas';
 
 
 const NewBeam = () => {
@@ -13,6 +14,15 @@ const NewBeam = () => {
     let [concreteError, setConcreteError] = useState('');
     let [steelError, setSteelError] = useState('');
     let [rebarError, setRebarError] = useState('');
+
+    let [fck, setFck] = useState(0);
+    let [fy, setFy] = useState(0);
+    let [alphaCC, setAlphaCC] = useState(0);
+    let [gammaMC, setGammaMC] = useState(0);
+    let [gammaMS, setGammaMS] = useState(0);
+    let fcd = 0;
+    let fcm = 0;
+    let fyd = 0;
 
     const navigate = useNavigate();
 
@@ -81,10 +91,26 @@ const NewBeam = () => {
             .catch(console.log);
     }
 
+    fcd = fcdCalculate(fck, alphaCC, gammaMC);
+    fcm = fcmCalculate(fck);
+    fyd = fydCalculate(fy, gammaMS);
+
     return (
         <MainStyled>
             <FormStyled onSubmit={onNewBeamSubmitHandler}>
                 <h1>New Beam</h1>
+
+                <DivStyled >
+                    <LabelStyledName htmlFor="level">Level</LabelStyledName>
+                    <input id="level" name='level' type="text" placeholder="First floor / +3.10" />
+                    <LabelStyledDimension htmlFor="level">[-]</LabelStyledDimension>
+                </DivStyled>
+
+                <DivStyled >
+                    <LabelStyledName htmlFor="beamsNumber">Beam's number</LabelStyledName>
+                    <input id="beamsNumber" name='beamsNumber' type="text" placeholder="B01" />
+                    <LabelStyledDimension htmlFor="beamsNumber">[-]</LabelStyledDimension>
+                </DivStyled>
 
                 <DivStyled >
                     <LabelStyledName htmlFor="height">Height</LabelStyledName>
@@ -136,7 +162,7 @@ const NewBeam = () => {
 
                 <DivStyled>
                     <LabelStyledName htmlFor="concrete">Concrete</LabelStyledName>
-                    <select name="concrete" id="concrete">
+                    <select name="concrete" id="concrete" onChange={e => setFck(Number(e.target.value.slice(1, 3)))}>
                         <option disabled selected hidden value="default">Select concrete...</option>
                         {structuralData.concreteArr.map((concreteGrade) => {
                             return <option value={concreteGrade}>{concreteGrade}</option>
@@ -155,8 +181,48 @@ const NewBeam = () => {
                 }
 
                 <DivStyled>
+                    <LabelStyledName htmlFor="fck">fck</LabelStyledName>
+                    <input id="fck" name='fck' type="text" value={fck} />
+                    <LabelStyledDimension htmlFor="fck">[MPa]</LabelStyledDimension>
+                </DivStyled>
+
+                <DivStyled>
+                    <LabelStyledName htmlFor="alphaCC">αcc</LabelStyledName>
+                    <select name="alphaCC" id="alphaCC" onChange={e => setAlphaCC(e.target.value)}>
+                        <option disabled selected hidden value="default">Select αcc...</option>
+                        {structuralData.alphaCCArr.map((alphaCC) => {
+                            return <option value={alphaCC}>{alphaCC}</option>
+                        })}
+                    </select>
+                    <LabelStyledDimension htmlFor="concrete">[MPa]</LabelStyledDimension>
+                </DivStyled>
+
+                <DivStyled>
+                    <LabelStyledName htmlFor="gammaMC">γm,c</LabelStyledName>
+                    <select name="gammaMC" id="gammaMC" onChange={e => setGammaMC(e.target.value)}>
+                        <option disabled selected hidden value="default">Select γm,c...</option>
+                        {structuralData.gammaMCArr.map((gammaMC) => {
+                            return <option value={gammaMC}>{gammaMC}</option>
+                        })}
+                    </select>
+                    <LabelStyledDimension htmlFor="concrete">[MPa]</LabelStyledDimension>
+                </DivStyled>
+
+                <DivStyled>
+                    <LabelStyledName htmlFor="fcd">fcd</LabelStyledName>
+                    <input id="fcd" name='fcd' type="text" value={(fcd && fcd !== Infinity) ? fcd.toFixed(2) : 'More info needed'} />
+                    <LabelStyledDimension htmlFor="fcd">[MPa]</LabelStyledDimension>
+                </DivStyled>
+
+                <DivStyled>
+                    <LabelStyledName htmlFor="fcm">fcm</LabelStyledName>
+                    <input id="fcm" name='fcm' type="text" value={fcm > 8 ? fcm : 'More info needed'} />
+                    <LabelStyledDimension htmlFor="fcm">[MPa]</LabelStyledDimension>
+                </DivStyled>
+
+                <DivStyled>
                     <LabelStyledName htmlFor="steel">Steel</LabelStyledName>
-                    <select name="steel" id="steel">
+                    <select name="steel" id="steel" onChange={e => setFy(Number(e.target.value.slice(1, 4)))}>
                         <option disabled selected hidden value="default">Select steel...</option>
                         {structuralData.steelArr.map((steelGrade) => {
                             return <option value={steelGrade}>{steelGrade}</option>
@@ -173,6 +239,29 @@ const NewBeam = () => {
                     )
                     : (<></>)
                 }
+
+                <DivStyled>
+                    <LabelStyledName htmlFor="fy">fy</LabelStyledName>
+                    <input id="fy" name='fy' type="text" value={fy} />
+                    <LabelStyledDimension htmlFor="fy">[MPa]</LabelStyledDimension>
+                </DivStyled>
+
+                <DivStyled>
+                    <LabelStyledName htmlFor="gammaMS">γm,s</LabelStyledName>
+                    <select name="gammaMS" id="gammaMS" onChange={e => setGammaMS(e.target.value)}>
+                        <option disabled selected hidden value="default">Select γm,s...</option>
+                        {structuralData.gammaMSArr.map((gammaMS) => {
+                            return <option value={gammaMS}>{gammaMS}</option>
+                        })}
+                    </select>
+                    <LabelStyledDimension htmlFor="concrete">[MPa]</LabelStyledDimension>
+                </DivStyled>
+
+                <DivStyled>
+                    <LabelStyledName htmlFor="fyd">fyd</LabelStyledName>
+                    <input id="fyd" name='fyd' type="text" value={(fyd && fyd !== Infinity && !isNaN(fyd)) ? fyd.toFixed(0) : 'More info needed'} />
+                    <LabelStyledDimension htmlFor="fyd">[MPa]</LabelStyledDimension>
+                </DivStyled>
 
                 <DivStyled>
                     <LabelStyledName htmlFor="rebar">Rebar diameter</LabelStyledName>
@@ -196,7 +285,7 @@ const NewBeam = () => {
                 <ButtonStyled type="Submit">Save</ButtonStyled>
 
             </FormStyled>
-        </MainStyled>
+        </MainStyled >
     );
 
 }
