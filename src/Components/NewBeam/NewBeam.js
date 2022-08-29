@@ -5,7 +5,7 @@ import * as beamService from '../../services/services';
 import validateNewElements from '../../validations/newDataValidations';
 import * as structuralData from '../../services/structuralData';
 import { MainStyled, DivStyled, FormStyled, LabelStyledName, LabelStyledDimension, DivErrStyled, ButtonStyled } from './newBeamStyled'
-import { fcdCalculate, fcmCalculate, fydCalculate } from '../../services/formulas';
+import { fcdCalculate, fcmCalculate, fctmCalculate, fydCalculate } from '../../services/formulas';
 
 
 const NewBeam = () => {
@@ -22,6 +22,7 @@ const NewBeam = () => {
     let [gammaMS, setGammaMS] = useState(0);
     let fcd = 0;
     let fcm = 0;
+    let fctm = 0;
     let fyd = 0;
 
     const navigate = useNavigate();
@@ -93,6 +94,7 @@ const NewBeam = () => {
 
     fcd = fcdCalculate(fck, alphaCC, gammaMC);
     fcm = fcmCalculate(fck);
+    fctm = fctmCalculate(fck, fcm);
     fyd = fydCalculate(fy, gammaMS);
 
     return (
@@ -218,6 +220,12 @@ const NewBeam = () => {
                     <LabelStyledName htmlFor="fcm">fcm</LabelStyledName>
                     <input id="fcm" name='fcm' type="text" value={fcm > 8 ? fcm : 'More info needed'} />
                     <LabelStyledDimension htmlFor="fcm">[MPa]</LabelStyledDimension>
+                </DivStyled>
+
+                <DivStyled>
+                    <LabelStyledName htmlFor="fctm">fctm</LabelStyledName>
+                    <input id="fctm" name='fctm' type="text" value={fctm.toFixed(2)} />
+                    <LabelStyledDimension htmlFor="fctm">[MPa]</LabelStyledDimension>
                 </DivStyled>
 
                 <DivStyled>
