@@ -30,7 +30,7 @@ const EditBeam = () => {
     const onEditBeamSubmitHandler = (e) => {
         e.preventDefault();
 
-        const { height, width, bendingMoment, concrete, steel, rebar } = e.target;
+        const { level, beamsNumber, height, width, bendingMoment, concrete, steel, rebar } = e.target;
 
         const heightTextError = validateNewElements.height(height.value);
         const widthTextError = validateNewElements.width(width.value);
@@ -77,6 +77,8 @@ const EditBeam = () => {
 
         beamService
             .editBeam(
+                level.value,
+                beamsNumber.value,
                 Number(height.value),
                 Number(width.value),
                 Number(bendingMoment.value),
@@ -97,6 +99,18 @@ const EditBeam = () => {
         <MainStyled>
             <FormStyled onSubmit={onEditBeamSubmitHandler}>
                 <h1>Edit Beam</h1>
+
+                <DivStyled >
+                    <label htmlFor="level">Level</label>
+                    <input id="level" name='level' type="text" placeholder="+3.10" defaultValue={beam.level} />
+                    <label htmlFor="level">[-]</label>
+                </DivStyled>
+
+                <DivStyled >
+                    <label htmlFor="beamsNumber">Beam's Number</label>
+                    <input id="beamsNumber" name='beamsNumber' type="text" placeholder="500" defaultValue={beam.beamsNumber} />
+                    <label htmlFor="beamsNumber">[mm]</label>
+                </DivStyled>
 
                 <DivStyled >
                     <label htmlFor="height">Height</label>
