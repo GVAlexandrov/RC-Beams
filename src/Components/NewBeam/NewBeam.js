@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import * as beamService from '../../services/services';
 import validateNewElements from '../../validations/newDataValidations';
 import * as structuralData from '../../services/structuralData';
-import { MainStyled, DivStyled, FormStyled, LabelStyledName, LabelStyledDimension, DivErrStyled, ButtonStyled } from './newBeamStyled'
+import { MainStyled, DivStyled, FormStyled, LabelStyledName, LabelStyledDimension, DivErrStyled, ButtonStyled, InputReadOnlyStyled } from './newBeamStyled'
 import { fcdCalculate, fcmCalculate, fctmCalculate, fydCalculate } from '../../services/formulas';
 
 
@@ -30,7 +30,7 @@ const NewBeam = () => {
     const onNewBeamSubmitHandler = (e) => {
         e.preventDefault();
 
-        const { height, width, bendingMoment, concrete, steel, rebar } = e.target;
+        const { level, height, width, bendingMoment, concrete, steel, rebar, beamsNumber } = e.target;
 
         const heightTextError = validateNewElements.height(height.value);
         const widthTextError = validateNewElements.width(width.value);
@@ -77,6 +77,8 @@ const NewBeam = () => {
 
         beamService
             .addNewBeam(
+                level.value,
+                beamsNumber.value,
                 Number(height.value),
                 Number(width.value),
                 Number(bendingMoment.value),
@@ -184,7 +186,7 @@ const NewBeam = () => {
 
                 <DivStyled>
                     <LabelStyledName htmlFor="fck">fck</LabelStyledName>
-                    <input id="fck" name='fck' type="text" value={fck} />
+                    <InputReadOnlyStyled id="fck" name='fck' type="text" value={fck} />
                     <LabelStyledDimension htmlFor="fck">[MPa]</LabelStyledDimension>
                 </DivStyled>
 
@@ -212,37 +214,37 @@ const NewBeam = () => {
 
                 <DivStyled>
                     <LabelStyledName htmlFor="fcd">fcd</LabelStyledName>
-                    <input id="fcd" name='fcd' type="text" value={(fcd && fcd !== Infinity) ? fcd.toFixed(2) : ''} />
+                    <InputReadOnlyStyled id="fcd" name='fcd' type="text" value={(fcd && fcd !== Infinity) ? fcd.toFixed(2) : ''} />
                     <LabelStyledDimension htmlFor="fcd">[MPa]</LabelStyledDimension>
                 </DivStyled>
 
                 <DivStyled>
                     <LabelStyledName htmlFor="fcm">fcm</LabelStyledName>
-                    <input id="fcm" name='fcm' type="text" value={fcm > 8 ? fcm : ''} />
+                    <InputReadOnlyStyled id="fcm" name='fcm' type="text" value={fcm > 8 ? fcm.toFixed(2) : ''} />
                     <LabelStyledDimension htmlFor="fcm">[MPa]</LabelStyledDimension>
                 </DivStyled>
 
                 <DivStyled>
                     <LabelStyledName htmlFor="fctm">fctm</LabelStyledName>
-                    <input id="fctm" name='fctm' type="text" value={fctm.toFixed(2)} />
+                    <InputReadOnlyStyled id="fctm" name='fctm' type="text" value={fctm.toFixed(2)} />
                     <LabelStyledDimension htmlFor="fctm">[MPa]</LabelStyledDimension>
                 </DivStyled>
 
                 <DivStyled>
                     <LabelStyledName htmlFor="fctk95">fctk05</LabelStyledName>
-                    <input id="fctk05" name='fctk05' type="text" value={(0.7 * fctm).toFixed(2)} />
+                    <InputReadOnlyStyled id="fctk05" name='fctk05' type="text" value={(0.7 * fctm).toFixed(2)} />
                     <LabelStyledDimension htmlFor="fctk05">[MPa]</LabelStyledDimension>
                 </DivStyled>
 
                 <DivStyled>
                     <LabelStyledName htmlFor="fctk95">fctk95</LabelStyledName>
-                    <input id="fctk95" name='fctk95' type="text" value={(1.3 * fctm).toFixed(2)} />
+                    <InputReadOnlyStyled id="fctk95" name='fctk95' type="text" value={(1.3 * fctm).toFixed(2)} />
                     <LabelStyledDimension htmlFor="fctk95">[MPa]</LabelStyledDimension>
                 </DivStyled>
 
                 <DivStyled>
                     <LabelStyledName htmlFor="Ecm">Ecm</LabelStyledName>
-                    <input id="Ecm" name='Ecm' type="text" value={(22 * (fcm / 10) ** 0.3).toFixed(1)} />
+                    <InputReadOnlyStyled id="Ecm" name='Ecm' type="text" value={(22 * (fcm / 10) ** 0.3).toFixed(1)} />
                     <LabelStyledDimension htmlFor="Ecm">[GPa]</LabelStyledDimension>
                 </DivStyled>
 
@@ -268,7 +270,7 @@ const NewBeam = () => {
 
                 <DivStyled>
                     <LabelStyledName htmlFor="fy">fy</LabelStyledName>
-                    <input id="fy" name='fy' type="text" value={fy} />
+                    <InputReadOnlyStyled id="fy" name='fy' type="text" value={fy} />
                     <LabelStyledDimension htmlFor="fy">[MPa]</LabelStyledDimension>
                 </DivStyled>
 
@@ -285,7 +287,7 @@ const NewBeam = () => {
 
                 <DivStyled>
                     <LabelStyledName htmlFor="fyd">fyd</LabelStyledName>
-                    <input id="fyd" name='fyd' type="text" value={(fyd && fyd !== Infinity && !isNaN(fyd)) ? fyd.toFixed(0) : ''} />
+                    <InputReadOnlyStyled id="fyd" name='fyd' type="text" value={(fyd && fyd !== Infinity && !isNaN(fyd)) ? fyd.toFixed(0) : ''} />
                     <LabelStyledDimension htmlFor="fyd">[MPa]</LabelStyledDimension>
                 </DivStyled>
 
