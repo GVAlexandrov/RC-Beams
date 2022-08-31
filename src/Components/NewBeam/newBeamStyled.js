@@ -15,9 +15,11 @@ border-bottom-right-radius:30px;
 
 const DivStyled = styled.div`
 position: relative;
+display:flex;
+justify-content: space-between;
 padding:5px 0px;
-font-size: 20px;
-height:40px;
+font-size: 18px;
+height:25px;
 vertical-align:bottom;
 display:flex;
 justify-content:center;
@@ -60,4 +62,8 @@ border-color:red;
 cursor: pointer;
 `;
 
-export { MainStyled, DivStyled, FormStyled, LabelStyledName, LabelStyledDimension, DivErrStyled, ButtonStyled }
+const InputReadOnlyStyled = styled.input`
+background-color:yellow;
+`
+
+export { MainStyled, DivStyled, FormStyled, LabelStyledName, LabelStyledDimension, DivErrStyled, ButtonStyled, InputReadOnlyStyled }
