@@ -29,6 +29,7 @@ const Header = ({
     return (
         <HeaderStyled>
             <NavStyled >
+                {/* <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/256x256/plain/bolt.png" alt="" /> */}
                 <UlStyled>
                     {(userEmail !== null)
                         ? <NavLinkStyled to='/beams'><LiStyled>Hello, {localStorage.getItem('email')}</LiStyled></NavLinkStyled>
@@ -58,6 +59,7 @@ const Header = ({
 
                     {/* <LiStyled><NavLinkStyled onClick={logoutHandler} to="/">Logout</NavLinkStyled></LiStyled> */}
                 </UlStyled>
+                <button hidden>MENU</button>
             </NavStyled >
         </HeaderStyled>
     )
@@ -100,7 +102,19 @@ right:15px;
 display:flex;
 
 @media only screen and (max-width: 690px) {
+    position:absolute;
+    top:0px;
+    right:0px;
+    margin:0px;
+    padding:0px;
+    padding-top:60px;
     flex-direction: column;    
+    background-color:black;
+    width:100vw;
+    z-index:100;
+    text-align:center;
+    min-width:260px;
+    /* display:none; */
   }
 `;
 
