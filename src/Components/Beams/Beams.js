@@ -103,13 +103,14 @@ margin-bottom:20px;
 border: 2px solid black;
 border-top-left-radius:30px;
 border-bottom-right-radius:30px;
+z-index:0;
 `
 const THeadStyledMain = styled.thead`
 position:sticky;
 top:70px;
 text-transform:capitalize;
 font-size:18px;
-z-index:500;
+z-index:100;
 background:gray;
 `
 

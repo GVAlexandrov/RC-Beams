@@ -234,6 +234,7 @@ const EditBeam = () => {
 const MainStyled = styled.main`
 position:relative;
 margin:auto;
+margin-bottom:30px;
 padding-bottom:20px;
 width:60%;
 max-width:500px;

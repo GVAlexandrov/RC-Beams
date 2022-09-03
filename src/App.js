@@ -53,19 +53,18 @@ top:0px;
 left:0px;
 width:100%;
 /* min-height:90vh; */
-padding-top:80px;
 background-color: gray;
 text-align: center;
 display:flex;
-    flex-direction: column;    
+flex-direction: column;    
   
 `;
 
 const MainStyled = styled.main`
 position:relative;
-/* top:20px; */
+padding-top:80px;
 width:100%;
-min-height:calc(100vh - 60px - 122px );
+min-height:calc(100vh - 60px - 100px - 40px);
 `;
 
 export default App;

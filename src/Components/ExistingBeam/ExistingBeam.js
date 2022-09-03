@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 
 const ExistingBeam = (beamObj) => {
-    const { height, width, bendingMoment, concrete, steel, rebar } = beamObj.beam[1];
-    const beamArr = [height, width, bendingMoment, concrete, steel, rebar];
+    const { level, beamsNumber, height, width, bendingMoment, concrete, steel, rebar } = beamObj.beam[1];
+    const beamArr = [level, beamsNumber, height, width, bendingMoment, concrete, steel, rebar];
 
     return (
         <TrStyled key={beamObj.beam[0]} id={beamObj.beam[0]}>
@@ -30,6 +30,7 @@ const ExistingBeam = (beamObj) => {
 
 const TrStyled = styled.tr`
 position:relative;
+height:10px;
 margin:0;
 background:gray;
 transition: all 500ms ease-out ;
