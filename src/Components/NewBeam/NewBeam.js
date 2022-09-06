@@ -4,7 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import * as beamService from '../../services/services';
 import validateNewElements from '../../validations/newDataValidations';
 import * as structuralData from '../../services/structuralData';
-import { MainStyled, DivStyled, FormStyled, LabelStyledName, LabelStyledDimension, DivErrStyled, ButtonStyled, InputReadOnlyStyled } from './newBeamStyled'
+import { MainStyled, FormStyled, ButtonStyled } from './newBeamStyled'
+import { BeamsInfo } from './BeamsInfo'
+import { BeamsGeometry } from './BeamsGeometry'
+import { Concrete } from './Concrete'
+import { Steel } from './Steel'
+import { Forces } from './Forces'
+import { Rebars } from './Rebars'
 import { fcdCalculate, fcmCalculate, fctmCalculate, fydCalculate } from '../../services/formulas';
 
 
@@ -104,211 +110,40 @@ const NewBeam = () => {
             <FormStyled onSubmit={onNewBeamSubmitHandler}>
                 <h1>New Beam</h1>
 
-                <DivStyled >
-                    <LabelStyledName htmlFor="level">Level</LabelStyledName>
-                    <input id="level" name='level' type="text" placeholder="First floor / +3.10" />
-                    <LabelStyledDimension htmlFor="level">[-]</LabelStyledDimension>
-                </DivStyled>
+                <BeamsInfo />
 
-                <DivStyled >
-                    <LabelStyledName htmlFor="beamsNumber">Beam's number</LabelStyledName>
-                    <input id="beamsNumber" name='beamsNumber' type="text" placeholder="B01" />
-                    <LabelStyledDimension htmlFor="beamsNumber">[-]</LabelStyledDimension>
-                </DivStyled>
+                <BeamsGeometry
+                    heightError={heightError}
+                    widthError={widthError}
+                />
 
-                <DivStyled >
-                    <LabelStyledName htmlFor="height">Height</LabelStyledName>
-                    <input id="height" name='height' type="number" placeholder="500" />
-                    <LabelStyledDimension htmlFor="height">[mm]</LabelStyledDimension>
-                </DivStyled>
+                <Forces />
 
-                {heightError
-                    ? (
-                        <DivErrStyled >
-                            <p>{heightError}</p>
-                        </DivErrStyled>
-                    )
-                    : (<></>)
-                }
+                <Concrete
+                    structuralData={structuralData}
+                    setFck={setFck}
+                    concreteError={concreteError}
+                    fck={fck}
+                    setAlphaCC={setAlphaCC}
+                    setGammaMC={setGammaMC}
+                    fcd={fcd}
+                    fcm={fcm}
+                    fctm={fctm}
+                />
 
-                <DivStyled>
-                    <LabelStyledName htmlFor="width">Width</LabelStyledName>
-                    <input id="width" name='width' type="number" placeholder="250" />
-                    <LabelStyledDimension htmlFor="width">[mm]</LabelStyledDimension>
-                </DivStyled>
+                <Steel
+                    structuralData={structuralData}
+                    setFy={setFy}
+                    steelError={steelError}
+                    setGammaMS={setGammaMS}
+                    fyd={fyd}
+                    fy={fy}
+                />
 
-                {widthError
-                    ? (
-                        <DivErrStyled >
-                            <p>{widthError}</p>
-                        </DivErrStyled>
-                    )
-                    : (<></>)
-                }
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="bendingMoment">Bending Moment</LabelStyledName>
-                    <input id="bendingMoment" name='bendingMoment' type="number" placeholder="10" />
-                    <LabelStyledDimension htmlFor="bendingMoment">[kN.m]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="shearForce">Shear Force</LabelStyledName>
-                    <input id="shearForce" name='shearForce' type="number" placeholder="10" />
-                    <LabelStyledDimension htmlFor="shearForce">[kN]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="torsion">Torsion</LabelStyledName>
-                    <input id="torsion" name='torsion' type="number" placeholder="10" />
-                    <LabelStyledDimension htmlFor="torsion">[kN.m]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="concrete">Concrete</LabelStyledName>
-                    <select name="concrete" id="concrete" onChange={e => setFck(Number(e.target.value.slice(1, 3)))}>
-                        <option disabled selected hidden value="default">Select concrete...</option>
-                        {structuralData.concreteArr.map((concreteGrade) => {
-                            return <option value={concreteGrade}>{concreteGrade}</option>
-                        })}
-                    </select>
-                    <LabelStyledDimension htmlFor="concrete">[MPa]</LabelStyledDimension>
-                </DivStyled>
-
-                {concreteError
-                    ? (
-                        <DivErrStyled >
-                            <p>{concreteError}</p>
-                        </DivErrStyled>
-                    )
-                    : (<></>)
-                }
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="fck">fck</LabelStyledName>
-                    <InputReadOnlyStyled id="fck" name='fck' type="text" value={fck} />
-                    <LabelStyledDimension htmlFor="fck">[MPa]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="alphaCC">αcc</LabelStyledName>
-                    <select name="alphaCC" id="alphaCC" onChange={e => setAlphaCC(e.target.value)}>
-                        <option disabled selected hidden value="default">Select αcc...</option>
-                        {structuralData.alphaCCArr.map((alphaCC) => {
-                            return <option value={alphaCC}>{alphaCC}</option>
-                        })}
-                    </select>
-                    <LabelStyledDimension htmlFor="concrete">[MPa]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="gammaMC">γm,c</LabelStyledName>
-                    <select name="gammaMC" id="gammaMC" onChange={e => setGammaMC(e.target.value)}>
-                        <option disabled selected hidden value="default">Select γm,c...</option>
-                        {structuralData.gammaMCArr.map((gammaMC) => {
-                            return <option value={gammaMC}>{gammaMC}</option>
-                        })}
-                    </select>
-                    <LabelStyledDimension htmlFor="concrete">[MPa]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="fcd">fcd</LabelStyledName>
-                    <InputReadOnlyStyled id="fcd" name='fcd' type="text" value={(fcd && fcd !== Infinity) ? fcd.toFixed(2) : ''} />
-                    <LabelStyledDimension htmlFor="fcd">[MPa]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="fcm">fcm</LabelStyledName>
-                    <InputReadOnlyStyled id="fcm" name='fcm' type="text" value={fcm > 8 ? fcm.toFixed(2) : ''} />
-                    <LabelStyledDimension htmlFor="fcm">[MPa]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="fctm">fctm</LabelStyledName>
-                    <InputReadOnlyStyled id="fctm" name='fctm' type="text" value={fctm.toFixed(2)} />
-                    <LabelStyledDimension htmlFor="fctm">[MPa]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="fctk95">fctk05</LabelStyledName>
-                    <InputReadOnlyStyled id="fctk05" name='fctk05' type="text" value={(0.7 * fctm).toFixed(2)} />
-                    <LabelStyledDimension htmlFor="fctk05">[MPa]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="fctk95">fctk95</LabelStyledName>
-                    <InputReadOnlyStyled id="fctk95" name='fctk95' type="text" value={(1.3 * fctm).toFixed(2)} />
-                    <LabelStyledDimension htmlFor="fctk95">[MPa]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="Ecm">Ecm</LabelStyledName>
-                    <InputReadOnlyStyled id="Ecm" name='Ecm' type="text" value={(22 * (fcm / 10) ** 0.3).toFixed(1)} />
-                    <LabelStyledDimension htmlFor="Ecm">[GPa]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="steel">Steel</LabelStyledName>
-                    <select name="steel" id="steel" onChange={e => setFy(Number(e.target.value.slice(1, 4)))}>
-                        <option disabled selected hidden value="default">Select steel...</option>
-                        {structuralData.steelArr.map((steelGrade) => {
-                            return <option value={steelGrade}>{steelGrade}</option>
-                        })}
-                    </select>
-                    <LabelStyledDimension htmlFor="steel">[MPa]</LabelStyledDimension>
-                </DivStyled>
-
-                {steelError
-                    ? (
-                        <DivErrStyled >
-                            <p>{steelError}</p>
-                        </DivErrStyled>
-                    )
-                    : (<></>)
-                }
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="fy">fy</LabelStyledName>
-                    <InputReadOnlyStyled id="fy" name='fy' type="text" value={fy} />
-                    <LabelStyledDimension htmlFor="fy">[MPa]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="gammaMS">γm,s</LabelStyledName>
-                    <select name="gammaMS" id="gammaMS" onChange={e => setGammaMS(e.target.value)}>
-                        <option disabled selected hidden value="default">Select γm,s...</option>
-                        {structuralData.gammaMSArr.map((gammaMS) => {
-                            return <option value={gammaMS}>{gammaMS}</option>
-                        })}
-                    </select>
-                    <LabelStyledDimension htmlFor="concrete">[MPa]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="fyd">fyd</LabelStyledName>
-                    <InputReadOnlyStyled id="fyd" name='fyd' type="text" value={(fyd && fyd !== Infinity && !isNaN(fyd)) ? fyd.toFixed(0) : ''} />
-                    <LabelStyledDimension htmlFor="fyd">[MPa]</LabelStyledDimension>
-                </DivStyled>
-
-                <DivStyled>
-                    <LabelStyledName htmlFor="rebar">Rebar diameter</LabelStyledName>
-                    <select name="rebar" id="rebar">
-                        <option disabled selected hidden value="default">Select rebar...</option>
-                        {structuralData.rebarArr.map((rebarDiameter) => {
-                            return <option value={rebarDiameter}>{rebarDiameter}</option>
-                        })}
-                    </select>
-                    <LabelStyledDimension htmlFor="rebar">[mm]</LabelStyledDimension>
-                </DivStyled>
-                {rebarError
-                    ? (
-                        <DivErrStyled >
-                            <p>{rebarError}</p>
-                        </DivErrStyled>
-                    )
-                    : (<></>)
-                }
+                <Rebars
+                    structuralData={structuralData}
+                    rebarError={rebarError}
+                />
 
                 <ButtonStyled type="Submit">Save</ButtonStyled>
 
