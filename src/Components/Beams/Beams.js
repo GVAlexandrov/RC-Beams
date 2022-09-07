@@ -32,12 +32,14 @@ const Beams = () => {
     }
 
     function deleteOrEditBeam(event) {
-        let elementId = event.target.nodeName === 'TD' ? event.target.parentNode.id : event.target.parentNode.parentNode.id;
+        let elementId = event.target.id;
 
         if (event.target.textContent === 'X') {
             services.deleteOneBeam(event, elementId, refresh);
-        } else {
+        } else if (event.target.textContent === 'Edit') {
             navigate(`/beams/edit-beam/${elementId}`);
+        } else if (event.target.textContent === 'Info') {
+            navigate(`/beams/info-beam/${elementId}`);
         }
     }
 
@@ -62,19 +64,12 @@ const Beams = () => {
                             }
                         </TrStyled>
                     </THeadStyledMain>
-                    {/* <THeadStyledSecond>
-                        <TrStyled>
-                            {
-                                structuralData.tableHeadingsDimensionsArr.map((heading) => {
-                                    return <th>{heading}</th>;
-                                })
-                            }
-                        </TrStyled>
-                    </THeadStyledSecond> */}
+
 
                     <tbody onClick={deleteOrEditBeam} setBeams={setBeams}>
-                        {beamsArr.map(beam => <ExistingBeam beam={beam} />)}
+                        {beamsArr.map(beam => <ExistingBeam key={beamsArr.id} beam={beam} />)}
                     </tbody>
+
                 </TableStyled>)
                 : ''
             }
@@ -101,10 +96,11 @@ margin:auto;
 margin-bottom:20px;
 /* margin-top:35px; */
 border: 2px solid black;
-border-top-left-radius:30px;
-border-bottom-right-radius:30px;
+border-top-right-radius:30px;
+border-bottom-left-radius:30px;
 z-index:0;
 `
+
 const THeadStyledMain = styled.thead`
 position:sticky;
 top:70px;
