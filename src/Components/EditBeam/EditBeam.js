@@ -3,10 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import * as beamService from '../../services/services';
 import validateNewElements from '../../validations/newDataValidations';
-import * as structuralData from '../../services/structuralData';
+import { MainStyled, FormStyled, SectionDivStyledTop, SectionDivStyledBottom, ButtonStyled } from '../NewBeam/newBeamStyled';
+import { BeamsInfo } from '../NewBeam/BeamsInfo';
+import { BeamsGeometry } from '../NewBeam/BeamsGeometry';
+import { Forces } from '../NewBeam/Forces';
+import { Concrete } from '../NewBeam/Concrete';
+import { Steel } from '../NewBeam/Steel';
+import { Rebars } from '../NewBeam/Rebars';
 
-import styled from 'styled-components';
-// import Beams from '../Beams/Beams';
 
 const EditBeam = () => {
     let [heightError, setHeightError] = useState('');
@@ -15,6 +19,7 @@ const EditBeam = () => {
     let [steelError, setSteelError] = useState('');
     let [rebarError, setRebarError] = useState('');
     let [beam, setBeam] = useState('');
+    console.log(beam);
 
     const navigate = useNavigate();
 
@@ -22,9 +27,7 @@ const EditBeam = () => {
 
     useEffect(() => {
         beamService.getOneBeam(beamId)
-            .then(beamObj => {
-                setBeam(beamObj);
-            })
+            .then(beamObj => setBeam(beamObj))
     }, [beamId]);
 
     const onEditBeamSubmitHandler = (e) => {
@@ -98,183 +101,53 @@ const EditBeam = () => {
     return (
         <MainStyled>
             <FormStyled onSubmit={onEditBeamSubmitHandler}>
-                <h1>Edit Beam</h1>
+                <SectionDivStyledTop>
+                    <h1>Edit Beam</h1>
+                </SectionDivStyledTop>
 
-                <DivStyled >
-                    <label htmlFor="level">Level</label>
-                    <input id="level" name='level' type="text" placeholder="+3.10" defaultValue={beam.level} />
-                    <label htmlFor="level">[-]</label>
-                </DivStyled>
+                <BeamsInfo
+                    level={beam.level}
+                    beamsNumber={beam.beamsNumber}
+                />
 
-                <DivStyled >
-                    <label htmlFor="beamsNumber">Beam's Number</label>
-                    <input id="beamsNumber" name='beamsNumber' type="text" placeholder="500" defaultValue={beam.beamsNumber} />
-                    <label htmlFor="beamsNumber">[mm]</label>
-                </DivStyled>
+                <BeamsGeometry
+                    heightError={heightError}
+                    widthError={widthError}
+                    height={beam.height}
+                    width={beam.width}
+                />
 
-                <DivStyled >
-                    <label htmlFor="height">Height</label>
-                    <input id="height" name='height' type="number" placeholder="500" defaultValue={beam.height} />
-                    <label htmlFor="height">[mm]</label>
-                </DivStyled>
+                <Forces
+                    bendingMoment={beam.bendingMoment}
+                    shearForce={beam.shearForce}
+                    torsion={beam.torsion}
+                />
 
-                {
-                    heightError
-                        ? (
-                            <DivErrStyled >
-                                <p>{heightError}</p>
-                            </DivErrStyled>
-                        )
-                        : (<></>)
-                }
+                <Concrete
+                    concreteError={concreteError}
+                    concrete={beam.concrete}
+                />
 
-                <DivStyled>
-                    <label htmlFor="width">Width</label>
-                    <input id="width" name='width' type="number" placeholder="250" defaultValue={beam.width} />
-                    <label htmlFor="width">[mm]</label>
-                </DivStyled>
+                <Steel
+                    steelError={steelError}
+                    steel={beam.steel}
+                />
 
-                {
-                    widthError
-                        ? (
-                            <DivErrStyled >
-                                <p>{widthError}</p>
-                            </DivErrStyled>
-                        )
-                        : (<></>)
-                }
 
-                <DivStyled>
-                    <label htmlFor="bendingMoment">BM</label>
-                    <input id="bendingMoment" name='bendingMoment' type="number" placeholder="250" defaultValue={beam.bendingMoment} />
-                    <label htmlFor="bendingMoment">[kN.m]</label>
-                </DivStyled>
+                <Rebars
+                    rebarError={rebarError}
+                    rebar={beam.rebar}
+                />
 
-                {/* {
-                    widthError
-                        ? (
-                            <DivErrStyled >
-                                <p>{widthError}</p>
-                            </DivErrStyled>
-                        )
-                        : (<></>)
-                } */}
 
-                <DivStyled>
-                    <label htmlFor="concrete">Concrete</label>
-                    <select name="concrete" id="concrete">
-                        {structuralData.concreteArr.map((concreteGrade) => {
-                            return beam.concrete === concreteGrade
-                                ? <option selected value={concreteGrade}>{concreteGrade}</option>
-                                : <option value={concreteGrade}>{concreteGrade}</option>
-                        })}
-                    </select>
-                    <label htmlFor="concrete">[MPa]</label>
-                </DivStyled>
-
-                {
-                    concreteError
-                        ? (
-                            <DivErrStyled >
-                                <p>{concreteError}</p>
-                            </DivErrStyled>
-                        )
-                        : (<></>)
-                }
-
-                <DivStyled>
-                    <label htmlFor="steel">Steel</label>
-                    <select name="steel" id="steel">
-                        {structuralData.steelArr.map((steelGrade) => {
-                            return beam.steel === steelGrade
-                                ? <option selected value={steelGrade}>{steelGrade}</option>
-                                : <option value={steelGrade}>{steelGrade}</option>
-                        })}
-                    </select>
-                    <label htmlFor="steel">[MPa]</label>
-                </DivStyled>
-
-                {steelError
-                    ? (
-                        <DivErrStyled >
-                            <p>{steelError}</p>
-                        </DivErrStyled>
-                    )
-                    : (<></>)
-                }
-
-                <DivStyled>
-                    <label htmlFor="rebar">Rebar diameter</label>
-                    <select name="rebar" id="rebar" >
-                        {structuralData.rebarArr.map((rebarDiameter) => {
-                            return Number(beam.rebar) === rebarDiameter
-                                ? <option selected value={rebarDiameter}>{rebarDiameter}</option>
-                                : <option value={rebarDiameter}>{rebarDiameter}</option>
-                        })}
-                    </select>
-                    <label htmlFor="rebar">[mm]</label>
-                </DivStyled>
-                {rebarError
-                    ? (
-                        <DivErrStyled >
-                            <p>{rebarError}</p>
-                        </DivErrStyled>
-                    )
-                    : (<></>)
-                }
-
-                <ButtonStyled type="Submit">Save</ButtonStyled>
+                <SectionDivStyledBottom>
+                    <ButtonStyled type="Submit">Save</ButtonStyled>
+                </SectionDivStyledBottom >
 
             </FormStyled>
         </MainStyled >
     );
 
 }
-
-const MainStyled = styled.main`
-position:relative;
-margin:auto;
-margin-bottom:30px;
-padding-bottom:20px;
-width:60%;
-max-width:500px;
-min-width:300px;
-border: 2px solid black;
-border-top-left-radius:30px;
-border-bottom-right-radius:30px;
-`;
-
-const DivStyled = styled.div`
-padding:5px 0px;
-font-size: 20px;
-height:40px;
-vertical-align:bottom;
-
-&:hover{
-    background:black;
-    color:white;
-}
-`;
-
-const FormStyled = styled.form`
-margin:auto;
-max-width:400px;
-`;
-
-const DivErrStyled = styled.div`
-    color:darkred;
-    font-style: italic;
-    margin-top:0px;
-`
-
-const ButtonStyled = styled.button`
-font-weight:bold;
-color:white;
-background:black;
-padding: 10px 10px;
-border-radius:5px;
-border-color:red;
-cursor: pointer;
-`;
 
 export default EditBeam;
