@@ -1,8 +1,13 @@
 import ExistingBeam from '../ExistingBeam/ExistingBeam';
 import * as services from '../../services/services';
 import * as structuralData from '../../services/structuralData';
+import {
+    TableStyled,
+    THeadStyledMain,
+    TrStyled,
+    TrStyled2
+} from './beamsStyledComponents.js';
 // import { URL } from '../../config/config';
-import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -28,13 +33,16 @@ const Beams = () => {
 
     let beamsArr = [];
     if (beams !== null) {
-        beamsArr = Object.entries(beams);
+        beamsArr = Object
+            .entries(beams)
+            .sort((a, b) => Number(a[1].level.slice(1)) - Number(b[1].level.slice(1)));
     }
 
     function deleteOrEditBeam(event) {
         let elementId = event.target.id;
 
         if (event.target.textContent === 'X') {
+            window.confirm('Are you sure you want to delete this item?');
             services.deleteOneBeam(event, elementId, refresh);
         } else if (event.target.textContent === 'Edit') {
             navigate(`/beams/edit-beam/${elementId}`);
@@ -56,13 +64,13 @@ const Beams = () => {
                             }
                         </TrStyled>
 
-                        <TrStyled>
+                        <TrStyled2>
                             {
                                 structuralData.tableHeadingsDimensionsArr.map((heading) => {
                                     return <th>{heading}</th>;
                                 })
                             }
-                        </TrStyled>
+                        </TrStyled2>
                     </THeadStyledMain>
 
 
@@ -84,36 +92,5 @@ const Beams = () => {
         </>
     );
 };
-
-const TableStyled = styled.table`
-/* display: flex;
-  flex-direction: column; */
-position:relative;
-min-width:600px;
-width:60%;
-padding:20px;
-margin:auto;
-margin-bottom:20px;
-/* margin-top:35px; */
-border: 2px solid black;
-border-top-right-radius:30px;
-border-bottom-left-radius:30px;
-z-index:0;
-`
-
-const THeadStyledMain = styled.thead`
-position:sticky;
-top:70px;
-text-transform:capitalize;
-font-size:18px;
-z-index:100;
-background:gray;
-`
-
-const TrStyled = styled.tr`
-padding:0px;
-margin:0px;
-`
-
 
 export default Beams;
