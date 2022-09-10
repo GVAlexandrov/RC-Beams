@@ -15,12 +15,14 @@ const tableHeadingsArr = [
     '№',
     'Height',
     'Width',
-    'BM',
+    'Bending',
+    'Shear',
+    'Torsion',
     'Concrete',
     'Steel',
-    'Rebar Ø',
-    'Edit',
-    'Delete'
+    'Ø',
+    '',
+    ''
 ];
 const tableHeadingsDimensionsArr = [
     '[-]',
@@ -28,11 +30,14 @@ const tableHeadingsDimensionsArr = [
     '[mm]',
     '[mm]',
     '[kN.m]',
-    '[MPa]',
+    '[kN]',
+    '[kN.m]',
+    '[-]',
     '[MPa]',
     '[mm]',
-    '[-]',
-    '[-]'
+    '',
+    '',
+    ''
 ];
 
 const alphaCCArr = [
