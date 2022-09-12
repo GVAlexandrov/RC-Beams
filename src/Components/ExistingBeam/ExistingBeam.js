@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 
 const ExistingBeam = (beamObj) => {
-    const { level, beamsNumber, height, width, bendingMoment, concrete, steel, rebar } = beamObj.beam[1];
-    const beamArr = [level, beamsNumber, height, width, bendingMoment, concrete, steel, rebar];
+    const { level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar } = beamObj.beam[1];
+    const beamArr = [level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar];
 
     return (
         <TrStyled key={beamObj.beam[0]} id={beamObj.beam[0]}>
@@ -17,12 +17,14 @@ const ExistingBeam = (beamObj) => {
                 })
             }
 
+
             <TdStyled>
-                <ButtonStyled>Edit</ButtonStyled>
+                <ButtonStyled id={beamObj.beam[0]}>Info</ButtonStyled>
             </TdStyled>
 
+
             <TdStyled >
-                <ButtonStyled>X</ButtonStyled>
+                <ButtonStyled id={beamObj.beam[0]}>X</ButtonStyled>
             </TdStyled>
         </TrStyled>
     )
@@ -33,8 +35,8 @@ position:relative;
 height:10px;
 margin:0;
 background:gray;
-transition: all 500ms ease-out ;
-outline: thin solid #585858;
+/* transition: all 500ms ease-out ; */
+/* outline: thin solid #585858; */
 /* transition: color 500ms ease-out step-end; */
 &:hover{
     background:black;
@@ -60,8 +62,6 @@ border-color:red;
 
 const TdStyled = styled.td`
 padding:0px;
-/* border:1px solid;
-border-color:#585858; */
 `
 
 export default ExistingBeam;
