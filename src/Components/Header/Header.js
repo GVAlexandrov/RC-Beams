@@ -15,6 +15,8 @@ const Header = ({
     setUserEmail
 }) => {
 
+    console.log(userEmail);
+
     const links = [
         { menuName: "Register", path: "/register", isAuth: false },
         { menuName: "Login", path: "/login", isAuth: false },
@@ -47,7 +49,7 @@ const Header = ({
                 {/* <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/256x256/plain/bolt.png" alt="" /> */}
                 <UlStyled id='MenuUL'>
                     {(userEmail !== null)
-                        ? <NavLinkStyled to='/beams'><LiStyled>Hello, {localStorage.getItem('email')}</LiStyled></NavLinkStyled>
+                        ? <NavLinkStyled to='/'><LiStyled>Hello, {localStorage.getItem('email')}</LiStyled></NavLinkStyled>
                         : ''
                     }
 
