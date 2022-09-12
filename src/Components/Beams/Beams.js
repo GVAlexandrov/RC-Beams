@@ -14,6 +14,11 @@ import { useNavigate } from "react-router-dom";
 const Beams = () => {
 
     let [beams, setBeams] = useState({});
+    let [level, setLevel] = useState('');
+
+    let beamsArr = [];
+    let beamsArrCopy = [];
+    let levelsArr = new Set([]);
 
     useEffect(() => {
         services.getAllBeams()
@@ -31,19 +36,23 @@ const Beams = () => {
 
     const navigate = useNavigate();
 
-    let beamsArr = [];
     if (beams !== null) {
         beamsArr = Object
             .entries(beams)
             .sort((a, b) => Number(a[1].level.slice(1)) - Number(b[1].level.slice(1)));
+
+        beamsArrCopy = [...beamsArr];
+
+        levelsArr = new Set([...beamsArr.map(a => a[1].level)]);
     }
 
     function deleteOrEditBeam(event) {
         let elementId = event.target.id;
 
         if (event.target.textContent === 'X') {
-            window.confirm('Are you sure you want to delete this item?');
-            services.deleteOneBeam(event, elementId, refresh);
+            if (window.confirm('Are you sure you want to DELETE this item?')) {
+                services.deleteOneBeam(event, elementId, refresh);
+            };
         } else if (event.target.textContent === 'Edit') {
             navigate(`/beams/edit-beam/${elementId}`);
         } else if (event.target.textContent === 'Info') {
@@ -53,36 +62,62 @@ const Beams = () => {
 
     return (
         <>
-            {beamsArr.length
-                ? (<TableStyled >
-                    <THeadStyledMain>
-                        <TrStyled>
-                            {
-                                structuralData.tableHeadingsArr.map((heading) => {
-                                    return <th>{heading}</th>;
-                                })
-                            }
-                        </TrStyled>
+            {beamsArrCopy.length
+                ? (
+                    <>
+                        <label htmlFor="level">Level</label>
+                        <select
+                            name="level"
+                            id="level"
+                            onChange={e => setLevel(e.target.value)}>
+                            <option selected value="all" >
+                                All
+                            </option>
 
-                        <TrStyled2>
-                            {
-                                structuralData.tableHeadingsDimensionsArr.map((heading) => {
-                                    return <th>{heading}</th>;
-                                })
-                            }
-                        </TrStyled2>
-                    </THeadStyledMain>
+                            {(Array
+                                .from(levelsArr)
+                                .map((level) => {
+                                    return <option value={level}>{level}</option>
+                                }))}
+
+                        </select>
+
+                        <TableStyled >
+                            <THeadStyledMain>
+                                <TrStyled>
+                                    {
+                                        structuralData.tableHeadingsArr.map((heading) => {
+                                            return <th>{heading}</th>;
+                                        })
+                                    }
+                                </TrStyled>
+
+                                <TrStyled2>
+                                    {
+                                        structuralData.tableHeadingsDimensionsArr.map((heading) => {
+                                            return <th>{heading}</th>;
+                                        })
+                                    }
+                                </TrStyled2>
+                            </THeadStyledMain>
 
 
-                    <tbody onClick={deleteOrEditBeam} setBeams={setBeams}>
-                        {beamsArr.map(beam => <ExistingBeam key={beamsArr.id} beam={beam} />)}
-                    </tbody>
+                            <tbody onClick={deleteOrEditBeam} setBeams={setBeams}>
+                                {beamsArrCopy
+                                    .filter(a => {
+                                        return level === 'all' || !level
+                                            ? a
+                                            : a[1].level === level;
+                                    })
+                                    .map(beam => <ExistingBeam key={beamsArrCopy.id} beam={beam} />)}
+                            </tbody>
 
-                </TableStyled>)
+                        </TableStyled>
+                    </>)
                 : ''
             }
 
-            {!beamsArr.length
+            {!beamsArrCopy.length
                 ? (
                     <h1 >No RC Beams designed so far...</h1>
                 )
