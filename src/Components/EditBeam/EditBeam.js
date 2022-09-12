@@ -19,7 +19,6 @@ const EditBeam = () => {
     let [steelError, setSteelError] = useState('');
     let [rebarError, setRebarError] = useState('');
     let [beam, setBeam] = useState('');
-    console.log(beam);
 
     const navigate = useNavigate();
 
@@ -32,8 +31,11 @@ const EditBeam = () => {
 
     const onEditBeamSubmitHandler = (e) => {
         e.preventDefault();
+        if (!window.confirm('Are you sure you want to EDIT this item?')) {
+            return;
+        };
 
-        const { level, beamsNumber, height, width, bendingMoment, concrete, steel, rebar } = e.target;
+        const { level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, numberRebars } = e.target;
 
         const heightTextError = validateNewElements.height(height.value);
         const widthTextError = validateNewElements.width(width.value);
@@ -85,9 +87,12 @@ const EditBeam = () => {
                 Number(height.value),
                 Number(width.value),
                 Number(bendingMoment.value),
+                Number(shearForce.value),
+                Number(torsion.value),
                 concrete.value,
                 steel.value,
-                rebar.value,
+                Number(rebar.value),
+                Number(numberRebars.value),
                 beamId
             )
             .then(response => {
