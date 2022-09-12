@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 
 const TableStyled = styled.table`
-/* display: flex;
-  flex-direction: column; */
 position:relative;
 min-width:600px;
 width:60%;
