@@ -1,7 +1,11 @@
 const Home = () => {
-
     return (
-        <h1>The section 'HOME' is under construction...</h1>
+        <h1>
+            Hello, {
+                localStorage.getItem('email')
+                    ? localStorage.getItem('email')
+                    : 'Guest.'}
+        </h1>
     );
 
 }

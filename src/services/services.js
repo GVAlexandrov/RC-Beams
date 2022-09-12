@@ -3,8 +3,8 @@ import { auth } from '../config/firebaseInit';
 
 let uid = localStorage.uid;
 
-export const addNewBeam = (level, beamsNumber, height, width, bendingMoment, concrete, steel, rebar) => {
-    let newBeam = { level, beamsNumber, height, width, bendingMoment, concrete, steel, rebar }
+export const addNewBeam = (level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, numberRebars) => {
+    let newBeam = { level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, numberRebars }
     uid = localStorage.uid;
 
     return auth.currentUser.getIdToken(false)
@@ -54,8 +54,8 @@ export const deleteOneBeam = (event, elementId, refresh) => {
     // })    
 }
 
-export const editBeam = (level, beamsNumber, height, width, bendingMoment, concrete, steel, rebar, beamId) => {
-    let newBeam = { level, beamsNumber, height, width, bendingMoment, concrete, steel, rebar }
+export const editBeam = (level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, numberRebars, beamId) => {
+    let newBeam = { level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, numberRebars }
     uid = localStorage.uid;
 
     return auth.currentUser.getIdToken(false)
