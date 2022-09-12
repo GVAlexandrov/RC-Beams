@@ -29,7 +29,7 @@ min-width:690px;
 &:hover{
     color:red;    
 }
-`
+`;
 
 const UlStyled = styled.ul`
 position:relative;
