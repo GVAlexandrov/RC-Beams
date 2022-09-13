@@ -75,24 +75,22 @@ const Register = () => {
     return (
         <MainStyled>
             <StyledForm id='registerForm' onSubmit={onRegister}>
-                <h1>Register</h1>
+                <H1Styled>Register</H1Styled>
 
-                <p>Personal info</p>
-
-                <div>
-                    <label htmlFor="username">Username</label>
+                <DivStyled>
+                    <LabelStyled htmlFor="username">Username</LabelStyled>
                     <input id="username" name="username" type="text" placeholder="JustMyself123..." />
-                </div>
+                </DivStyled>
 
-                <div>
-                    <label htmlFor="password">Password</label>
+                <DivStyled>
+                    <LabelStyled htmlFor="password">Password</LabelStyled>
                     <input id="password" type="password" placeholder="******" name="pass" />
-                </div>
+                </DivStyled>
 
-                <div>
-                    <label htmlFor="repeat-password">Repeat Password</label>
+                <DivStyled>
+                    <LabelStyled htmlFor="repeat-password">Repeat Password</LabelStyled>
                     <input id="repeat-password" type="password" placeholder="******" name="repass" />
-                </div>
+                </DivStyled>
 
                 <ButtonStyled type="submit">Register</ButtonStyled>
             </StyledForm>
@@ -108,22 +106,58 @@ padding-bottom:20px;
 width:60%;
 max-width:500px;
 min-width:300px;
-border: 2px solid black;
+border: 1px solid black;
 border-top-left-radius:30px;
 border-bottom-right-radius:30px;
-`;
-
-const StyledForm = styled.form`
+overflow: hidden;
+&:hover{
+    border-top-left-radius:0px;
+    border-bottom-right-radius:0px;
+    border-top-right-radius:30px;
+    border-bottom-left-radius:30px;
+}
 `;
 
 const ButtonStyled = styled.button`
+width: 100px;
 font-weight:bold;
+font-size:16px;
 color:white;
 background:black;
 padding: 10px 10px;
 border-radius:5px;
 border-color:red;
 cursor: pointer;
+`;
+
+const DivStyled = styled.div`
+margin:0px 0px;
+padding:20px 0px;
+font-size:19px;
+/* text-transform: capitalize; */
+
+&:hover{
+    background:black;
+    color:white;
+}
+`;
+
+const H1Styled = styled.h1`
+margin: 0px;
+padding: 20px 0px;
+width:100%;
+
+&:hover{
+    background:black;
+    color:white;
+}
+`;
+
+const LabelStyled = styled.label`
+padding-right: 10px;
+`;
+
+const StyledForm = styled.form`
 `;
 
 export default Register;
