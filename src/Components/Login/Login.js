@@ -54,19 +54,17 @@ const Login = () => {
     return (
         <MainStyled>
             <form onSubmit={onLogin}>
-                <h1>Login</h1>
+                <H1Styled>Login</H1Styled>
 
-                <p>Personal info</p>
-
-                <div>
-                    <label htmlFor="email">Email</label>
+                <DivStyled>
+                    <LabelStyled htmlFor="email">Email</LabelStyled>
                     <input id="email" name="email" type="text" placeholder="your-email@gmail.com" onInput={(e) => setCredentials(oldState => ({ ...oldState, email: e.target.value }))} />
-                </div>
+                </DivStyled>
 
-                <div>
-                    <label htmlFor="password">Password</label>
+                <DivStyled>
+                    <LabelStyled htmlFor="password">Password</LabelStyled>
                     <input id="password" name="password" type="password" placeholder="********" onInput={(e) => setCredentials(oldState => ({ ...oldState, pass: e.target.value }))} />
-                </div>
+                </DivStyled>
 
                 <ButtonStyled type="submit">Login</ButtonStyled>
             </form>
@@ -82,19 +80,55 @@ padding-bottom:20px;
 width:60%;
 max-width:500px;
 min-width:300px;
-border: 2px solid black;
+border: 1px solid black;
 border-top-left-radius:30px;
 border-bottom-right-radius:30px;
+overflow: hidden;
+&:hover{
+    border-top-left-radius:0px;
+    border-bottom-right-radius:0px;
+    border-top-right-radius:30px;
+    border-bottom-left-radius:30px;
+}
 `;
 
 const ButtonStyled = styled.button`
+width: 100px;
 font-weight:bold;
+font-size:16px;
 color:white;
 background:black;
 padding: 10px 10px;
 border-radius:5px;
 border-color:red;
 cursor: pointer;
+`;
+
+const DivStyled = styled.div`
+margin:0px 0px;
+padding:20px 0px;
+font-size:19px;
+/* text-transform: capitalize; */
+
+&:hover{
+    background:black;
+    color:white;
+}
+`;
+
+const H1Styled = styled.h1`
+margin: 0px;
+padding: 20px 0px;
+width:100%;
+
+&:hover{
+    background:black;
+    color:white;
+}
+`;
+
+const LabelStyled = styled.label`
+padding-right: 10px;
 `;
 
 export default Login;
