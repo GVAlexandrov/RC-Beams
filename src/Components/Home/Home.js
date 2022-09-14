@@ -1,9 +1,22 @@
+import { useEffect, useState } from 'react';
+
 const Home = () => {
+    const [isLogged, setIsLogged] = useState(false);
+    const email = localStorage.email;
+
+    useEffect(() => {
+        if (email) {
+            setIsLogged(true)
+        } else {
+            setIsLogged(false)
+        }
+    }, [email])
+
     return (
         <h1>
             Hello, {
-                localStorage.getItem('email')
-                    ? localStorage.getItem('email')
+                isLogged
+                    ? email
                     : 'Guest.'}
         </h1>
     );

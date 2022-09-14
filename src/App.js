@@ -2,22 +2,24 @@
 import { Routes, Route } from 'react-router-dom';
 import { auth } from './config/firebaseInit';
 import { useEffect, useState } from 'react';
+
 import { WrapperDivStyled, MainStyled } from './styledApp';
 
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
-import Register from './Components/Register/Register';
+// import Register from './Components/Register/Register';
+import LoginRegister from './Components/LoginRegister/LoginRegister';
 import Beams from './Components/Beams/Beams';
 import NewBeam from './Components/NewBeam/NewBeam';
 import EditBeam from './Components/EditBeam/EditBeam';
 import InfoBeam from './Components/InfoBeam/InfoBeam';
-import Frames from './Components/Frames/Frames';
 import Footer from './Components/Footer/Footer';
 
 
 function App() {
   const [userEmail, setUserEmail] = useState(null);
+  console.log(userEmail);
 
   useEffect(() => {
     auth.onAuthStateChanged(setUserEmail);
@@ -34,14 +36,12 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
+          <Route path='/register' element={<LoginRegister />} />
 
           <Route path='/beams' element={<Beams />} />
           <Route path='/beams/new-beam' element={<NewBeam />} />
           <Route path='/beams/edit-beam/:beamId' element={<EditBeam />} />
           <Route path='/beams/info-beam/:beamId' element={<InfoBeam />} />
-
-          <Route path='/frames' element={<Frames />} />
         </Routes>
       </MainStyled>
 
