@@ -118,7 +118,7 @@ const LoginRegister = () => {
                 </H1Styled>
 
                 <DivStyled>
-                    <LabelStyled htmlFor="username">Username</LabelStyled>
+                    <LabelStyled htmlFor="username">Email</LabelStyled>
                     <input
                         id="username"
                         name="username"

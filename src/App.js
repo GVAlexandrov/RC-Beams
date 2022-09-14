@@ -7,7 +7,7 @@ import { WrapperDivStyled, MainStyled } from './styledApp';
 
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
-import Login from './Components/Login/Login';
+// import Login from './Components/Login/Login';
 // import Register from './Components/Register/Register';
 import LoginRegister from './Components/LoginRegister/LoginRegister';
 import Beams from './Components/Beams/Beams';
@@ -34,7 +34,7 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={<LoginRegister />} />
           <Route path='/register' element={<LoginRegister />} />
 
           <Route path='/beams' element={<Beams />} />
