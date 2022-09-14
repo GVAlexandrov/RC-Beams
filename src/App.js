@@ -19,7 +19,6 @@ import Footer from './Components/Footer/Footer';
 
 function App() {
   const [userEmail, setUserEmail] = useState(null);
-  console.log(userEmail);
 
   useEffect(() => {
     auth.onAuthStateChanged(setUserEmail);

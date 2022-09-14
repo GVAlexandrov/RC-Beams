@@ -14,7 +14,6 @@ const Header = ({
     userEmail,
     setUserEmail
 }) => {
-    console.log(userEmail);
 
     const links = [
         { menuName: "Register", path: "/register", isAuth: false },
@@ -27,7 +26,7 @@ const Header = ({
 
     const logoutHandler = (e) => {
         e.preventDefault();
-        logout();
+        logout()();
         setUserEmail(null);
         localStorage.removeItem('email');
         localStorage.removeItem('uid');
