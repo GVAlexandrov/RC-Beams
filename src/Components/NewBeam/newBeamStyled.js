@@ -26,8 +26,8 @@ justify-content:center;
 align-items:center;
 
 &:hover{
-    background:black;
-    color:red;
+    background:#969592;
+    /* color:red; */
 }
 `;
 
@@ -64,8 +64,9 @@ cursor: pointer;
 `;
 
 const InputReadOnlyStyled = styled.input`
-background-color:#808080;
-color:darkred;
+background-color:#bdbbb7;
+color:black;
+font-size:15px;
 border:1px solid black;
 text-align:center;
 `;
@@ -78,28 +79,28 @@ padding-bottom:10px;
 /* transform:rotate(-90deg); */
 /* border-bottom: 1px solid black; */
 &:hover{
-    background-color:black;
-    color:red;
+    background-color:#969592;
+    /* color:red; */
 }
 `;
 
 const SectionDivStyledTop = styled.div`
 position:relative;
-background-color:#808080;
+background-color:#bdbbb7;
 color:black;
 border: 1px solid black;
 border-top-right-radius:30px;
 
 &:hover{
-background-color:black;
-color:red;
+background-color:#969592;
+/* color:red; */
 }
 `;
 
 const SectionDivStyled = styled.div`
 position:relative;
 margin-top:9px;
-background-color:#808080;
+background-color:#bdbbb7;
 color:black;
 border: 1px solid black;
 
@@ -112,13 +113,13 @@ const SectionDivStyledBottom = styled.div`
 position:relative;
 margin-top:9px;
 padding:10px 0px;
-background-color:#808080;
+background-color:#bdbbb7;
 color:black;
 border: 1px solid black;
 border-bottom-left-radius:30px;
 
 &:hover{
-background-color:black;
+background-color:#969592;
 }
 `;
 

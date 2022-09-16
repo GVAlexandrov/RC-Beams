@@ -6,7 +6,7 @@ top:0px;
 left:0px;
 width:100%;
 /* min-height:90vh; */
-background-color: gray;
+background-color: #bdbbb7;
 text-align: center;
 display:flex;
 flex-direction: column;    

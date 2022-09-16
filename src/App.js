@@ -39,8 +39,8 @@ function App() {
 
           <Route path='/beams' element={<Beams />} />
           <Route path='/beams/new-beam' element={<NewBeam />} />
-          <Route path='/beams/edit-beam/:beamId' element={<EditBeam />} />
           <Route path='/beams/info-beam/:beamId' element={<InfoBeam />} />
+          <Route path='/beams/edit-beam/:beamId' element={<EditBeam />} />
         </Routes>
       </MainStyled>
 

@@ -13,6 +13,7 @@ const Forces = (props) => {
                     name='bendingMoment'
                     type="number"
                     placeholder="10"
+                    step="5"
                     defaultValue={props.bendingMoment ? props.bendingMoment : ''}
                 />
                 <LabelStyledDimension htmlFor="bendingMoment">[kN.m]</LabelStyledDimension>

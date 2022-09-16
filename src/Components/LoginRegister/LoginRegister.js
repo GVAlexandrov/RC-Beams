@@ -169,10 +169,10 @@ border-top-left-radius:30px;
 border-bottom-right-radius:30px;
 overflow: hidden;
 &:hover{
-    border-top-left-radius:0px;
+    /* border-top-left-radius:0px;
     border-bottom-right-radius:0px;
     border-top-right-radius:30px;
-    border-bottom-left-radius:30px;
+    border-bottom-left-radius:30px; */
 }
 `;
 
@@ -195,8 +195,8 @@ font-size:19px;
 /* text-transform: capitalize; */
 
 &:hover{
-    background:black;
-    color:white;
+    background:#969592;
+    /* color:white; */
 }
 `;
 
@@ -206,8 +206,8 @@ padding: 20px 0px;
 width:100%;
 
 &:hover{
-    background:black;
-    color:white;
+    background:#969592;
+    /* color:white; */
 }
 `;
 

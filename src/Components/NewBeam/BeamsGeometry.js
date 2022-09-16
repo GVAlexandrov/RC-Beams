@@ -15,6 +15,8 @@ const BeamsGeometry = (props) => {
                     name='height'
                     type="number"
                     placeholder="500"
+                    min="0"
+                    step="5"
                     defaultValue={props.height ? props.height : ''}
                 />
                 <LabelStyledDimension htmlFor="height">[mm]</LabelStyledDimension>
@@ -36,6 +38,8 @@ const BeamsGeometry = (props) => {
                     name='width'
                     type="number"
                     placeholder="250"
+                    min="0"
+                    step="5"
                     defaultValue={props.width ? props.width : ''}
                 />
                 <LabelStyledDimension htmlFor="width">[mm]</LabelStyledDimension>

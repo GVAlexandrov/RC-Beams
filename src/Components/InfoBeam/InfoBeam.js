@@ -60,7 +60,7 @@ const InfoBeam = () => {
 
                 <tbody>
                     <TrStyledData>
-                        <td>{beam.level ? beam.level : ''}</td>
+                        <td contenteditable="true">{beam.level ? beam.level : ''}</td>
                         <td>{beam.beamsNumber ? beam.beamsNumber : ''}</td>
                         <td>{beam.height ? beam.height : ''}</td>
                         <td>{beam.width ? beam.width : ''}</td>
@@ -119,15 +119,15 @@ z-index:0;
 const TrStyledData = styled.tr`
 position:relative;
 margin:0;
-background:gray;
+background:#bdbbb7;
 font-size:17px;
 /* transition: all 500ms ease-out ; */
 /* outline: thin solid #585858; */
 /* transition: color 500ms ease-out step-end; */
 &:hover{
-    background:black;
-    color:white;
-    font-weight:bold;
+    background:#969592;
+    /* color:white; */
+    /* font-weight:bold; */
 }
 `
 

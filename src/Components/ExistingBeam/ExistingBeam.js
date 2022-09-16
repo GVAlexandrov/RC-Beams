@@ -34,13 +34,13 @@ const TrStyled = styled.tr`
 position:relative;
 height:10px;
 margin:0;
-background:gray;
+background:#bdbbb7;
 /* transition: all 500ms ease-out ; */
 /* outline: thin solid #585858; */
 /* transition: color 500ms ease-out step-end; */
 &:hover{
-    background:black;
-    color:white;
+    background:#969592;
+    /* color:white; */
     font-weight:bold;
 }
 `
