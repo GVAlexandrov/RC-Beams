@@ -12,6 +12,7 @@ import Home from './Components/Home/Home';
 import LoginRegister from './Components/LoginRegister/LoginRegister';
 import Beams from './Components/Beams/Beams';
 import NewBeam from './Components/NewBeam/NewBeam';
+import NewBeam2 from './Components/NewBeam2/NewBeam2';
 import EditBeam from './Components/EditBeam/EditBeam';
 import InfoBeam from './Components/InfoBeam/InfoBeam';
 import Footer from './Components/Footer/Footer';
@@ -39,6 +40,7 @@ function App() {
 
           <Route path='/beams' element={<Beams />} />
           <Route path='/beams/new-beam' element={<NewBeam />} />
+          <Route path='/beams/new-beam2' element={<NewBeam2 />} />
           <Route path='/beams/info-beam/:beamId' element={<InfoBeam />} />
           <Route path='/beams/edit-beam/:beamId' element={<EditBeam />} />
         </Routes>
