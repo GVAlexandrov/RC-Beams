@@ -17,9 +17,21 @@ function fctmCalculate(fck, fcm) {
     );
 }
 
+function miuCalculate(fcd, width, d, med) {
+    return (med * (10 ** 6)) / (width * (d ** 2) * fcd);
+}
+
+function ksiCalculate(fcd, width, d, med) {
+    let miu = miuCalculate(fcd, width, d, med);
+
+    return (1.25 * (1 - Math.sqrt(1 - 2 * miu)));
+}
+
 export {
     fcdCalculate,
     fydCalculate,
     fcmCalculate,
-    fctmCalculate
+    fctmCalculate,
+    miuCalculate,
+    ksiCalculate
 }

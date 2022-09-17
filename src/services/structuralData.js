@@ -1,4 +1,5 @@
 const concreteArr = ['C20/25', 'C25/30', 'C30/37', 'C35/45', 'C40/50', 'C50/60', 'C60/75', 'C70/85'];
+
 const steelArr = [
     'B420',
     'B420A',
@@ -9,7 +10,13 @@ const steelArr = [
     'B500B',
     'B500C'
 ];
+
+const steelModulusArr = [
+    200
+];
+
 const rebarArr = [6.5, 8, 10, 12, 14, 16, 18, 20, 22, 25, 28, 32];
+
 const tableHeadingsArr = [
     'Level',
     '№',
@@ -63,5 +70,6 @@ export {
     tableHeadingsDimensionsArr,
     alphaCCArr,
     gammaMCArr,
-    gammaMSArr
+    gammaMSArr,
+    steelModulusArr
 }
