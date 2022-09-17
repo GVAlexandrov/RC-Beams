@@ -159,6 +159,23 @@ const NewBeam2 = () => {
                         <TdStyled>Es</TdStyled>
                         <TdStyled>εyd</TdStyled>
                     </tr>
+
+                    <tr>
+                        <TdStyledDimensions>[-]</TdStyledDimensions>
+                        <TdStyledDimensions>[-]</TdStyledDimensions>
+                        <TdStyledDimensions>[-]</TdStyledDimensions>
+                        <TdStyledDimensions>[-]</TdStyledDimensions>
+                        <TdStyledDimensions>[-]</TdStyledDimensions>
+                        <TdStyledDimensions>[MPa]</TdStyledDimensions>
+                        <TdStyledDimensions>[MPa]</TdStyledDimensions>
+                        <TdStyledDimensions>[MPa]</TdStyledDimensions>
+                        <TdStyledDimensions>[MPa]</TdStyledDimensions>
+                        <TdStyledDimensions>[MPa]</TdStyledDimensions>
+                        <TdStyledDimensions>[MPa]</TdStyledDimensions>
+                        <TdStyledDimensions>[GPa]</TdStyledDimensions>
+                        <TdStyledDimensions>[GPa]</TdStyledDimensions>
+                        <TdStyledDimensions>[‰]</TdStyledDimensions>
+                    </tr>
                 </thead>
 
 
@@ -305,6 +322,15 @@ const NewBeam2 = () => {
                         <TdStyled>Med</TdStyled>
                         <TdStyled>Ved</TdStyled>
                         <TdStyled>Ted</TdStyled>
+                    </tr>
+                    <tr>
+                        <TdStyledDimensions>[mm]</TdStyledDimensions>
+                        <TdStyledDimensions>[mm]</TdStyledDimensions>
+                        <TdStyledDimensions>[mm]</TdStyledDimensions>
+                        <TdStyledDimensions>[mm]</TdStyledDimensions>
+                        <TdStyledDimensions>[kN.m]</TdStyledDimensions>
+                        <TdStyledDimensions>[kN]</TdStyledDimensions>
+                        <TdStyledDimensions>[kN.m]</TdStyledDimensions>
                     </tr>
                 </thead>
 
