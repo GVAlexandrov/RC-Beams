@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import * as structuralData from '../../services/structuralData';
 import { fcdCalculate, fcmCalculate, fctmCalculate, fydCalculate, miuCalculate, ksiCalculate } from '../../services/formulas';
+import validateNewElements from '../../validations/newDataValidations';
+
 
 const NewBeam2 = () => {
     let [fck, setFck] = useState(0);
@@ -15,10 +17,12 @@ const NewBeam2 = () => {
     let [height, setHeight] = useState(0);
     let [d1, setD1] = useState(0);
     let [med, setMed] = useState(0);
+    let [ved, setVed] = useState(0);
+    let [ted, setTed] = useState(0);
     let [rebarDiameter, setRebarDiameter] = useState(0);
 
-    // console.log(`${fck} -> ${alphaCC} -> ${gammaMC}`);
-    // console.log(`${fy} -> ${gammaMS}`);
+    let [error, setError] = useState('');
+
 
     let fcd = 0;
     let fyd = 0;
@@ -138,9 +142,63 @@ const NewBeam2 = () => {
 
 
 
+    const onSubmitHandler = (e) => {
+        const concreteTextError = validateNewElements.concrete(fck);
+        const alphaCCTextError = validateNewElements.alphaCC(alphaCC);
+        const gammaMCTextError = validateNewElements.gammaMC(gammaMC);
+        const steelTextError = validateNewElements.steel(fy);
+        const gammaMSTextError = validateNewElements.gammaMS(gammaMS);
+        const heightTextError = validateNewElements.height(height.valueOf());
+        const widthTextError = validateNewElements.width(width.valueOf());
+        const d1TextError = validateNewElements.d1(d1.valueOf());
+        const bendingMomentTextError = validateNewElements.bendingMoment(med);
+        const shearForceTextError = validateNewElements.shearForce(ved);
+        const torsionTextError = validateNewElements.torsion(ted);
+        const roS1TextError = validateNewElements.roS1(roS1);
+        const rebarTextError = validateNewElements.rebar(rebarDiameter);
+
+        if (concreteTextError ||
+            alphaCCTextError ||
+            gammaMCTextError ||
+            steelTextError ||
+            gammaMSTextError ||
+            widthTextError ||
+            heightTextError ||
+            d1TextError ||
+            bendingMomentTextError ||
+            shearForceTextError ||
+            torsionTextError ||
+            roS1TextError ||
+            rebarTextError) {
+            setError(concreteTextError ||
+                alphaCCTextError ||
+                gammaMCTextError ||
+                steelTextError ||
+                gammaMSTextError ||
+                widthTextError ||
+                heightTextError ||
+                d1TextError ||
+                bendingMomentTextError ||
+                shearForceTextError ||
+                torsionTextError ||
+                roS1TextError ||
+                rebarTextError);
+
+            setTimeout(() => {
+                setError('');
+            }, 5000);
+
+            return;
+        };
+
+        console.log('AFTER RETURN');
+    }
+
+
+
     return (
         <>
-            <h1>This module is to substitute "New Beam"</h1>
+            <h1 style={{ color: 'red' }}>The module "New Beam2" is to substitute "New Beam"</h1>
             <TableStyled>
                 <thead>
                     <tr>
@@ -161,10 +219,10 @@ const NewBeam2 = () => {
                     </tr>
 
                     <tr>
+                        <TdStyledDimensions>[class]</TdStyledDimensions>
                         <TdStyledDimensions>[-]</TdStyledDimensions>
                         <TdStyledDimensions>[-]</TdStyledDimensions>
-                        <TdStyledDimensions>[-]</TdStyledDimensions>
-                        <TdStyledDimensions>[-]</TdStyledDimensions>
+                        <TdStyledDimensions>[class]</TdStyledDimensions>
                         <TdStyledDimensions>[-]</TdStyledDimensions>
                         <TdStyledDimensions>[MPa]</TdStyledDimensions>
                         <TdStyledDimensions>[MPa]</TdStyledDimensions>
@@ -343,7 +401,7 @@ const NewBeam2 = () => {
                                 name='width'
                                 type="number"
                                 placeholder="250"
-                                min="0"
+                                min="60"
                                 step="5"
                                 onChange={e => setWidth(Number(e.target.value))}
                                 value={width}
@@ -356,7 +414,7 @@ const NewBeam2 = () => {
                                 name='height'
                                 type="number"
                                 placeholder="500"
-                                min="0"
+                                min="150"
                                 step="5"
                                 onChange={e => setHeight(Number(e.target.value))}
                                 value={height}
@@ -369,7 +427,7 @@ const NewBeam2 = () => {
                                 name='d1'
                                 type="number"
                                 placeholder="25"
-                                min="0"
+                                min="25"
                                 step="1"
                                 onChange={e => setD1(Number(e.target.value))}
                                 value={d1}
@@ -399,6 +457,8 @@ const NewBeam2 = () => {
                                 type="number"
                                 placeholder="10"
                                 step="1"
+                                onChange={e => setVed(Number(e.target.value))}
+                                value={ved}
                             />
                         </TdStyled>
 
@@ -409,6 +469,8 @@ const NewBeam2 = () => {
                                 type="number"
                                 placeholder="10"
                                 step="1"
+                                onChange={e => setTed(Number(e.target.value))}
+                                value={ted}
                             />
                         </TdStyled>
                     </tr>
@@ -538,7 +600,6 @@ const NewBeam2 = () => {
                         <TdStyled>Fs1</TdStyled>
                         <TdStyled>Mcr,1</TdStyled>
                         <TdStyled>Mcr,2</TdStyled>
-                        <TdStyled>al</TdStyled>
                     </tr>
                     <tr>
                         <TdStyledDimensions>[mm]</TdStyledDimensions>
@@ -552,7 +613,6 @@ const NewBeam2 = () => {
                         <TdStyledDimensions>[kN]</TdStyledDimensions>
                         <TdStyledDimensions>[kN.m]</TdStyledDimensions>
                         <TdStyledDimensions>[kN.m]</TdStyledDimensions>
-                        <TdStyledDimensions>[mm]</TdStyledDimensions>
                     </tr>
                 </thead>
 
@@ -567,7 +627,14 @@ const NewBeam2 = () => {
 
                         <TdStyled>
                             <select name="rebar" id="rebar" onChange={e => setRebarDiameter(e.target.value)}>
-
+                                <option
+                                    disabled
+                                    selected
+                                    hidden
+                                    value="default"
+                                >
+                                    dim.
+                                </option>
                                 {structuralData.rebarArr.map((rebarDiameter) => {
                                     return <option value={rebarDiameter}>{rebarDiameter}</option>
                                 })}
@@ -631,6 +698,17 @@ const NewBeam2 = () => {
                     </tr>
                 </tbody>
             </TableStyled>
+
+            {error
+                ? (
+                    <DivErrorStyled >
+                        <PErrorStyled>{error}</PErrorStyled>
+                    </DivErrorStyled>
+                )
+                : (<></>)
+            }
+
+            <ButtonStyled onClick={onSubmitHandler}>Save</ButtonStyled>
         </>
     );
 }
@@ -644,6 +722,9 @@ padding:10px;
 border: 1px solid black;
 border-top-right-radius:15px;
 border-bottom-left-radius:15px;
+&:hover{
+background-color:#969592;
+}
 `;
 
 const InputStyled = styled.input`
@@ -656,12 +737,49 @@ max-width:50px;
 `;
 
 const TdStyled = styled.td`
-min-width:50px;
+min-width:60px;
 `;
 
 const TdStyledDimensions = styled.td`
 min-width:50px;
 font-style: italic;
+`;
+
+const ButtonStyled = styled.button`
+display: block;
+margin:20px auto;
+margin-bottom:20px;
+font-size:16px;
+background:#bdbbb7;
+padding: 10px 50px;
+border-radius:5px;
+border-color:black;
+cursor: pointer;
+&:hover{
+background-color:#969592;
+}
+&:active {
+background-color:#bdbbb7;
+/* background-color:black;
+color:red;
+border-color:red; */
+}
+`;
+
+const DivErrorStyled = styled.div`
+color:red;
+background-color:white;
+font-size:20px;
+/* font-weight: bold; */
+border: 1.5px solid red;
+border-top-right-radius:15px;
+border-bottom-left-radius:15px;
+display: inline-block;
+`;
+
+const PErrorStyled = styled.p`
+margin:auto;
+padding:10px;
 `;
 
 export default NewBeam2;
