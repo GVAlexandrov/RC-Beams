@@ -15,6 +15,7 @@ const NewBeam2 = () => {
     let [height, setHeight] = useState(0);
     let [d1, setD1] = useState(0);
     let [med, setMed] = useState(0);
+    let [rebarDiameter, setRebarDiameter] = useState(0);
 
     // console.log(`${fck} -> ${alphaCC} -> ${gammaMC}`);
     // console.log(`${fy} -> ${gammaMS}`);
@@ -32,11 +33,20 @@ const NewBeam2 = () => {
 
     let miu = 0;
     let ksi = 0;
+    let x = 0;
     let ksiMax = 0;
     let xMax = 0;
     let roLMin = 0;
     let roLMax = 0;
     let roS1 = 0;
+    let ceta = 0;
+    let z = 0;
+    let As1 = 0;
+    let As1_1 = 0;
+    let numberOfRebarsNeeded = 0;
+    let As1Provided = 0;
+    let roL = 0;
+    let Fc = 0;
 
 
 
@@ -71,6 +81,9 @@ const NewBeam2 = () => {
     ksi = isNaN(ksiCalculate(fcd, width, d, med))
         ? 0
         : Number(ksiCalculate(fcd, width, d, med));
+    x = (isNaN(Number(ksi * d)) || !isFinite(Number(ksi * d)))
+        ? '-'
+        : Number(ksi * d);
     ksiMax = isNaN((3.5 / (3.5 + epsilonYD)))
         ? '-'
         : (3.5 / (3.5 + epsilonYD));
@@ -88,11 +101,40 @@ const NewBeam2 = () => {
         roS1 = '-';
     } else {
         roS1 = ((100 * 0.8 * ksi * fcd / fyd >= roLMin && 100 * 0.8 * ksi * fcd / fyd <= roLMax))
-            ? Number(100 * 0.8 * ksi * fcd / fyd)
-            : 'Out';
+            ? Number(100 * 0.8 * ksi * fcd / fyd).toFixed(3)
+            : 'OUT';
     }
 
+    ceta = (isNaN(Number(1 - .4 * ksi)) || !isFinite(Number(1 - .4 * ksi)))
+        ? '-'
+        : Number(1 - .4 * ksi);
+    z = (isNaN(Number(d * ceta)) || !isFinite(Number(d * ceta)))
+        ? '-'
+        : Number(d * ceta);
+    As1 = (isNaN(Number((roS1 * 0.01 * width * d) / 100)) || !isFinite(Number((roS1 * 0.01 * width * d) / 100)))
+        ? '-'
+        : Number((roS1 * 0.01 * width * d) / 100);
+    As1_1 = (isNaN(Number((Math.PI * 0.25 * rebarDiameter ** 2) / 100)) || !isFinite(Number((Math.PI * 0.25 * rebarDiameter ** 2) / 100)))
+        ? '-'
+        : Number((Math.PI * 0.25 * rebarDiameter ** 2) / 100);
+    numberOfRebarsNeeded = (isNaN(Number(Math.ceil(As1 / As1_1)))) || !isFinite(Number(Math.ceil(As1 / As1_1)))
+        ? '-'
+        : Number(Math.ceil(As1 / As1_1));
+    As1Provided = (isNaN(Number(As1_1 * numberOfRebarsNeeded))) || !isFinite(Number(As1_1 * numberOfRebarsNeeded))
+        ? '-'
+        : Number(As1_1 * numberOfRebarsNeeded);
 
+    if (isNaN(Number(100 * (numberOfRebarsNeeded * As1_1 * 100) / (width * d))) || !isFinite(Number(100 * (numberOfRebarsNeeded * As1_1 * 100) / (width * d)))) {
+        roL = '-';
+    } else {
+        roL = ((100 * (numberOfRebarsNeeded * As1_1 * 100) / (width * d) >= roLMin && 100 * (numberOfRebarsNeeded * As1_1 * 100) / (width * d) <= roLMax))
+            ? Number(100 * 0.8 * ksi * fcd / fyd).toFixed(3)
+            : 'OUT';
+    }
+
+    Fc = (isNaN(Number((0.8 * width * x * fcd) / 1000))) || !isFinite(Number((0.8 * width * x * fcd) / 1000))
+        ? '-'
+        : Number((0.8 * width * x * fcd) / 1000);
 
 
 
@@ -360,8 +402,25 @@ const NewBeam2 = () => {
                         <TdStyled>x,max</TdStyled>
                         <TdStyled>As,2</TdStyled>
                         <TdStyled>ρl,min</TdStyled>
-                        <TdStyled>ρs1</TdStyled>
+                        <TdStyled>≤ ρs1 ≤</TdStyled>
                         <TdStyled>ρl,max</TdStyled>
+                        <TdStyled>ω1</TdStyled>
+                        <TdStyled>ζ</TdStyled>
+                        <TdStyled>z</TdStyled>
+                    </tr>
+                    <tr>
+                        <TdStyledDimensions>[-]</TdStyledDimensions>
+                        <TdStyledDimensions>[-]</TdStyledDimensions>
+                        <TdStyledDimensions>[mm]</TdStyledDimensions>
+                        <TdStyledDimensions>[-]</TdStyledDimensions>
+                        <TdStyledDimensions>[mm]</TdStyledDimensions>
+                        <TdStyledDimensions>[?]</TdStyledDimensions>
+                        <TdStyledDimensions>[%]</TdStyledDimensions>
+                        <TdStyledDimensions>[%]</TdStyledDimensions>
+                        <TdStyledDimensions>[%]</TdStyledDimensions>
+                        <TdStyledDimensions>[-]</TdStyledDimensions>
+                        <TdStyledDimensions>[-]</TdStyledDimensions>
+                        <TdStyledDimensions>[mm]</TdStyledDimensions>
                     </tr>
                 </thead>
 
@@ -377,7 +436,9 @@ const NewBeam2 = () => {
                         </TdStyled>
 
                         <TdStyled>
-                            {(ksi * d).toFixed(0)}
+                            {isNaN(Number(x))
+                                ? '-'
+                                : Number(x).toFixed(0)}
                         </TdStyled>
 
                         <TdStyled>
@@ -392,10 +453,10 @@ const NewBeam2 = () => {
                                 : Number(xMax).toFixed(0)}
                         </TdStyled>
 
-                        <TdStyled>
+                        <TdStyled style={ksiMax >= ksi ? {} : { color: 'red', 'font-weight': 'bold' }}>
                             {(ksiMax >= ksi)
                                 ? 'No'
-                                : 'Yes'}
+                                : 'YES'}
                         </TdStyled>
 
                         <TdStyled>
@@ -404,16 +465,142 @@ const NewBeam2 = () => {
                                 : Number(roLMin).toFixed(3)}
                         </TdStyled>
 
-                        <TdStyled>
-                            {isNaN(Number(roS1))
-                                ? '-'
-                                : Number(roS1).toFixed(3)}
+                        <TdStyled style={ksiMax >= ksi ? {} : { color: 'red', 'font-weight': 'bold' }}>
+                            {roS1}
                         </TdStyled>
 
                         <TdStyled>
                             {isNaN(Number(roLMax))
                                 ? '-'
                                 : Number(roLMax).toFixed(3)}
+                        </TdStyled>
+
+                        <TdStyled>
+                            {isNaN(Number(.8 * ksi))
+                                ? '-'
+                                : Number(.8 * ksi).toFixed(3)}
+                        </TdStyled>
+
+                        <TdStyled>
+                            {isNaN(Number(ceta))
+                                ? '-'
+                                : Number(ceta).toFixed(2)}
+                        </TdStyled>
+
+                        <TdStyled>
+                            {isNaN(Number(z))
+                                ? '-'
+                                : Number(z).toFixed(0)}
+                        </TdStyled>
+                    </tr>
+                </tbody>
+            </TableStyled>
+
+            {/* ________________________________________________________ */}
+
+            <TableStyled>
+                <thead>
+                    <tr>
+                        <TdStyled>As,1</TdStyled>
+                        <TdStyled>Ø</TdStyled>
+                        <TdStyled>As1,1</TdStyled>
+                        <TdStyled>№</TdStyled>
+                        <TdStyled>As1,p</TdStyled>
+                        <TdStyled>Reserve</TdStyled>
+                        <TdStyled>ρl</TdStyled>
+                        <TdStyled>Fc =</TdStyled>
+                        <TdStyled>Fs1</TdStyled>
+                        <TdStyled>Mcr,1</TdStyled>
+                        <TdStyled>Mcr,2</TdStyled>
+                        <TdStyled>al</TdStyled>
+                    </tr>
+                    <tr>
+                        <TdStyledDimensions>[mm]</TdStyledDimensions>
+                        <TdStyledDimensions>[mm]</TdStyledDimensions>
+                        <TdStyledDimensions>[mm]</TdStyledDimensions>
+                        <TdStyledDimensions>[-]</TdStyledDimensions>
+                        <TdStyledDimensions>[mm]</TdStyledDimensions>
+                        <TdStyledDimensions>[%]</TdStyledDimensions>
+                        <TdStyledDimensions>[%]</TdStyledDimensions>
+                        <TdStyledDimensions>[kN]</TdStyledDimensions>
+                        <TdStyledDimensions>[kN]</TdStyledDimensions>
+                        <TdStyledDimensions>[kN.m]</TdStyledDimensions>
+                        <TdStyledDimensions>[kN.m]</TdStyledDimensions>
+                        <TdStyledDimensions>[mm]</TdStyledDimensions>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    <tr>
+                        <TdStyled>
+                            {isNaN(Number(As1))
+                                ? '-'
+                                : Number(As1).toFixed(2)}
+                        </TdStyled>
+
+                        <TdStyled>
+                            <select name="rebar" id="rebar" onChange={e => setRebarDiameter(e.target.value)}>
+
+                                {structuralData.rebarArr.map((rebarDiameter) => {
+                                    return <option value={rebarDiameter}>{rebarDiameter}</option>
+                                })}
+
+                            </select>
+                        </TdStyled>
+
+                        <TdStyled>
+                            {isNaN(Number(As1_1))
+                                ? '-'
+                                : Number(As1_1).toFixed(2)}
+                        </TdStyled>
+
+                        <TdStyled>
+                            {isNaN(Number(numberOfRebarsNeeded))
+                                ? '-'
+                                : Number(numberOfRebarsNeeded)}
+                        </TdStyled>
+
+                        <TdStyled>
+                            {isNaN(Number(As1Provided))
+                                ? '-'
+                                : Number(As1Provided).toFixed(2)}
+                        </TdStyled>
+
+                        <TdStyled>
+                            {isNaN(Number(100 * As1Provided / As1))
+                                ? '-'
+                                : Number(100 * (As1Provided / As1 - 1)).toFixed(0)}
+                        </TdStyled>
+
+                        <TdStyled>
+                            {isNaN(Number(roL))
+                                ? '-'
+                                : Number(roL).toFixed(2)}
+                        </TdStyled>
+
+                        <TdStyled>
+                            {isNaN(Number(Fc))
+                                ? '-'
+                                : Number(Fc).toFixed(0)}
+                        </TdStyled>
+
+                        <TdStyled>
+                            {isNaN(Number((fyd * As1 * 100) / 1000))
+                                ? '-'
+                                : Number((fyd * As1 * 100) / 1000).toFixed(0)}
+                        </TdStyled>
+
+                        <TdStyled>
+                            {isNaN(Number((fctk95 * width * height ** 2 / 6) / 1000000))
+                                ? '-'
+                                : Number((fctk95 * width * height ** 2 / 6) / 1000000).toFixed(2)}
+                        </TdStyled>
+
+                        <TdStyled>
+                            {isNaN(Number((fctk05 * width * height ** 2 / 6) / 1000000))
+                                ? '-'
+                                : Number((fctk05 * width * height ** 2 / 6) / 1000000).toFixed(2)}
                         </TdStyled>
                     </tr>
                 </tbody>
@@ -435,7 +622,7 @@ border-bottom-left-radius:15px;
 
 const InputStyled = styled.input`
 max-width:50px;
-background-color:#bdbbb7;
+/* background-color:#bdbbb7; */
 
 &:focus{
     background:white;
@@ -444,6 +631,11 @@ background-color:#bdbbb7;
 
 const TdStyled = styled.td`
 min-width:50px;
+`;
+
+const TdStyledDimensions = styled.td`
+min-width:50px;
+font-style: italic;
 `;
 
 export default NewBeam2;
