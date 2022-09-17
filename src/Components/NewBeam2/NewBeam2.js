@@ -405,7 +405,9 @@ const NewBeam2 = () => {
                         </TdStyled>
 
                         <TdStyled>
-                            {roS1.toFixed(3)}
+                            {isNaN(Number(roS1))
+                                ? '-'
+                                : Number(roS1).toFixed(3)}
                         </TdStyled>
 
                         <TdStyled>
