@@ -3,79 +3,85 @@ const validateNewElements = {
 
     concrete(fck) {
         if (fck === 0 || isNaN(Number(fck))) {
-            return 'You should choose a class of concrete!'
+            return 'You should choose a class of concrete!';
         }
     },
 
     alphaCC(alphaCCValue) {
         if (alphaCCValue === 0 || isNaN(Number(alphaCCValue))) {
-            return 'You should choose a value for αcc!'
+            return 'You should choose a value for αcc!';
         }
     },
 
     gammaMC(gammaMCValue) {
         if (gammaMCValue === 0 || isNaN(Number(gammaMCValue))) {
-            return 'You should choose a value for γm,c!'
+            return 'You should choose a value for γm,c!';
         }
     },
 
     steel(fy) {
         if (fy === 0 || isNaN(Number(fy))) {
-            return 'You should choose a class of steel!'
+            return 'You should choose a class of steel!';
         }
     },
 
     gammaMS(gammaMSValue) {
         if (gammaMSValue === 0 || isNaN(Number(gammaMSValue))) {
-            return 'You should choose a value for γm,s!'
+            return 'You should choose a value for γm,s!';
+        }
+    },
+
+    Es(Es) {
+        if (Es === 0 || isNaN(Number(Es))) {
+            return 'You should choose a value for Es!';
         }
     },
 
     width(width) {
         if (width < 60 || isNaN(Number(width))) {
-            return 'Width should be an integer, larger than or equal to 60 mm!'
+            return 'Width should be an integer, larger than or equal to 60 mm!';
         }
     },
 
     height(height) {
         if (height < 150 || isNaN(Number(height))) {
-            return 'Heigh should be an integer, larger than or equal to 150 mm!'
+            return 'Heigh should be an integer, larger than or equal to 150 mm!';
         }
     },
 
     d1(d1) {
         if (d1 < 25 || isNaN(Number(d1))) {
-            return 'd1 should be an integer, larger than or equal to 25 mm!'
+            return 'd1 should be an integer, larger than or equal to 25 mm!';
         }
     },
 
     bendingMoment(bendingMoment) {
-        if (isNaN(Number(bendingMoment))) {
-            return 'Bending moment should be an integer'
+        if (bendingMoment === 0 || isNaN(Number(bendingMoment))) {
+            return 'Bending moment should be a non-zero integer';
         }
     },
 
     shearForce(shearForce) {
-        if (isNaN(Number(shearForce))) {
-            return 'Shear force should be an integer'
+        if (shearForce === 0 || isNaN(Number(shearForce))) {
+            return 'Shear force should be a non-zero integer';
         }
     },
 
     torsion(torsion) {
         if (isNaN(Number(torsion))) {
-            return 'Torsion should be an integer'
+            return 'Torsion should be an integer';
         }
     },
 
     roS1(roS1) {
         if (roS1 === 'OUT') {
-            return 'The value of ρs1 should be between ρl,min and ρl,max. If not - increase the dimensions of the beam section (height or/and width)'
+            return 'The value of ρs1 should be between ρl,min and ρl,max. If not - increase the dimensions of the beam section (height or/and width)';
         }
     },
 
     rebar(diameter) {
         if (diameter === 0 || isNaN(Number(diameter))) {
-            return 'You should choose a diameter of rebar!'
+            return 'You should choose a diameter of rebar!';
         }
     },
 }

@@ -148,6 +148,7 @@ const NewBeam2 = () => {
         const gammaMCTextError = validateNewElements.gammaMC(gammaMC);
         const steelTextError = validateNewElements.steel(fy);
         const gammaMSTextError = validateNewElements.gammaMS(gammaMS);
+        const EsTextError = validateNewElements.Es(steelModulus);
         const heightTextError = validateNewElements.height(height.valueOf());
         const widthTextError = validateNewElements.width(width.valueOf());
         const d1TextError = validateNewElements.d1(d1.valueOf());
@@ -162,27 +163,29 @@ const NewBeam2 = () => {
             gammaMCTextError ||
             steelTextError ||
             gammaMSTextError ||
+            EsTextError ||
             widthTextError ||
             heightTextError ||
             d1TextError ||
             bendingMomentTextError ||
             shearForceTextError ||
             torsionTextError ||
-            roS1TextError ||
-            rebarTextError) {
+            rebarTextError ||
+            roS1TextError) {
             setError(concreteTextError ||
                 alphaCCTextError ||
                 gammaMCTextError ||
                 steelTextError ||
                 gammaMSTextError ||
+                EsTextError ||
                 widthTextError ||
                 heightTextError ||
                 d1TextError ||
                 bendingMomentTextError ||
                 shearForceTextError ||
                 torsionTextError ||
-                roS1TextError ||
-                rebarTextError);
+                rebarTextError ||
+                roS1TextError);
 
             setTimeout(() => {
                 setError('');
@@ -350,7 +353,6 @@ const NewBeam2 = () => {
                                     disabled
                                     selected
                                     hidden
-                                    value="default"
                                 >
                                     -
                                 </option>                              {structuralData.steelModulusArr.map((modulus) => {
