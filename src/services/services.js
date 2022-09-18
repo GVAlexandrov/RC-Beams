@@ -3,8 +3,45 @@ import { auth } from '../config/firebaseInit';
 
 let uid = localStorage.uid;
 
-export const addNewBeam = (level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, numberRebars) => {
-    let newBeam = { level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, numberRebars }
+
+export const addNewBeam = (
+    projectName,
+    beamLevel,
+    beamNumberString,
+    rebarPosition,
+    concrete,
+    alphaCC,
+    gammaMC,
+    steel,
+    gammaMS,
+    steelModulus,
+    width,
+    height,
+    d1,
+    bendingMoment,
+    shearForce,
+    torsion,
+    rebar
+) => {
+    let newBeam = {
+        projectName,
+        beamLevel,
+        beamNumberString,
+        rebarPosition,
+        concrete,
+        alphaCC,
+        gammaMC,
+        steel,
+        gammaMS,
+        steelModulus,
+        width,
+        height,
+        d1,
+        bendingMoment,
+        shearForce,
+        torsion,
+        rebar
+    }
     uid = localStorage.uid;
 
     return auth.currentUser.getIdToken(false)
@@ -16,15 +53,21 @@ export const addNewBeam = (level, beamsNumber, height, width, bendingMoment, she
         })
 }
 
+
+
 export const getAllBeams = () => {
     uid = localStorage.uid;
     return fetch(`${URL}beams/${uid}/.json`)
         .then(response => response.json())
         .then(result => {
+            console.log('Inside getAllBeams');
+            console.log(result);
             return result;
         })
         .catch(error => console.log(error));
 }
+
+
 
 export const getOneBeam = (beamId) => {
     uid = localStorage.uid;
@@ -35,6 +78,8 @@ export const getOneBeam = (beamId) => {
         })
         .catch(error => console.log(error));
 }
+
+
 
 export const deleteOneBeam = (event, elementId, refresh) => {
     // let parentNode = event.target.nodeName === 'TD' ? event.target.parentNode.parentNode : event.target.parentNode.parentNode.parentNode;
@@ -53,6 +98,8 @@ export const deleteOneBeam = (event, elementId, refresh) => {
     //     parentNode.setBeams(res);
     // })    
 }
+
+
 
 export const editBeam = (level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, numberRebars, beamId) => {
     let newBeam = { level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, numberRebars }
