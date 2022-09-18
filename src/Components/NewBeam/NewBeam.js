@@ -26,7 +26,7 @@ const NewBeam = () => {
 
         const { level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, numberRebars } = e.target;
 
-        // ERRORS
+        // ERRORS_____________________________________________________
         const heightTextError = validateNewElements.height(height.value);
         const widthTextError = validateNewElements.width(width.value);
         const concreteTextError = validateNewElements.concrete(concrete.value);
@@ -70,7 +70,7 @@ const NewBeam = () => {
 
         if (heightTextError || widthTextError || concreteTextError || steelTextError || rebarTextError) return;
 
-        // NEW BEAM ADDED
+        // NEW BEAM ADDED_____________________________________________________
         beamService
             .addNewBeam(
                 level.value,
