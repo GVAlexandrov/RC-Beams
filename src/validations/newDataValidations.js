@@ -1,6 +1,30 @@
 
 const validateNewElements = {
 
+    projectName(name) {
+        if (name.length <= 3) {
+            return 'The project\'s name should be longer than 3 characters!';
+        }
+    },
+
+    beamLevel(level) {
+        if (isNaN(Number(level))) {
+            return 'The beam\'s level should be a number';
+        }
+    },
+
+    beamNumber(beamNumberAsString) {
+        if (beamNumberAsString.length < 1) {
+            return 'The beam\'s number should be at least 1 character long!';
+        }
+    },
+
+    rebarPosition(positionAsString) {
+        if (positionAsString !== 'top' && positionAsString !== 'bottom') {
+            return 'You should choose a reinforcement\'s position!';
+        }
+    },
+
     concrete(fck) {
         if (fck === 0 || isNaN(Number(fck))) {
             return 'You should choose a class of concrete!';
@@ -76,6 +100,12 @@ const validateNewElements = {
     roS1(roS1) {
         if (roS1 === 'OUT') {
             return 'The value of ρs1 should be between ρl,min and ρl,max. If not - increase the dimensions of the beam section (height or/and width)';
+        }
+    },
+
+    roL(roL) {
+        if (roL === 'OUT') {
+            return 'The value of ρl should be between ρl,min and ρl,max. If not - increase the dimensions of the beam section (height or/and width)';
         }
     },
 
