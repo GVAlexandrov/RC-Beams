@@ -39,11 +39,11 @@ const Beams = () => {
     if (beams !== null) {
         beamsArr = Object
             .entries(beams)
-            .sort((a, b) => Number(a[1].level.slice(1)) - Number(b[1].level.slice(1)));
+            .sort((a, b) => Number(a[1].beamLevel) - Number(b[1].beamLevel));
 
         beamsArrCopy = [...beamsArr];
 
-        levelsArr = new Set([...beamsArr.map(a => a[1].level)]);
+        levelsArr = new Set([...beamsArr.map(a => a[1].beamLevel)]);
     }
 
     function deleteOrEditBeam(event) {
@@ -77,10 +77,12 @@ const Beams = () => {
                             {(Array
                                 .from(levelsArr)
                                 .map((level) => {
-                                    return <option value={level}>{level}</option>
+                                    return <option value={level}>{Number(level).toFixed(2)}</option>
                                 }))}
 
                         </select>
+
+
 
                         <TableStyled >
                             <THeadStyledMain>
@@ -107,7 +109,7 @@ const Beams = () => {
                                     .filter(a => {
                                         return level === 'all' || !level
                                             ? a
-                                            : a[1].level === level;
+                                            : Number(a[1].beamLevel) === Number(level);
                                     })
                                     .map(beam => <ExistingBeam key={beamsArrCopy.id} beam={beam} />)}
                             </tbody>
