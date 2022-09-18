@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 
 const ExistingBeam = (beamObj) => {
-    const { level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar } = beamObj.beam[1];
-    const beamArr = [level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar];
+    const { projectName, beamLevel, beamNumberString, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar } = beamObj.beam[1];
+    let rebarNumber = '';
+    const beamArr = [projectName, Number(beamLevel).toFixed(2), beamNumberString, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, rebarNumber];
 
     return (
         <TrStyled key={beamObj.beam[0]} id={beamObj.beam[0]}>
@@ -62,6 +63,7 @@ border-color:red;
 
 const TdStyled = styled.td`
 padding:0px;
+min-width:60px;
 `
 
 export default ExistingBeam;
