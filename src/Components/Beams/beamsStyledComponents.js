@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const TableStyled = styled.table`
 position:relative;
 min-width:600px;
-width:60%;
+width:70%;
 padding:20px;
 margin:auto;
 margin:20px auto;
