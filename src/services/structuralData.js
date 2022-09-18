@@ -16,8 +16,9 @@ const steelModulusArr = [
 const rebarArr = [6.5, 8, 10, 12, 14, 16, 18, 20, 22, 25, 28, 32];
 
 const tableHeadingsArr = [
+    'Project\'s name',
     'Level',
-    '№',
+    'Beam',
     'Height',
     'Width',
     'Bending',
@@ -26,21 +27,23 @@ const tableHeadingsArr = [
     'Concrete',
     'Steel',
     'Ø',
+    'Rebars',
     '',
     ''
 ];
 const tableHeadingsDimensionsArr = [
     '[-]',
     '[-]',
+    '[№]',
     '[mm]',
     '[mm]',
     '[kN.m]',
     '[kN]',
     '[kN.m]',
-    '[-]',
-    '[MPa]',
+    '[Grade]',
+    '[Grade]',
     '[mm]',
-    '',
+    '[№]',
     '',
     ''
 ];
