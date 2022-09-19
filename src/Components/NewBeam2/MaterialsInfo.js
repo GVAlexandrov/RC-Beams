@@ -21,6 +21,7 @@ const BeamInfo = (props) => {
     let setSteelModulus = props.setSteelModulus;
     let epsilonYD = props.epsilonYD;
 
+
     return (
         <TableStyled>
             <thead>
@@ -74,7 +75,7 @@ const BeamInfo = (props) => {
                                 Grade
                             </option>
                             {structuralData.concreteArr.map((concreteGrade) => {
-                                return <option value={concreteGrade}>{concreteGrade}</option>
+                                return (<option value={concreteGrade}>{concreteGrade}</option>)
                             })}
                         </select>
                     </TdStyled>
@@ -91,7 +92,9 @@ const BeamInfo = (props) => {
                             </option>
                             {structuralData.alphaCCArr.map((alphaCC) => {
                                 return <option value={alphaCC}>{Number(alphaCC).toFixed(2)}</option>
-                            })}
+                            })
+                            }
+
                         </select>
                     </TdStyled>
 
@@ -140,7 +143,7 @@ const BeamInfo = (props) => {
                     </TdStyled>
 
                     <TdStyled>
-                        {(fcd && fcd !== Infinity) ? fcd.toFixed(2) : ''}
+                        {(fcd && fcd !== Infinity) ? fcd.toFixed(2) : '-'}
                     </TdStyled>
 
                     <TdStyled>
