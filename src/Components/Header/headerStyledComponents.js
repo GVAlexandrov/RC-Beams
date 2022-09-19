@@ -98,6 +98,11 @@ height:3px;
 border-radius:1.5px;
 `;
 
+const DivLogoStyled = styled.div`
+position: absolute;
+left:50px;
+`;
+
 
 export {
   HeaderStyled,
@@ -106,5 +111,6 @@ export {
   LiStyled,
   NavLinkStyled,
   DivHamburgerMenu,
-  SpanHamburgerMenu
+  SpanHamburgerMenu,
+  DivLogoStyled
 };
