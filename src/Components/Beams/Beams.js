@@ -55,8 +55,6 @@ const Beams = () => {
             };
         } else if (event.target.textContent === 'Edit') {
             navigate(`/beams/edit-beam/${elementId}`);
-        } else if (event.target.textContent === 'Info') {
-            navigate(`/beams/info-beam/${elementId}`);
         }
     }
 
