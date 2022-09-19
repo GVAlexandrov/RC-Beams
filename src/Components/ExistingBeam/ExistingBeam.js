@@ -20,7 +20,7 @@ const ExistingBeam = (beamObj) => {
 
 
             <TdStyled>
-                <ButtonStyled id={beamObj.beam[0]}>Info</ButtonStyled>
+                <ButtonStyled id={beamObj.beam[0]}>Edit</ButtonStyled>
             </TdStyled>
 
 
