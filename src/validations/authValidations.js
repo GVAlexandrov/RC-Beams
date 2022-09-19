@@ -1,10 +1,10 @@
 const validate = {
-    username(username) {
+    email(email) {
         const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
-        if (username.length === 0) return 'Username is required';
-        if (username.length < 5) return 'Username should be at least 5 symbols';
-        if (!username.match(emailRegex)) return 'Please, provide a valid email!';
+        if (email.length === 0) return 'Email is required.';
+        if (email.length < 5) return 'Email should be at least 5 symbols.';
+        if (!email.match(emailRegex)) return 'Please, provide a valid email.';
 
         return;
     },
