@@ -14,11 +14,13 @@ import { useNavigate } from "react-router-dom";
 const Beams = () => {
 
     let [beams, setBeams] = useState({});
+    let [project, setProject] = useState('');
     let [level, setLevel] = useState('');
 
     let beamsArr = [];
     let beamsArrCopy = [];
-    let levelsArr = new Set([]);
+    let projectsSet = new Set([]);
+    let levelsSet = new Set([]);
 
     useEffect(() => {
         services.getAllBeams()
@@ -36,14 +38,24 @@ const Beams = () => {
 
     const navigate = useNavigate();
 
-    if (beams !== null) {
+    if (beams) {
         beamsArr = Object
             .entries(beams)
-            .sort((a, b) => Number(a[1].beamLevel) - Number(b[1].beamLevel));
+            .sort((a, b) => {
+                if (a[1].projectName !== b[1].projectName) {
+                    return (a[1].projectName).localeCompare(b[1].projectName);
+                } else {
+                    return Number(b[1].beamLevel) - Number(a[1].beamLevel);
+                }
+            });
 
         beamsArrCopy = [...beamsArr];
 
-        levelsArr = new Set([...beamsArr.map(a => a[1].beamLevel)]);
+        projectsSet = new Set([...beamsArr.map(a => a[1].projectName)]);
+
+        levelsSet = project && project !== 'all'
+            ? new Set([...beamsArr.filter(a => a[1].projectName === project).map(a => a[1].beamLevel)])
+            : new Set([...beamsArr.map(a => a[1].beamLevel)]);
     }
 
     function deleteOrEditBeam(event) {
@@ -63,6 +75,23 @@ const Beams = () => {
             {beamsArrCopy.length
                 ? (
                     <>
+                        <label htmlFor="project">Project</label>
+                        <select
+                            name="project"
+                            id="project"
+                            onChange={e => setProject(e.target.value)}>
+                            <option selected value="all" >
+                                All
+                            </option>
+
+                            {(Array
+                                .from(projectsSet)
+                                .map((project) => {
+                                    return <option value={project}>{project}</option>
+                                }))}
+
+                        </select>
+
                         <label htmlFor="level">Level</label>
                         <select
                             name="level"
@@ -73,7 +102,7 @@ const Beams = () => {
                             </option>
 
                             {(Array
-                                .from(levelsArr)
+                                .from(levelsSet)
                                 .map((level) => {
                                     return <option value={level}>{Number(level).toFixed(2)}</option>
                                 }))}
@@ -104,6 +133,11 @@ const Beams = () => {
 
                             <tbody onClick={deleteOrEditBeam} setBeams={setBeams}>
                                 {beamsArrCopy
+                                    .filter(a => {
+                                        return project === 'all' || !project
+                                            ? a
+                                            : (a[1].projectName) === (project);
+                                    })
                                     .filter(a => {
                                         return level === 'all' || !level
                                             ? a
