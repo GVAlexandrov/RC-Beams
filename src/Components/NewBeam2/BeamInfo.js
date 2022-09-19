@@ -1,3 +1,4 @@
+
 import {
     TableStyled,
     InputStyled,
@@ -54,6 +55,7 @@ const BeamInfo = (props) => {
                             type="number"
                             step='0.01'
                             value={beamLevel}
+                            // value={beamLevel}
                             onChange={e => setBeamLevel(Number(e.target.value))}
                         />
                     </TdStyled>
@@ -65,6 +67,7 @@ const BeamInfo = (props) => {
                             type="text"
                             placeholder="B01"
                             value={beamNumberString}
+                            // value={beamNumberString}
                             onChange={e => setbeamNumberString(e.target.value)}
                         />
                     </TdStyled>
@@ -74,8 +77,8 @@ const BeamInfo = (props) => {
 
                             <option disabled selected hidden value="default">-</option>
 
-                            < option value='top' >Top</option>
-                            < option value='bottom' >Bottom</option>
+                            < option value='top' >top</option>
+                            < option value='bottom' >bottom</option>
                         </select>
                     </TdStyled>
 
