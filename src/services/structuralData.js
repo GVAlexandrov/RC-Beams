@@ -13,6 +13,11 @@ const steelModulusArr = [
     200
 ];
 
+const rebarPosition = [
+    'Top',
+    'Bottom'
+];
+
 const rebarArr = [6.5, 8, 10, 12, 14, 16, 18, 20, 22, 25, 28, 32];
 
 const tableHeadingsArr = [
@@ -72,5 +77,6 @@ export {
     alphaCCArr,
     gammaMCArr,
     gammaMSArr,
-    steelModulusArr
+    steelModulusArr,
+    rebarPosition
 }
