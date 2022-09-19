@@ -7,7 +7,8 @@ import {
     LiStyled,
     NavLinkStyled,
     DivHamburgerMenu,
-    SpanHamburgerMenu
+    SpanHamburgerMenu,
+    DivLogoStyled
 } from './headerStyledComponents';
 
 const Header = ({
@@ -44,6 +45,9 @@ const Header = ({
     return (
         <HeaderStyled>
             <NavStyled >
+                <DivLogoStyled>
+                    <NavLinkStyled to='/'>RC Design</NavLinkStyled>
+                </DivLogoStyled>
 
                 <UlStyled id='MenuUL'>
                     {(userEmail !== null)
