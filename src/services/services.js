@@ -60,8 +60,6 @@ export const getAllBeams = () => {
     return fetch(`${URL}beams/${uid}/.json`)
         .then(response => response.json())
         .then(result => {
-            console.log('Inside getAllBeams');
-            console.log(result);
             return result;
         })
         .catch(error => console.log(error));
@@ -101,8 +99,45 @@ export const deleteOneBeam = (event, elementId, refresh) => {
 
 
 
-export const editBeam = (level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, numberRebars, beamId) => {
-    let newBeam = { level, beamsNumber, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, numberRebars }
+export const editBeam = (
+    projectName,
+    beamLevel,
+    beamNumberString,
+    rebarPosition,
+    concrete,
+    alphaCC,
+    gammaMC,
+    steel,
+    gammaMS,
+    steelModulus,
+    width,
+    height,
+    d1,
+    bendingMoment,
+    shearForce,
+    torsion,
+    rebar,
+    beamId
+) => {
+    let newBeam = {
+        projectName,
+        beamLevel,
+        beamNumberString,
+        rebarPosition,
+        concrete,
+        alphaCC,
+        gammaMC,
+        steel,
+        gammaMS,
+        steelModulus,
+        width,
+        height,
+        d1,
+        bendingMoment,
+        shearForce,
+        torsion,
+        rebar
+    }
     uid = localStorage.uid;
 
     return auth.currentUser.getIdToken(false)
