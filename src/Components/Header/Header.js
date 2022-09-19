@@ -20,7 +20,6 @@ const Header = ({
         { menuName: "Login", path: "/login", isAuth: false },
         { menuName: "RC Beams", path: "/beams", isAuth: true },
         { menuName: "New Beam", path: "/beams/new-beam", isAuth: true },
-        { menuName: "New Beam2", path: "/beams/new-beam2", isAuth: true },
     ]
 
     const navigate = useNavigate();
