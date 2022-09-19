@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const ExistingBeam = (beamObj) => {
     const { projectName, beamLevel, beamNumberString, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar } = beamObj.beam[1];
-    let rebarNumber = '';
-    const beamArr = [projectName, Number(beamLevel).toFixed(2), beamNumberString, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar, rebarNumber];
+
+    const beamArr = [projectName, Number(beamLevel).toFixed(2), beamNumberString, height, width, bendingMoment, shearForce, torsion, concrete, steel, rebar];
 
     return (
         <TrStyled key={beamObj.beam[0]} id={beamObj.beam[0]}>
