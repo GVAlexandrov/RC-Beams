@@ -10,6 +10,7 @@ const steelArr = [
 ];
 
 const steelModulusArr = [
+    190,
     200
 ];
 
@@ -32,7 +33,6 @@ const tableHeadingsArr = [
     'Concrete',
     'Steel',
     'Ø',
-    'Rebars',
     '',
     ''
 ];
@@ -48,7 +48,6 @@ const tableHeadingsDimensionsArr = [
     '[Grade]',
     '[Grade]',
     '[mm]',
-    '[№]',
     '',
     ''
 ];
