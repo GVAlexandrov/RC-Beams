@@ -264,7 +264,7 @@ const NewBeam2 = () => {
 
     return (
         <>
-            <h1 style={{ color: 'red' }}>The module "New Beam2" is to substitute "New Beam"</h1>
+            <h1>New Beam</h1>
 
             <BeamInfo
                 projectName={projectName}
