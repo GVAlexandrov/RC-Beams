@@ -15,6 +15,9 @@ const BeamInfo = (props) => {
     let setbeamNumberString = props.setbeamNumberString;
     let setRebarPosition = props.setRebarPosition;
     let structuralData = props.structuralData;
+    let setConcreteGrade = props.setConcreteGrade;
+    let setSteelGrade = props.setSteelGrade;
+
     let beamObj = props.beam ? props.beam : null;
 
     return (
@@ -25,6 +28,8 @@ const BeamInfo = (props) => {
                     <TdStyled>Level</TdStyled>
                     <TdStyled>Beam</TdStyled>
                     <TdStyled>Reinforcement</TdStyled>
+                    <TdStyled>Concrete</TdStyled>
+                    <TdStyled>Steel</TdStyled>
                 </tr>
 
                 <tr>
@@ -32,12 +37,15 @@ const BeamInfo = (props) => {
                     <TdStyledDimensions>[-]</TdStyledDimensions>
                     <TdStyledDimensions>[№]</TdStyledDimensions>
                     <TdStyledDimensions>[position]</TdStyledDimensions>
+                    <TdStyledDimensions>[class]</TdStyledDimensions>
+                    <TdStyledDimensions>[class]</TdStyledDimensions>
                 </tr>
             </thead>
 
 
             <tbody>
                 <tr>
+
                     <TdStyled>
                         <InputStyled
                             id="projectsName"
@@ -49,6 +57,7 @@ const BeamInfo = (props) => {
                             onChange={e => setProjectName(e.target.value)}
                         />
                     </TdStyled>
+
 
                     <TdStyled>
                         <InputStyled
@@ -62,6 +71,7 @@ const BeamInfo = (props) => {
                         />
                     </TdStyled>
 
+
                     <TdStyled>
                         <InputStyled
                             id="projectsName"
@@ -74,6 +84,7 @@ const BeamInfo = (props) => {
                         />
                     </TdStyled>
 
+
                     <TdStyled>
                         <select name="steel" id="steel" onChange={e => setRebarPosition(e.target.value)}>
 
@@ -83,8 +94,40 @@ const BeamInfo = (props) => {
                                         ? <option selected value={rebarPosition}>{rebarPosition}</option>
                                         : <option value={rebarPosition}>{rebarPosition}</option>)
                                 })}
+                        </select>
+                    </TdStyled>
 
 
+                    <TdStyled>
+                        <select
+                            onChange={e => setConcreteGrade(e.target.value)}>
+                            <option
+                                disabled
+                                selected
+                                hidden
+                                value="default"
+                            >
+                                Grade
+                            </option>
+                            {structuralData.concreteArr.map((concreteGrade) => {
+                                return (beamObj?.concrete === concreteGrade
+                                    ? <option selected value={beamObj.concrete}>{beamObj.concrete}</option>
+                                    : <option value={concreteGrade}>{concreteGrade}</option>)
+                            })}
+                        </select>
+                    </TdStyled>
+
+
+                    <TdStyled>
+                        <select name="steel" id="steel" onChange={e => setSteelGrade(e.target.value)}>
+
+                            <option disabled selected hidden value="default">Grade</option>
+
+                            {structuralData.steelArr.map((steelGrade) => {
+                                return (beamObj?.steel === steelGrade
+                                    ? < option selected value={steelGrade} > {steelGrade}</option>
+                                    : < option value={steelGrade} > {steelGrade}</option>)
+                            })}
                         </select>
                     </TdStyled>
 
