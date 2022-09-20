@@ -5,11 +5,9 @@ import {
 } from './newBeam2Styled';
 
 const BeamInfo = (props) => {
-    let setConcreteGrade = props.setConcreteGrade;
     let structuralData = props.structuralData;
     let setAlphaCC = props.setAlphaCC;
     let setGammaMC = props.setGammaMC;
-    let setSteelGrade = props.setSteelGrade;
     let setGammaMS = props.setGammaMS;
     let fcd = props.fcd;
     let fyd = props.fyd;
@@ -26,10 +24,8 @@ const BeamInfo = (props) => {
         <TableStyled>
             <thead>
                 <tr>
-                    <TdStyled>Concrete</TdStyled>
                     <TdStyled>αcc</TdStyled>
                     <TdStyled>γm,c</TdStyled>
-                    <TdStyled>Steel</TdStyled>
                     <TdStyled>γm,s</TdStyled>
                     <TdStyled>fcd</TdStyled>
                     <TdStyled>fyd</TdStyled>
@@ -43,10 +39,8 @@ const BeamInfo = (props) => {
                 </tr>
 
                 <tr>
-                    <TdStyledDimensions>[class]</TdStyledDimensions>
                     <TdStyledDimensions>[-]</TdStyledDimensions>
                     <TdStyledDimensions>[-]</TdStyledDimensions>
-                    <TdStyledDimensions>[class]</TdStyledDimensions>
                     <TdStyledDimensions>[-]</TdStyledDimensions>
                     <TdStyledDimensions>[MPa]</TdStyledDimensions>
                     <TdStyledDimensions>[MPa]</TdStyledDimensions>
@@ -63,24 +57,6 @@ const BeamInfo = (props) => {
 
             <tbody>
                 <tr>
-                    <TdStyled>
-                        <select
-                            onChange={e => setConcreteGrade(e.target.value)}>
-                            <option
-                                disabled
-                                selected
-                                hidden
-                                value="default"
-                            >
-                                Grade
-                            </option>
-                            {structuralData.concreteArr.map((concreteGrade) => {
-                                return (beamObj?.concrete === concreteGrade
-                                    ? <option selected value={beamObj.concrete}>{beamObj.concrete}</option>
-                                    : <option value={concreteGrade}>{concreteGrade}</option>)
-                            })}
-                        </select>
-                    </TdStyled>
 
                     <TdStyled>
                         <select name="alphaCC" id="alphaCC" onChange={e => setAlphaCC(e.target.value)}>
@@ -93,6 +69,7 @@ const BeamInfo = (props) => {
                         </select>
                     </TdStyled>
 
+
                     <TdStyled>
                         <select name="gammaMC" id="gammaMC" onChange={e => setGammaMC(e.target.value)}>
 
@@ -104,18 +81,6 @@ const BeamInfo = (props) => {
                         </select>
                     </TdStyled>
 
-                    <TdStyled>
-                        <select name="steel" id="steel" onChange={e => setSteelGrade(e.target.value)}>
-
-                            <option disabled selected hidden value="default">Grade</option>
-
-                            {structuralData.steelArr.map((steelGrade) => {
-                                return (beamObj?.steel === steelGrade
-                                    ? < option selected value={steelGrade} > {steelGrade}</option>
-                                    : < option value={steelGrade} > {steelGrade}</option>)
-                            })}
-                        </select>
-                    </TdStyled>
 
                     <TdStyled>
                         <select name="gammaMS" id="gammaMS" onChange={e => setGammaMS(e.target.value)}
@@ -129,33 +94,41 @@ const BeamInfo = (props) => {
                         </select>
                     </TdStyled>
 
+
                     <TdStyled>
                         {(fcd && fcd !== Infinity) ? fcd.toFixed(2) : '-'}
                     </TdStyled>
+
 
                     <TdStyled>
                         {(fyd && fyd !== Infinity && !isNaN(fyd)) ? fyd.toFixed(0) : '-'}
                     </TdStyled>
 
+
                     <TdStyled>
                         {(fcm && fcm !== Infinity && !isNaN(fcm)) ? fcm.toFixed(0) : '-'}
                     </TdStyled>
+
 
                     <TdStyled>
                         {(fctm && fctm !== Infinity && !isNaN(fctm)) ? fctm.toFixed(2) : '-'}
                     </TdStyled>
 
+
                     <TdStyled>
                         {(fctk05 && fctk05 !== Infinity && !isNaN(fctk05)) ? fctk05.toFixed(2) : '-'}
                     </TdStyled>
+
 
                     <TdStyled>
                         {(fctk95 && fctk95 !== Infinity && !isNaN(fctk95)) ? fctk95.toFixed(2) : '-'}
                     </TdStyled>
 
+
                     <TdStyled>
                         {(Ecm && Ecm !== Infinity && !isNaN(Ecm)) ? Ecm.toFixed(1) : '-'}
                     </TdStyled>
+
 
                     <TdStyled>
                         <select name="steelModulus" id="steelModulus" onChange={e => setSteelModulus(e.target.value)} >
@@ -168,11 +141,13 @@ const BeamInfo = (props) => {
                         </select>
                     </TdStyled>
 
+
                     <TdStyled>
                         {isNaN(Number(epsilonYD))
                             ? '-'
                             : Number(epsilonYD).toFixed(2)}
                     </TdStyled>
+
                 </tr>
             </tbody>
         </TableStyled>
