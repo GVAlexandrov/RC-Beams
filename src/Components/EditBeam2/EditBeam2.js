@@ -17,7 +17,7 @@ import validateNewElements from '../../validations/newDataValidations';
 import BendingCalcs02 from './BendingCalcs02';
 
 
-const NewBeam2 = () => {
+const EditBeam2 = () => {
     let [projectName, setProjectName] = useState('');
     let [beamLevel, setBeamLevel] = useState(0);
     let [beamNumberString, setbeamNumberString] = useState('');
@@ -40,7 +40,6 @@ const NewBeam2 = () => {
     let [rebarDiameter, setRebarDiameter] = useState(0);
 
     let [error, setError] = useState('');
-
     let [beam, setBeam] = useState(null);
 
     const navigate = useNavigate();
@@ -266,6 +265,8 @@ const NewBeam2 = () => {
             return;
         };
 
+
+
         if (!window.confirm('Are you sure you want to EDIT this item?')) {
             return;
         };
@@ -296,7 +297,8 @@ const NewBeam2 = () => {
                     navigate('/beams');
                 }
             })
-            .catch(console.log);
+            .catch(console.log)
+
     }
 
 
@@ -406,4 +408,4 @@ const NewBeam2 = () => {
 }
 
 
-export default NewBeam2;
+export default EditBeam2;
