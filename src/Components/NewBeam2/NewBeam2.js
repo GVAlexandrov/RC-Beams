@@ -7,7 +7,7 @@ import * as beamService from '../../services/services';
 import { ButtonStyled, DivErrorStyled, PErrorStyled } from './newBeam2Styled';
 
 import BeamInfo from './BeamInfo';
-import MaterialsInfo from './MaterialsInfo';
+import MaterialsInfo from './MaterialsInfo01';
 import GeometryAndForces from './GeometryAndForces.js';
 import BendingCalcs01 from './BendingCalcs01';
 
@@ -232,6 +232,7 @@ const NewBeam2 = () => {
         };
 
 
+
         beamService
             .addNewBeam(
                 projectName,
@@ -274,6 +275,10 @@ const NewBeam2 = () => {
                 beamNumberString={beamNumberString}
                 setbeamNumberString={setbeamNumberString}
                 setRebarPosition={setRebarPosition}
+                setConcreteGrade={setConcreteGrade}
+                structuralData={structuralData}
+                setSteelGrade={setSteelGrade}
+                setSteelModulus={setSteelModulus}
             />
 
 
