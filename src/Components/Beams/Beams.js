@@ -54,8 +54,13 @@ const Beams = () => {
         projectsSet = new Set([...beamsArr.map(a => a[1].projectName)]);
 
         levelsSet = project && project !== 'all'
-            ? new Set([...beamsArr.filter(a => a[1].projectName === project).map(a => a[1].beamLevel)])
-            : new Set([...beamsArr.map(a => a[1].beamLevel)]);
+            ? new Set([...beamsArr
+                .filter(a => a[1].projectName === project)
+                .map(a => Number(a[1].beamLevel))
+                .sort((a, b) => b - a)])
+            : new Set([...beamsArr
+                .map(a => a[1].beamLevel)
+                .sort((a, b) => b - a)]);
     }
 
     function deleteOrEditBeam(event) {
@@ -131,7 +136,7 @@ const Beams = () => {
                             </THeadStyledMain>
 
 
-                            <tbody onClick={deleteOrEditBeam} setBeams={setBeams}>
+                            <tbody onClick={deleteOrEditBeam} >
                                 {beamsArrCopy
                                     .filter(a => {
                                         return project === 'all' || !project
