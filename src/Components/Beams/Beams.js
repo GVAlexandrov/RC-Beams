@@ -92,7 +92,7 @@ const Beams = () => {
                             {(Array
                                 .from(projectsSet)
                                 .map((project) => {
-                                    return <option value={project}>{project}</option>
+                                    return <option key={project} value={project}>{project}</option>
                                 }))}
 
                         </select>
@@ -109,7 +109,7 @@ const Beams = () => {
                             {(Array
                                 .from(levelsSet)
                                 .map((level) => {
-                                    return <option value={level}>{Number(level).toFixed(2)}</option>
+                                    return <option key={level} value={level}>{Number(level).toFixed(2)}</option>
                                 }))}
 
                         </select>
@@ -121,15 +121,15 @@ const Beams = () => {
                                 <TrStyled>
                                     {
                                         structuralData.tableHeadingsArr.map((heading) => {
-                                            return <th>{heading}</th>;
+                                            return <th key={heading}>{heading}</th>;
                                         })
                                     }
                                 </TrStyled>
 
                                 <TrStyled2>
                                     {
-                                        structuralData.tableHeadingsDimensionsArr.map((heading) => {
-                                            return <th>{heading}</th>;
+                                        structuralData.tableHeadingsDimensionsArr.map((dimension, index) => {
+                                            return <th key={index}>{dimension}</th>;
                                         })
                                     }
                                 </TrStyled2>
@@ -148,7 +148,7 @@ const Beams = () => {
                                             ? a
                                             : Number(a[1].beamLevel) === Number(level);
                                     })
-                                    .map(beam => <ExistingBeam key={beamsArrCopy.id} beam={beam} />)}
+                                    .map((beam) => <ExistingBeam key={beam[0]} beam={beam} />)}
                             </tbody>
 
                         </TableStyled>
