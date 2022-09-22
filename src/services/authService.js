@@ -3,7 +3,11 @@ import { firebaseLogin, firebaseRegister, firebaseSignOut } from '../config/fire
 export function register(email, pass) {
     return firebaseRegister(email, pass)
         .then(() => login(email, pass))
-        .catch((error) => console.log(error))
+        .catch((error) => {
+            console.log(`Inside register catch: ${error}`);
+            throw new Error(error);
+        })
+
 }
 
 export function login(email, pass) {
