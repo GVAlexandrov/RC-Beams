@@ -11,7 +11,7 @@ const ExistingBeam = (beamObj) => {
             {
                 beamArr.map((x) => {
                     return (
-                        <TdStyled>
+                        <TdStyled key={x}>
                             <p>{x}</p>
                         </TdStyled>
                     )
