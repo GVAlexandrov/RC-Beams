@@ -12,6 +12,7 @@ import Beams from './Components/Beams/Beams';
 import NewBeam2 from './Components/NewBeam2/NewBeam2';
 import EditBeam2 from './Components/EditBeam2/EditBeam2';
 import Footer from './Components/Footer/Footer';
+import NewWall from './Components/NewWall/NewWall';
 
 
 function App() {
@@ -37,6 +38,8 @@ function App() {
           <Route path='/beams' element={<Beams />} />
           <Route path='/beams/new-beam' element={<NewBeam2 />} />
           <Route path='/beams/edit-beam/:beamId' element={<EditBeam2 />} />
+
+          <Route path='/walls/new-wall' element={<NewWall />} />
         </Routes>
       </MainStyled>
 
