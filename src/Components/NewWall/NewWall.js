@@ -1,7 +1,15 @@
+import WallInfo from './WallInfo';
+
+
 const NewWall = () => {
 
+
     return (
-        <h1>NEW WALL</h1>
+        <>
+            <h1>Wall Info</h1>
+            <WallInfo
+            />
+        </>
     )
 }
 
