@@ -2,6 +2,17 @@ import styled from 'styled-components';
 
 
 const WallInfo = (props) => {
+    let setProjectName = props.setProjectName;
+    let projectName = props.projectName;
+    let setWallLevel = props.setWallLevel;
+    let wallLevel = props.wallLevel;
+    let setWallNumberString = props.setWallNumberString;
+    let wallNumberString = props.wallNumberString;
+    let setConcreteGrade = props.setConcreteGrade;
+    let concreteGrade = props.concreteGrade;
+    let setSteelGrade = props.setSteelGrade;
+    let steelGrade = props.steelGrade;
+    let structuralData = props.structuralData;
 
 
     return (
@@ -34,6 +45,8 @@ const WallInfo = (props) => {
                             type="text"
                             placeholder="Porject's name"
                             style={{ 'min-width': '150px' }}
+                            onChange={e => setProjectName(e.target.value)}
+                            value={projectName}
                         />
                     </TdStyled>
 
@@ -45,6 +58,8 @@ const WallInfo = (props) => {
                             name='level'
                             type="number"
                             step='0.01'
+                            onChange={e => setWallLevel(Number(e.target.value))}
+                            value={wallLevel}
                         />
                     </TdStyled>
 
@@ -52,17 +67,20 @@ const WallInfo = (props) => {
 
                     <TdStyled>
                         <InputStyled
-                            id="projectsName"
-                            name='projectsName'
+                            id="wallNumber"
+                            name='wallNumber'
                             type="text"
-                            placeholder="B01"
+                            placeholder="W01"
+                            onChange={e => setWallNumberString(e.target.value)}
+                            value={wallNumberString}
                         />
                     </TdStyled>
 
 
 
                     <TdStyled>
-                        <select>
+                        <select onChange={e => setConcreteGrade(e.target.value)}>
+
                             <option
                                 disabled
                                 selected
@@ -71,16 +89,45 @@ const WallInfo = (props) => {
                             >
                                 Grade
                             </option>
+
+                            {structuralData
+                                .concreteArr
+                                .map((concreteGrade) => {
+                                    return (
+                                        <option value={concreteGrade} >
+                                            {concreteGrade}
+                                        </option>
+                                    )
+                                })
+                            }
+
                         </select>
                     </TdStyled>
 
 
 
                     <TdStyled>
-                        <select name="steel" id="steel" >
+                        <select onChange={e => setSteelGrade(e.target.value)}>
 
-                            <option disabled selected hidden value="default">Grade</option>
+                            <option
+                                disabled
+                                selected
+                                hidden
+                                value="default"
+                            >
+                                Grade
+                            </option>
 
+                            {structuralData
+                                .steelArr
+                                .map((steelGrade) => {
+                                    return (
+                                        <option value={steelGrade} >
+                                            {steelGrade}
+                                        </option>
+                                    )
+                                })
+                            }
 
                         </select>
                     </TdStyled>
