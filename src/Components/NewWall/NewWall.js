@@ -8,8 +8,8 @@ import GeometryAndForces from './GeometryAndForces';
 
 const NewWall = () => {
     let [projectName, setProjectName] = useState('');
-    let [beamLevel, setBeamLevel] = useState(0);
-    let [beamNumberString, setbeamNumberString] = useState('');
+    let [wallLevel, setWallLevel] = useState(0);
+    let [wallNumberString, setWallNumberString] = useState('');
     let [rebarPosition, setRebarPosition] = useState('');
 
     let [concreteGrade, setConcreteGrade] = useState('');
@@ -19,12 +19,12 @@ const NewWall = () => {
     let [gammaMS, setGammaMS] = useState(0);
     let [steelModulus, setSteelModulus] = useState(0);
     let [width, setWidth] = useState(0);
-    let [height, setHeight] = useState(0);
+    let [length, setLength] = useState(0);
+    let [rebarAreaEndZone, setRebarAreaEndZone] = useState(0);
+    let [rebarAreaMiddleZone, setRebarAreaMiddleZone] = useState(0);
     let [d1, setD1] = useState(0);
-    let [mEd, setMEd] = useState(0);
-    let [vEd, setVEd] = useState(0);
-    let [tEd, setTEd] = useState(0);
-    let [rebarDiameter, setRebarDiameter] = useState(0);
+
+    // console.log(d1);
 
     let fck = 0;
     let fcd = 0;
@@ -61,7 +61,18 @@ const NewWall = () => {
                 epsilonYD={epsilonYD}
             />
 
-            <GeometryAndForces />
+            <GeometryAndForces
+                setWidth={setWidth}
+                width={width}
+                setLength={setLength}
+                length={length}
+                setRebarAreaEndZone={setRebarAreaEndZone}
+                rebarAreaEndZone={rebarAreaEndZone}
+                setRebarAreaMiddleZone={setRebarAreaMiddleZone}
+                rebarAreaMiddleZone={rebarAreaMiddleZone}
+                setD1={setD1}
+                d1={d1}
+            />
 
         </>
     )
