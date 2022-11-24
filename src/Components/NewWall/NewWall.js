@@ -6,11 +6,12 @@ import WallInfo from './WallInfo';
 import MaterialsInfo from '../NewBeam2/MaterialsInfo01';
 import GeometryAndForces from './GeometryAndForces';
 
+import { fcdCalculate, fcmCalculate, fctmCalculate, fydCalculate, miuCalculate, ksiCalculate } from '../../services/formulas';
+
 const NewWall = () => {
     let [projectName, setProjectName] = useState('');
     let [wallLevel, setWallLevel] = useState(0);
     let [wallNumberString, setWallNumberString] = useState('');
-    let [rebarPosition, setRebarPosition] = useState('');
 
     let [concreteGrade, setConcreteGrade] = useState('');
     let [alphaCC, setAlphaCC] = useState(0);
@@ -24,7 +25,7 @@ const NewWall = () => {
     let [rebarAreaMiddleZone, setRebarAreaMiddleZone] = useState(0);
     let [d1, setD1] = useState(0);
 
-    // console.log(d1);
+    // console.log(fck);
 
     let fck = 0;
     let fcd = 0;
@@ -37,18 +38,52 @@ const NewWall = () => {
     let Ecm = 0;
     let epsilonYD = 0;
 
+    fck = Number(concreteGrade.slice(1, 3));
+    fcd = fcdCalculate(fck, alphaCC, gammaMC);
+    fy = Number(steelGrade.slice(1, 4));
+    fyd = fydCalculate(fy, gammaMS);
+    fcm = (isNaN(fcmCalculate(fck)) || !isFinite(fcmCalculate(fck)))
+        ? 0
+        : Number(fcmCalculate(fck));
+    fctm = (isNaN(fctmCalculate(fck, fcm)) || !isFinite(fctmCalculate(fck, fcm)))
+        ? 0
+        : Number(fctmCalculate(fck, fcm));
+    fctk05 = (isNaN((0.7 * fctm)) || !isFinite((0.7 * fctm)))
+        ? 0
+        : Number((0.7 * fctm));
+    fctk95 = (isNaN((1.3 * fctm)) || !isFinite((1.3 * fctm)))
+        ? 0
+        : Number((1.3 * fctm));
+    Ecm = (isNaN(22 * (fcm / 10) ** 0.3) || !isFinite(22 * (fcm / 10) ** 0.3))
+        ? 0
+        : Number(22 * (fcm / 10) ** 0.3);
+    epsilonYD = (isNaN(fyd / steelModulus) || !isFinite(fyd / steelModulus))
+        ? '-'
+        : (fyd / steelModulus);
+
+
     return (
         <>
             <h1>Wall Info</h1>
 
-            <WallInfo />
+            <WallInfo
+                setProjectName={setProjectName}
+                projectName={projectName}
+                setWallLevel={setWallLevel}
+                wallLevel={wallLevel}
+                setWallNumberString={setWallNumberString}
+                wallNumberString={wallNumberString}
+                setConcreteGrade={setConcreteGrade}
+                concreteGrade={concreteGrade}
+                setSteelGrade={setSteelGrade}
+                steelGrade={steelGrade}
+                structuralData={structuralData}
+            />
 
             <MaterialsInfo
-                setConcreteGrade={setConcreteGrade}
                 structuralData={structuralData}
                 setAlphaCC={setAlphaCC}
                 setGammaMC={setGammaMC}
-                setSteelGrade={setSteelGrade}
                 setGammaMS={setGammaMS}
                 fcd={fcd}
                 fyd={fyd}
