@@ -1,6 +1,21 @@
 import styled from 'styled-components';
 
 const GeometryAndForces = (props) => {
+    let setWidth = props.setWidth;
+    let width = props.width;
+    let setLength = props.setLength;
+    let length = props.length;
+    let setRebarAreaEndZone = props.setRebarAreaEndZone;
+    let rebarAreaEndZone = props.rebarAreaEndZone;
+    let setRebarAreaMiddleZone = props.setRebarAreaMiddleZone;
+    let rebarAreaMiddleZone = props.rebarAreaMiddleZone;
+    let setD1 = props.setD1;
+    let d1 = props.d1;
+    let endArea = 2 * d1;
+    let numberOfMiddleAreas = 3;
+    let singleMiddleArea = (length - 2 * endArea) / numberOfMiddleAreas;
+
+
     return (
         <TableStyled>
             <thead>
@@ -44,20 +59,60 @@ const GeometryAndForces = (props) => {
                             placeholder="250"
                             min="60"
                             step="5"
-
+                            onChange={e => setWidth(Number(e.target.value))}
+                            value={width}
                         />
                     </TdStyled>
 
                     <TdStyled>
                         <InputStyled
-                            id="height"
-                            name='height'
+                            id="length"
+                            name='length'
                             type="number"
                             placeholder="500"
                             min="150"
                             step="5"
-
+                            onChange={e => setLength(Number(e.target.value))}
+                            value={length}
                         />
+                    </TdStyled>
+
+                    <TdStyled>
+                        <InputStyled
+                            id="as1"
+                            name='as1'
+                            type="number"
+                            placeholder="1"
+                            min="1"
+                            step="0.1"
+                            onChange={e => setRebarAreaEndZone(Number(e.target.value))}
+                            value={rebarAreaEndZone}
+                        />
+                    </TdStyled>
+
+                    <TdStyled>
+                        <InputStyled
+                            id="as2"
+                            name='as2'
+                            type="number"
+                            placeholder="1"
+                            min="0"
+                            step="0.1"
+                            onChange={e => setRebarAreaMiddleZone(Number(e.target.value))}
+                            value={rebarAreaMiddleZone}
+                        />
+                    </TdStyled>
+
+                    <TdStyled>
+                        {rebarAreaMiddleZone}
+                    </TdStyled>
+
+                    <TdStyled>
+                        {rebarAreaMiddleZone}
+                    </TdStyled>
+
+                    <TdStyled>
+                        {rebarAreaEndZone}
                     </TdStyled>
 
                     <TdStyled>
@@ -65,66 +120,29 @@ const GeometryAndForces = (props) => {
                             id="d1"
                             name='d1'
                             type="number"
-                            placeholder="25"
-                            min="25"
+                            placeholder="1"
+                            min="0"
                             step="1"
-
+                            max={length / 8}
+                            onChange={e => setD1(Number(e.target.value))}
+                            value={d1}
                         />
                     </TdStyled>
 
                     <TdStyled>
-                        <InputStyled
-                            id="bendingMoment"
-                            name='bendingMoment'
-                            type="number"
-                            placeholder="10"
-                            step="5"
-
-                        />
+                        {(endArea + 0.5 * singleMiddleArea).toFixed(0)}
                     </TdStyled>
 
                     <TdStyled>
-                        <InputStyled
-                            id="shearForce"
-                            name='shearForce'
-                            type="number"
-                            placeholder="10"
-                            step="1"
-
-                        />
+                        {(endArea + 1.5 * singleMiddleArea).toFixed(0)}
                     </TdStyled>
 
                     <TdStyled>
-                        <InputStyled
-                            id="torsion"
-                            name='torsion'
-                            type="number"
-                            placeholder="10"
-                            step="1"
-
-                        />
+                        {(endArea + 2.5 * singleMiddleArea).toFixed(0)}
                     </TdStyled>
 
                     <TdStyled>
-                        <InputStyled
-                            id="torsion"
-                            name='torsion'
-                            type="number"
-                            placeholder="10"
-                            step="1"
-
-                        />
-                    </TdStyled>
-
-                    <TdStyled>
-                        <InputStyled
-                            id="torsion"
-                            name='torsion'
-                            type="number"
-                            placeholder="10"
-                            step="1"
-
-                        />
+                        {length - d1}
                     </TdStyled>
                 </tr>
             </tbody>
