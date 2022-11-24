@@ -74,8 +74,8 @@ const BeamInfo = (props) => {
 
                     <TdStyled>
                         <InputStyled
-                            id="projectsName"
-                            name='projectsName'
+                            id="beamNumber"
+                            name='beamNumber'
                             type="text"
                             placeholder="B01"
                             value={beamNumberString}
@@ -99,8 +99,8 @@ const BeamInfo = (props) => {
 
 
                     <TdStyled>
-                        <select
-                            onChange={e => setConcreteGrade(e.target.value)}>
+                        <select onChange={e => setConcreteGrade(e.target.value)}>
+
                             <option
                                 disabled
                                 selected
@@ -109,9 +109,17 @@ const BeamInfo = (props) => {
                             >
                                 Grade
                             </option>
-                            {structuralData.concreteArr.map((concreteGrade) => {
-                                return (<option value={concreteGrade}>{concreteGrade}</option>)
-                            })}
+
+                            {structuralData
+                                .concreteArr
+                                .map((concreteGrade) => {
+                                    return (
+                                        <option value={concreteGrade}>
+                                            {concreteGrade}
+                                        </option>)
+                                })
+                            }
+
                         </select>
                     </TdStyled>
 
