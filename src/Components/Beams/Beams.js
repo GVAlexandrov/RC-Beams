@@ -94,8 +94,8 @@ const Beams = () => {
                                 .map((project) => {
                                     return <option key={project} value={project}>{project}</option>
                                 }))}
-
                         </select>
+
 
                         <label htmlFor="level">Level</label>
                         <select
@@ -111,7 +111,6 @@ const Beams = () => {
                                 .map((level) => {
                                     return <option key={level} value={level}>{Number(level).toFixed(2)}</option>
                                 }))}
-
                         </select>
 
 
