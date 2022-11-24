@@ -4,6 +4,7 @@ import * as structuralData from '../../services/structuralData';
 
 import WallInfo from './WallInfo';
 import MaterialsInfo from '../NewBeam2/MaterialsInfo01';
+import GeometryAndForces from './GeometryAndForces';
 
 const NewWall = () => {
     let [projectName, setProjectName] = useState('');
@@ -59,6 +60,9 @@ const NewWall = () => {
                 setSteelModulus={setSteelModulus}
                 epsilonYD={epsilonYD}
             />
+
+            <GeometryAndForces />
+
         </>
     )
 }
