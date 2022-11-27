@@ -14,8 +14,10 @@ const WallCanvas = (props) => {
         if (!context) return;
 
         context.beginPath();
-        context.moveTo(0, 250);
-        context.lineTo(450, 250);
+        context.moveTo(100, 200);
+        context.lineTo(200, 250);
+        context.lineTo(200, 400);
+        context.lineTo(50, 400);
         context.stroke();
     }, [])
 
