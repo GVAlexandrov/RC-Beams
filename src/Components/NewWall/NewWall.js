@@ -3,6 +3,7 @@ import { useState } from 'react';
 import * as structuralData from '../../services/structuralData';
 
 import WallInfo from './WallInfo';
+import WallCanvas from './WallCanvas';
 import MaterialsInfo from '../NewBeam2/MaterialsInfo01';
 import GeometryAndForces from './GeometryAndForces';
 
@@ -108,6 +109,8 @@ const NewWall = () => {
                 setD1={setD1}
                 d1={d1}
             />
+
+            <WallCanvas />
 
         </>
     )
