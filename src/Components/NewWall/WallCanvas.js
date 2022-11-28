@@ -7,26 +7,33 @@ const WallCanvas = (props) => {
     const canvasRef = useRef(null);
 
     let width = props.width;
+    let length = props.length;
     console.log(width);
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        canvas.width = 500;
-        canvas.height = 500;
+        let canvasWidth = canvas.width = 500;
+        let canvasHeight = canvas.height = 500;
+        let centerHorizontal = canvasWidth / 2;
+        let centerVertical = canvasHeight / 2;
         console.log(canvas);
 
         const context = canvas.getContext('2d');
         if (!context) return;
 
+        for (let i = 0; i <= 125; i += 1) {
+            console.log((i / 100) * length);
+        }
+
         context.beginPath();
         context.moveTo(0, canvas.height / 2);
-        context.lineTo(canvas.width, canvas.height / 2);
+        context.lineTo(canvasWidth, canvasHeight / 2);
 
-        context.moveTo(canvas.width / 2, 0);
-        context.lineTo(canvas.width / 2, canvas.height);
+        context.moveTo(canvasWidth / 2, 0);
+        context.lineTo(canvasWidth / 2, canvasHeight);
 
-        context.moveTo(0, 0);
+        context.moveTo(centerHorizontal, centerVertical);
         context.lineTo(width, width);
         context.lineTo(-width, 8);
         context.stroke();
