@@ -317,6 +317,8 @@ const EditBeam2 = () => {
                 setRebarPosition={setRebarPosition}
                 structuralData={structuralData}
                 beam={beam}
+                setConcreteGrade={setConcreteGrade}
+                setSteelGrade={setSteelGrade}
             />
 
 
