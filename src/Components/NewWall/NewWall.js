@@ -112,6 +112,7 @@ const NewWall = () => {
 
             <WallCanvas
                 width={width}
+                length={length}
             />
 
         </>
