@@ -7,7 +7,7 @@ import WallCanvas from './WallCanvas';
 import MaterialsInfo from '../NewBeam2/MaterialsInfo01';
 import GeometryAndForces from './GeometryAndForces';
 
-import { fcdCalculate, fcmCalculate, fctmCalculate, fydCalculate, miuCalculate, ksiCalculate } from '../../services/formulas';
+import { fcdCalculate, fcmCalculate, fctmCalculate, fydCalculate, } from '../../services/formulas';
 
 const NewWall = () => {
     let [projectName, setProjectName] = useState('');
@@ -110,7 +110,9 @@ const NewWall = () => {
                 d1={d1}
             />
 
-            <WallCanvas />
+            <WallCanvas
+                width={width}
+            />
 
         </>
     )
