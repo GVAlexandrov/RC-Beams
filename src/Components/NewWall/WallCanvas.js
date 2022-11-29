@@ -94,14 +94,34 @@ const WallCanvas = (props) => {
             if (epsilonI <= -epsilonSYD) {
                 let sigma = -fyd;
                 sigmaS1.push(sigma);
-                console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
+                // console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
             } else if (epsilonI > -epsilonSYD && epsilonI < epsilonSYD) {
                 let sigma = epsilonI * steelModulus * 1000;
                 sigmaS1.push(sigma);
-                console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
+                // console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
             } else if (epsilonI >= epsilonSYD) {
                 let sigma = fyd;
                 sigmaS1.push(sigma);
+                // console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
+            }
+        })
+
+        epsilonS2Arr.forEach(epsilonI => {
+            if (fyd === 0 || steelModulus === 0) {
+                return
+            }
+
+            if (epsilonI <= -epsilonSYD) {
+                let sigma = -fyd;
+                sigmaS2.push(sigma);
+                console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
+            } else if (epsilonI > -epsilonSYD && epsilonI < epsilonSYD) {
+                let sigma = epsilonI * steelModulus * 1000;
+                sigmaS2.push(sigma);
+                console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
+            } else if (epsilonI >= epsilonSYD) {
+                let sigma = fyd;
+                sigmaS2.push(sigma);
                 console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
             }
         })
