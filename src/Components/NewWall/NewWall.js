@@ -25,6 +25,10 @@ const NewWall = () => {
     let [rebarAreaEndZone, setRebarAreaEndZone] = useState(0);
     let [rebarAreaMiddleZone, setRebarAreaMiddleZone] = useState(0);
     let [d1, setD1] = useState(0);
+    let [d2, setD2] = useState(0);
+    let [d3, setD3] = useState(0);
+    let [d4, setD4] = useState(0);
+    let [d5, setD5] = useState(0);
 
     // console.log(fck);
 
@@ -108,11 +112,26 @@ const NewWall = () => {
                 rebarAreaMiddleZone={rebarAreaMiddleZone}
                 setD1={setD1}
                 d1={d1}
+                setD2={setD2}
+                d2={d2}
+                setD3={setD3}
+                d3={d3}
+                setD4={setD4}
+                d4={d4}
+                setD5={setD5}
+                d5={d5}
             />
 
             <WallCanvas
                 width={width}
                 length={length}
+                d1={d1}
+                d2={d2}
+                d3={d3}
+                d4={d4}
+                d5={d5}
+                fyd={fyd}
+                steelModulus={steelModulus}
             />
 
         </>
