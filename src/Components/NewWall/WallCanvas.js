@@ -14,7 +14,10 @@ const WallCanvas = (props) => {
     let d4 = props.d4;
     let d5 = props.d5;
     let fyd = props.fyd;
+    let fcd = props.fcd;
     let steelModulus = props.steelModulus;
+    let rebarAreaEndZone = props.rebarAreaEndZone;
+    let rebarAreaMiddleZone = props.rebarAreaMiddleZone;
     // console.log(d1, d2, d3, d4, d5);
 
 
@@ -40,6 +43,9 @@ const WallCanvas = (props) => {
         let sigmaS3 = [];
         let sigmaS4 = [];
         let sigmaS5 = [];
+        let mJArr = [];
+        let nJArr = [];
+        let lambda = 0.8;
 
 
         const context = canvas.getContext('2d');
@@ -47,10 +53,12 @@ const WallCanvas = (props) => {
 
         for (let i = 0; i <= 125; i += 1) {
             if (length === 0 || width === 0) {
+                console.log('Lenght and width are needed');
                 return;
             }
 
             let xJ = (i / 100) * length;
+
 
             if (xJ === 0) {
                 epsilonS1Arr.push(-epsilonSYD);
@@ -60,21 +68,27 @@ const WallCanvas = (props) => {
                 epsilonS5Arr.push(-epsilonSYD);
             }
 
-            if (xJ > 0 && xJ < 1.25 * length) {
-                if ((-epsilonCU3 * (d1 - xJ) / xJ) < -epsilonUD) {
+
+            if (xJ > 0 && xJ < (125 / 100) * length) {
+                if ((-epsilonCU3 * (d1 - xJ) / xJ) <= -epsilonUD) {
                     epsilonS1Arr.push(-epsilonUD);
+                } else {
+                    epsilonS1Arr.push(-epsilonCU3 * (d1 - xJ) / xJ);
+                }
+
+                if (epsilonS1Arr[i] === -epsilonUD) {
                     epsilonS2Arr.push(-(xJ / (d1 - xJ)) * epsilonUD * ((d2 - xJ) / xJ));
                     epsilonS3Arr.push(-(xJ / (d1 - xJ)) * epsilonUD * ((d3 - xJ) / xJ));
                     epsilonS4Arr.push(-(xJ / (d1 - xJ)) * epsilonUD * ((d4 - xJ) / xJ));
                     epsilonS5Arr.push(-(xJ / (d1 - xJ)) * epsilonUD * ((d5 - xJ) / xJ));
-                } else if ((-epsilonCU3 * (d1 - xJ) / xJ) > -epsilonUD) {
-                    epsilonS1Arr.push(-epsilonCU3 * (d1 - xJ) / xJ);
+                } else {
                     epsilonS2Arr.push(- epsilonCU3 * ((d2 - xJ) / xJ));
                     epsilonS3Arr.push(- epsilonCU3 * ((d3 - xJ) / xJ));
                     epsilonS4Arr.push(- epsilonCU3 * ((d4 - xJ) / xJ));
                     epsilonS5Arr.push(- epsilonCU3 * ((d5 - xJ) / xJ));
                 }
             }
+
 
             if (xJ === (125 / 100) * length) {
                 epsilonS1Arr.push(epsilonC3);
@@ -85,24 +99,21 @@ const WallCanvas = (props) => {
             }
         }
 
-
         epsilonS1Arr.forEach(epsilonI => {
             if (fyd === 0 || steelModulus === 0) {
+                console.log('Fyd or Steel modulus needed');
                 return
             }
 
             if (epsilonI <= -epsilonSYD) {
                 let sigma = -fyd;
                 sigmaS1.push(sigma);
-                // console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
             } else if (epsilonI > -epsilonSYD && epsilonI < epsilonSYD) {
                 let sigma = epsilonI * steelModulus * 1000;
                 sigmaS1.push(sigma);
-                // console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
             } else if (epsilonI >= epsilonSYD) {
                 let sigma = fyd;
                 sigmaS1.push(sigma);
-                // console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
             }
         })
 
@@ -114,19 +125,82 @@ const WallCanvas = (props) => {
             if (epsilonI <= -epsilonSYD) {
                 let sigma = -fyd;
                 sigmaS2.push(sigma);
-                console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
             } else if (epsilonI > -epsilonSYD && epsilonI < epsilonSYD) {
                 let sigma = epsilonI * steelModulus * 1000;
                 sigmaS2.push(sigma);
-                console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
             } else if (epsilonI >= epsilonSYD) {
                 let sigma = fyd;
                 sigmaS2.push(sigma);
-                console.log((epsilonI * 1000).toFixed(5), sigma.toFixed(0));
             }
         })
 
-        // sigmaS1.forEach(stress => console.log(stress.toFixed(0)));
+        epsilonS3Arr.forEach(epsilonI => {
+            if (fyd === 0 || steelModulus === 0) {
+                return
+            }
+
+            if (epsilonI <= -epsilonSYD) {
+                let sigma = -fyd;
+                sigmaS3.push(sigma);
+            } else if (epsilonI > -epsilonSYD && epsilonI < epsilonSYD) {
+                let sigma = epsilonI * steelModulus * 1000;
+                sigmaS3.push(sigma);
+            } else if (epsilonI >= epsilonSYD) {
+                let sigma = fyd;
+                sigmaS3.push(sigma);
+            }
+        })
+
+        epsilonS4Arr.forEach(epsilonI => {
+            if (fyd === 0 || steelModulus === 0) {
+                return
+            }
+
+            if (epsilonI <= -epsilonSYD) {
+                let sigma = -fyd;
+                sigmaS4.push(sigma);
+            } else if (epsilonI > -epsilonSYD && epsilonI < epsilonSYD) {
+                let sigma = epsilonI * steelModulus * 1000;
+                sigmaS4.push(sigma);
+            } else if (epsilonI >= epsilonSYD) {
+                let sigma = fyd;
+                sigmaS4.push(sigma);
+            }
+        })
+
+        epsilonS5Arr.forEach(epsilonI => {
+            if (fyd === 0 || steelModulus === 0) {
+                return
+            }
+
+            if (epsilonI <= -epsilonSYD) {
+                let sigma = -fyd;
+                sigmaS5.push(sigma);
+            } else if (epsilonI > -epsilonSYD && epsilonI < epsilonSYD) {
+                let sigma = epsilonI * steelModulus * 1000;
+                sigmaS5.push(sigma);
+            } else if (epsilonI >= epsilonSYD) {
+                let sigma = fyd;
+                sigmaS5.push(sigma);
+            }
+        })
+
+        for (let i = 0; i <= 125; i++) {
+            let axialForceConcrete = (width * lambda * ((i / 100) * length) * fcd) / 1000;
+            let axialForceAs1 = (rebarAreaEndZone * 100 * sigmaS1[i]) / 1000;
+            let axialForceAs2 = (rebarAreaMiddleZone * 100 * sigmaS2[i]) / 1000;
+            let axialForceAs3 = (rebarAreaMiddleZone * 100 * sigmaS3[i]) / 1000;
+            let axialForceAs4 = (rebarAreaMiddleZone * 100 * sigmaS4[i]) / 1000;
+            let axialForceAs5 = (rebarAreaEndZone * 100 * sigmaS5[i]) / 1000;
+
+
+            let totalAxialForce = axialForceConcrete + axialForceAs1 + axialForceAs2 + axialForceAs3 + axialForceAs4 + axialForceAs5;
+            console.log(totalAxialForce.toFixed(0));
+
+            nJArr.push(totalAxialForce);
+        }
+
+
 
         context.beginPath();
         context.moveTo(0, canvas.height / 2);
