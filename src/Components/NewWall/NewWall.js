@@ -131,7 +131,10 @@ const NewWall = () => {
                 d4={d4}
                 d5={d5}
                 fyd={fyd}
+                fcd={fcd}
                 steelModulus={steelModulus}
+                rebarAreaEndZone={rebarAreaEndZone}
+                rebarAreaMiddleZone={rebarAreaMiddleZone}
             />
 
         </>
