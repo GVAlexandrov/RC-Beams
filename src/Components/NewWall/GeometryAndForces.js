@@ -11,9 +11,22 @@ const GeometryAndForces = (props) => {
     let rebarAreaMiddleZone = props.rebarAreaMiddleZone;
     let setD1 = props.setD1;
     let d1 = props.d1;
+    let setD2 = props.setD2;
+    let d2 = props.d2;
+    let setD3 = props.setD3;
+    let d3 = props.d3;
+    let setD4 = props.setD4;
+    let d4 = props.d4;
+    let setD5 = props.setD5;
+    let d5 = props.d5;
     let endArea = 2 * d1;
     let numberOfMiddleAreas = 3;
     let singleMiddleArea = (length - 2 * endArea) / numberOfMiddleAreas;
+
+    setD2((endArea + 0.5 * singleMiddleArea).toFixed(0));
+    setD3((endArea + 1.5 * singleMiddleArea).toFixed(0));
+    setD4((endArea + 2.5 * singleMiddleArea).toFixed(0));
+    setD5(length - d1);
 
 
     return (
@@ -130,19 +143,19 @@ const GeometryAndForces = (props) => {
                     </TdStyled>
 
                     <TdStyled>
-                        {(endArea + 0.5 * singleMiddleArea).toFixed(0)}
+                        {d2}
                     </TdStyled>
 
                     <TdStyled>
-                        {(endArea + 1.5 * singleMiddleArea).toFixed(0)}
+                        {d3}
                     </TdStyled>
 
                     <TdStyled>
-                        {(endArea + 2.5 * singleMiddleArea).toFixed(0)}
+                        {d4}
                     </TdStyled>
 
                     <TdStyled>
-                        {length - d1}
+                        {d5}
                     </TdStyled>
                 </tr>
             </tbody>
