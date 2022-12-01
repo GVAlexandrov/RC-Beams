@@ -230,19 +230,19 @@ const WallCanvas = (props) => {
 
         context.moveTo(centerHorizontal, centerVertical);
 
-        for (let i = 0; i <= 125; i++) {
+        for (let i = 0; i <= 125; i += 5) {
             context.lineWidth = 50;
             context.lineTo(momentJArr[i] + centerHorizontal, centerVertical - axialForceJArr[i]);
         }
 
-        for (let i = 125; i >= 0; i--) {
+        for (let i = 125; i >= 0; i -= 5) {
             context.lineWidth = 50;
             context.lineTo(centerHorizontal - momentJArr[i], centerVertical - axialForceJArr[i]);
         }
 
         context.stroke();
 
-    }, [width, length, d1])
+    }, [width, length, d1, rebarAreaEndZone, rebarAreaMiddleZone])
 
 
     return (
