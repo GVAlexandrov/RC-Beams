@@ -24,10 +24,9 @@ const WallCanvas = (props) => {
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        let canvasWidth = canvas.width = 500;
-        let canvasHeight = canvas.height = 500;
-        let centerHorizontal = canvasWidth / 2;
-        let centerVertical = canvasHeight / 2;
+        let canvasWidth = 0;
+        let canvasHeight = 0;
+
         // console.log(canvas);
         let epsilonUD = 67.5 / 1000;
         let epsilonC3 = 1.75 / 1000;
@@ -43,8 +42,8 @@ const WallCanvas = (props) => {
         let sigmaS3 = [];
         let sigmaS4 = [];
         let sigmaS5 = [];
-        let mJArr = [];
-        let nJArr = [];
+        let momentJArr = [];
+        let axialForceJArr = [];
         let lambda = 0.8;
 
 
@@ -186,6 +185,8 @@ const WallCanvas = (props) => {
         })
 
         for (let i = 0; i <= 125; i++) {
+            let xJ = (i / 100) * length;
+
             let axialForceConcrete = (width * lambda * ((i / 100) * length) * fcd) / 1000;
             let axialForceAs1 = (rebarAreaEndZone * 100 * sigmaS1[i]) / 1000;
             let axialForceAs2 = (rebarAreaMiddleZone * 100 * sigmaS2[i]) / 1000;
@@ -195,10 +196,27 @@ const WallCanvas = (props) => {
 
 
             let totalAxialForce = axialForceConcrete + axialForceAs1 + axialForceAs2 + axialForceAs3 + axialForceAs4 + axialForceAs5;
-            console.log(totalAxialForce.toFixed(0));
+            // console.log(totalAxialForce.toFixed(0));
 
-            nJArr.push(totalAxialForce);
+            axialForceJArr.push(totalAxialForce);
+
+
+            let momentConcrete = (width * lambda * xJ * fcd * (length / 2 - lambda * xJ / 2)) / (1000 * 1000);
+            let momentAs1 = (rebarAreaEndZone * 100 * sigmaS1[i] * (length / 2 - d1)) / (1000 * 1000);
+            let momentAs2 = (rebarAreaMiddleZone * 100 * sigmaS2[i] * (length / 2 - d2)) / (1000 * 1000);
+            let momentAs3 = (rebarAreaMiddleZone * 100 * sigmaS3[i] * (length / 2 - d3)) / (1000 * 1000);
+            let momentAs4 = (rebarAreaMiddleZone * 100 * sigmaS4[i] * (length / 2 - d4)) / (1000 * 1000);
+            let momentAs5 = (rebarAreaEndZone * 100 * sigmaS5[i] * (length / 2 - d5)) / (1000 * 1000);
+
+            let totalMoment = momentConcrete + momentAs1 + momentAs2 + momentAs3 + momentAs4 + momentAs5;
+
+            momentJArr.push(totalMoment);
         }
+
+        canvasWidth = canvas.width = Number(Math.max(...momentJArr) * 2);
+        canvasHeight = canvas.height = Number(Math.max(...axialForceJArr) * 2);
+        let centerHorizontal = canvasWidth / 2;
+        let centerVertical = canvasHeight / 2;
 
 
 
@@ -208,10 +226,20 @@ const WallCanvas = (props) => {
 
         context.moveTo(canvasWidth / 2, 0);
         context.lineTo(canvasWidth / 2, canvasHeight);
+        context.lineWidth = 1;
 
         context.moveTo(centerHorizontal, centerVertical);
-        context.lineTo(width, width);
-        context.lineTo(-width, 8);
+
+        for (let i = 0; i <= 125; i++) {
+            context.lineWidth = 50;
+            context.lineTo(momentJArr[i] + centerHorizontal, centerVertical - axialForceJArr[i]);
+        }
+
+        for (let i = 125; i >= 0; i--) {
+            context.lineWidth = 50;
+            context.lineTo(centerHorizontal - momentJArr[i], centerVertical - axialForceJArr[i]);
+        }
+
         context.stroke();
 
     }, [width, length, d1])
