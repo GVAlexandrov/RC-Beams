@@ -213,16 +213,20 @@ const WallCanvas = (props) => {
             momentJArr.push(totalMoment);
         }
 
+        console.log('Mmax = ' + Math.max(...momentJArr).toFixed(0));
+        console.log('Nmax = ' + Math.max(...axialForceJArr).toFixed(0));
+        console.log('Nmin = ' + Math.min(...axialForceJArr).toFixed(0));
+
         canvasWidth = canvas.width = Number(Math.max(...momentJArr) * 2);
-        canvasHeight = canvas.height = Number(Math.max(...axialForceJArr) * 2);
+        canvasHeight = canvas.height = Number(Math.max(...axialForceJArr) - Math.min(...axialForceJArr));
         let centerHorizontal = canvasWidth / 2;
-        let centerVertical = canvasHeight / 2;
+        let centerVertical = Math.max(...axialForceJArr);
 
 
 
         context.beginPath();
-        context.moveTo(0, canvas.height / 2);
-        context.lineTo(canvasWidth, canvasHeight / 2);
+        context.moveTo(0, centerVertical);
+        context.lineTo(canvasWidth, centerVertical);
 
         context.moveTo(canvasWidth / 2, 0);
         context.lineTo(canvasWidth / 2, canvasHeight);
@@ -257,7 +261,7 @@ const WallCanvas = (props) => {
 const CanvasStyled = styled.canvas`
 display: block;
 border:1px solid;
-width:500px;
+width:700px;
 height:500px;
 margin: 50px 0px;
 `;
