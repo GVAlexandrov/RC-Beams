@@ -216,37 +216,48 @@ const WallCanvas = (props) => {
         console.log('Mmax = ' + Math.max(...momentJArr).toFixed(0));
         console.log('Nmax = ' + Math.max(...axialForceJArr).toFixed(0));
         console.log('Nmin = ' + Math.min(...axialForceJArr).toFixed(0));
+        momentJArr.forEach(m => console.log('Moment arr => ', m.toFixed(0)));
+        axialForceJArr.forEach(n => console.log('Axial force arr => ', n.toFixed(0)));
 
-        canvasWidth = canvas.width = Number(Math.max(...momentJArr) * 2);
-        canvasHeight = canvas.height = Number(Math.max(...axialForceJArr) - Math.min(...axialForceJArr));
+
+        canvasWidth = canvas.width = Number(Math.max(...momentJArr) * 2.1);
+        canvasHeight = canvas.height = Number(Math.max(...axialForceJArr) - Math.min(...axialForceJArr)) * 1.05;
         let centerHorizontal = canvasWidth / 2;
-        let centerVertical = Math.max(...axialForceJArr);
-
+        let centerVertical = Math.max(...axialForceJArr) * 1.025;
+        let maxAxialForce = Math.max(...axialForceJArr);
+        let minAxialForce = Math.min(...axialForceJArr);
+        let numberHorizontalLines = Math.floor(maxAxialForce / 1000);
+        console.log(numberHorizontalLines);
 
 
         context.beginPath();
+        context.lineWidth = 50;
         context.moveTo(0, centerVertical);
         context.lineTo(canvasWidth, centerVertical);
 
         context.moveTo(canvasWidth / 2, 0);
         context.lineTo(canvasWidth / 2, canvasHeight);
-        context.lineWidth = 1;
 
         context.moveTo(centerHorizontal, centerVertical);
 
         for (let i = 0; i <= 125; i += 5) {
-            context.lineWidth = 50;
             context.lineTo(momentJArr[i] + centerHorizontal, centerVertical - axialForceJArr[i]);
         }
 
         for (let i = 125; i >= 0; i -= 5) {
-            context.lineWidth = 50;
             context.lineTo(centerHorizontal - momentJArr[i], centerVertical - axialForceJArr[i]);
+        }
+
+        context.closePath();
+
+        for (let i = 1; i <= numberHorizontalLines; i++) {
+            context.moveTo(0, centerVertical - i * 1000);
+            context.lineTo(canvasWidth, centerVertical - i * 1000);
         }
 
         context.stroke();
 
-    }, [width, length, d1, rebarAreaEndZone, rebarAreaMiddleZone])
+    }, [width, length, d1, rebarAreaEndZone, rebarAreaMiddleZone, fcd, fyd, steelModulus])
 
 
     return (
@@ -261,7 +272,7 @@ const WallCanvas = (props) => {
 const CanvasStyled = styled.canvas`
 display: block;
 border:1px solid;
-width:700px;
+width:750px;
 height:500px;
 margin: 50px 0px;
 `;
