@@ -224,10 +224,12 @@ const WallCanvas = (props) => {
         canvasHeight = canvas.height = Number(Math.max(...axialForceJArr) - Math.min(...axialForceJArr)) * 1.05;
         let centerHorizontal = canvasWidth / 2;
         let centerVertical = Math.max(...axialForceJArr) * 1.025;
+        let maxMoment = Math.max(...momentJArr);
         let maxAxialForce = Math.max(...axialForceJArr);
         let minAxialForce = Math.min(...axialForceJArr);
         let numberHorizontalLinesAboveZero = Math.floor(maxAxialForce / 1000);
         let numberHorizontalLinesBelowZero = Math.ceil(minAxialForce / 1000);
+        let numberVerticalLines = Math.floor(maxMoment / 1000);
 
 
 
@@ -273,6 +275,14 @@ const WallCanvas = (props) => {
             context.lineTo(canvasWidth, centerVertical - i * 1000);
         }
 
+        for (let i = 1; i <= numberVerticalLines; i++) {
+            context.moveTo(canvasWidth / 2 + i * 1000, 0);
+            context.lineTo(canvasWidth / 2 + i * 1000, canvasHeight);
+
+            context.moveTo(canvasWidth / 2 - i * 1000, 0);
+            context.lineTo(canvasWidth / 2 - i * 1000, canvasHeight);
+        }
+
         context.stroke();
 
     }, [width, length, d1, rebarAreaEndZone, rebarAreaMiddleZone, fcd, fyd, steelModulus])
@@ -289,7 +299,6 @@ const WallCanvas = (props) => {
 
 const CanvasStyled = styled.canvas`
 display: block;
-border:1px solid;
 width:750px;
 height:500px;
 margin: 50px 0px;
