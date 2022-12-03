@@ -226,19 +226,15 @@ const WallCanvas = (props) => {
         let centerVertical = Math.max(...axialForceJArr) * 1.025;
         let maxAxialForce = Math.max(...axialForceJArr);
         let minAxialForce = Math.min(...axialForceJArr);
-        let numberHorizontalLines = Math.floor(maxAxialForce / 1000);
-        console.log(numberHorizontalLines);
+        let numberHorizontalLinesAboveZero = Math.floor(maxAxialForce / 1000);
+        let numberHorizontalLinesBelowZero = Math.ceil(minAxialForce / 1000);
 
 
+
+        // GRAPH-----------------------------
         context.beginPath();
-        context.lineWidth = 50;
-        context.moveTo(0, centerVertical);
-        context.lineTo(canvasWidth, centerVertical);
-
-        context.moveTo(canvasWidth / 2, 0);
-        context.lineTo(canvasWidth / 2, canvasHeight);
-
-        context.moveTo(centerHorizontal, centerVertical);
+        context.moveTo(centerHorizontal, centerVertical - axialForceJArr[0]);
+        context.lineWidth = 20;
 
         for (let i = 0; i <= 125; i += 5) {
             context.lineTo(momentJArr[i] + centerHorizontal, centerVertical - axialForceJArr[i]);
@@ -249,8 +245,30 @@ const WallCanvas = (props) => {
         }
 
         context.closePath();
+        context.fillStyle = 'lightgray';
+        context.fill();
+        context.stroke();
 
-        for (let i = 1; i <= numberHorizontalLines; i++) {
+        // COORDINATE SYSTEM-----------------------------
+        context.beginPath();
+        context.lineWidth = 90;
+        context.moveTo(0, centerVertical);
+        context.lineTo(canvasWidth, centerVertical);
+
+        context.moveTo(canvasWidth / 2, 0);
+        context.lineTo(canvasWidth / 2, canvasHeight);
+        context.stroke();
+
+        // ADDITIONAL LINES-----------------------------
+        context.beginPath();
+        context.strokeStyle = 'gray';
+        context.lineWidth = 25;
+        for (let i = 1; i <= numberHorizontalLinesAboveZero; i++) {
+            context.moveTo(0, centerVertical - i * 1000);
+            context.lineTo(canvasWidth, centerVertical - i * 1000);
+        }
+
+        for (let i = -1; i >= numberHorizontalLinesBelowZero; i--) {
             context.moveTo(0, centerVertical - i * 1000);
             context.lineTo(canvasWidth, centerVertical - i * 1000);
         }
