@@ -216,8 +216,8 @@ const WallCanvas = (props) => {
         console.log('Mmax = ' + Math.max(...momentJArr).toFixed(0));
         console.log('Nmax = ' + Math.max(...axialForceJArr).toFixed(0));
         console.log('Nmin = ' + Math.min(...axialForceJArr).toFixed(0));
-        momentJArr.forEach(m => console.log('Moment arr => ', m.toFixed(0)));
-        axialForceJArr.forEach(n => console.log('Axial force arr => ', n.toFixed(0)));
+        // momentJArr.forEach(m => console.log('Moment arr => ', m.toFixed(0)));
+        // axialForceJArr.forEach(n => console.log('Axial force arr => ', n.toFixed(0)));
 
 
         canvasWidth = canvas.width = Number(Math.max(...momentJArr) * 2.1);
@@ -247,27 +247,28 @@ const WallCanvas = (props) => {
         }
 
         context.closePath();
-        context.fillStyle = 'lightgray';
+        context.fillStyle = 'gray';
         context.fill();
         context.stroke();
 
         // COORDINATE SYSTEM-----------------------------
         context.beginPath();
-        context.lineWidth = 0.007 * canvasHeight;
+        context.lineWidth = 0.008 * canvasHeight;
         context.moveTo(0, centerVertical);
         context.lineTo(canvasWidth, centerVertical);
         context.stroke();
 
         context.beginPath();
-        context.lineWidth = 0.005 * canvasWidth;
+        context.lineWidth = 0.006 * canvasWidth;
         context.moveTo(canvasWidth / 2, 0);
         context.lineTo(canvasWidth / 2, canvasHeight);
         context.stroke();
 
         // ADDITIONAL LINES-----------------------------
         context.beginPath();
-        context.strokeStyle = 'red';
-        context.lineWidth = 0.0035 * canvasHeight;
+        context.setLineDash([0.01 * canvasWidth, 0.01 * canvasWidth]);
+        // context.strokeStyle = 'red';
+        context.lineWidth = 0.003 * canvasHeight;
         for (let i = 1; i <= numberHorizontalLinesAboveZero; i++) {
             context.moveTo(0, centerVertical - i * 1000);
             context.lineTo(canvasWidth, centerVertical - i * 1000);
@@ -280,8 +281,9 @@ const WallCanvas = (props) => {
         context.stroke();
 
         context.beginPath();
-        context.strokeStyle = 'blue';
-        context.lineWidth = 0.0025 * canvasWidth;
+        context.setLineDash([0.015 * canvasHeight, 0.015 * canvasHeight]);
+        // context.strokeStyle = 'blue';
+        context.lineWidth = 0.002 * canvasWidth;
         for (let i = 1; i <= numberVerticalLines; i++) {
             context.moveTo(canvasWidth / 2 + i * 1000, 0);
             context.lineTo(canvasWidth / 2 + i * 1000, canvasHeight);
@@ -297,6 +299,7 @@ const WallCanvas = (props) => {
 
     return (
         <DivCanvasWrapperStyled>
+            <h2>Graph M-N</h2>
             <CanvasStyled ref={canvasRef} />
         </DivCanvasWrapperStyled>
     )
@@ -304,6 +307,7 @@ const WallCanvas = (props) => {
 
 const CanvasStyled = styled.canvas`
 display: block;
+border:solid 1px;
 width:750px;
 height:500px;
 margin: 50px 0px;
