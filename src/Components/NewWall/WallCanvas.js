@@ -236,7 +236,7 @@ const WallCanvas = (props) => {
         // GRAPH-----------------------------
         context.beginPath();
         context.moveTo(centerHorizontal, centerVertical - axialForceJArr[0]);
-        context.lineWidth = 20;
+        context.lineWidth = 0.005 * canvasWidth;
 
         for (let i = 0; i <= 125; i += 5) {
             context.lineTo(momentJArr[i] + centerHorizontal, centerVertical - axialForceJArr[i]);
@@ -253,18 +253,21 @@ const WallCanvas = (props) => {
 
         // COORDINATE SYSTEM-----------------------------
         context.beginPath();
-        context.lineWidth = 90;
+        context.lineWidth = 0.007 * canvasHeight;
         context.moveTo(0, centerVertical);
         context.lineTo(canvasWidth, centerVertical);
+        context.stroke();
 
+        context.beginPath();
+        context.lineWidth = 0.005 * canvasWidth;
         context.moveTo(canvasWidth / 2, 0);
         context.lineTo(canvasWidth / 2, canvasHeight);
         context.stroke();
 
         // ADDITIONAL LINES-----------------------------
         context.beginPath();
-        context.strokeStyle = 'gray';
-        context.lineWidth = 25;
+        context.strokeStyle = 'red';
+        context.lineWidth = 0.0035 * canvasHeight;
         for (let i = 1; i <= numberHorizontalLinesAboveZero; i++) {
             context.moveTo(0, centerVertical - i * 1000);
             context.lineTo(canvasWidth, centerVertical - i * 1000);
@@ -274,7 +277,11 @@ const WallCanvas = (props) => {
             context.moveTo(0, centerVertical - i * 1000);
             context.lineTo(canvasWidth, centerVertical - i * 1000);
         }
+        context.stroke();
 
+        context.beginPath();
+        context.strokeStyle = 'blue';
+        context.lineWidth = 0.0025 * canvasWidth;
         for (let i = 1; i <= numberVerticalLines; i++) {
             context.moveTo(canvasWidth / 2 + i * 1000, 0);
             context.lineTo(canvasWidth / 2 + i * 1000, canvasHeight);
@@ -290,8 +297,6 @@ const WallCanvas = (props) => {
 
     return (
         <DivCanvasWrapperStyled>
-            <h1>Graph</h1>
-
             <CanvasStyled ref={canvasRef} />
         </DivCanvasWrapperStyled>
     )
