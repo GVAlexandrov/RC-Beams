@@ -71,7 +71,7 @@ const GeometryAndForces = (props) => {
                             type="number"
                             placeholder="250"
                             min="60"
-                            step="5"
+                            step="10"
                             onChange={e => setWidth(Number(e.target.value))}
                             value={width}
                         />
@@ -84,7 +84,7 @@ const GeometryAndForces = (props) => {
                             type="number"
                             placeholder="500"
                             min="150"
-                            step="5"
+                            step="50"
                             onChange={e => setLength(Number(e.target.value))}
                             value={length}
                         />
@@ -97,7 +97,7 @@ const GeometryAndForces = (props) => {
                             type="number"
                             placeholder="1"
                             min="1"
-                            step="0.1"
+                            step="0.2"
                             onChange={e => setRebarAreaEndZone(Number(e.target.value))}
                             value={rebarAreaEndZone}
                         />
@@ -110,7 +110,7 @@ const GeometryAndForces = (props) => {
                             type="number"
                             placeholder="1"
                             min="0"
-                            step="0.1"
+                            step="0.2"
                             onChange={e => setRebarAreaMiddleZone(Number(e.target.value))}
                             value={rebarAreaMiddleZone}
                         />
