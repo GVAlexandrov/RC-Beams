@@ -266,33 +266,49 @@ const WallCanvas = (props) => {
 
         // ADDITIONAL LINES-----------------------------
         context.beginPath();
-        context.setLineDash([0.01 * canvasWidth, 0.01 * canvasWidth]);
-        // context.strokeStyle = 'red';
-        context.lineWidth = 0.003 * canvasHeight;
+        context.setLineDash([0.005 * canvasWidth, 0.005 * canvasWidth]);
+        context.strokeStyle = 'black';
+        context.lineWidth = 0.0025 * canvasHeight;
         for (let i = 1; i <= numberHorizontalLinesAboveZero; i++) {
+            context.font = `${0.04 * canvasHeight}px Arial`;
+            context.fillStyle = "darkblue";
+            context.fillText(i.toFixed(1), 0.89 * canvasWidth / 2, centerVertical - i * 1000 - 100, 0.045 * canvasWidth);
             context.moveTo(0, centerVertical - i * 1000);
             context.lineTo(canvasWidth, centerVertical - i * 1000);
         }
 
         for (let i = -1; i >= numberHorizontalLinesBelowZero; i--) {
+            context.font = `${0.04 * canvasHeight}px Arial`;
+            context.fillStyle = "darkblue";
+            context.fillText(i.toFixed(1), 0.87 * canvasWidth / 2, centerVertical - i * 1000 - 100, 0.055 * canvasWidth);
             context.moveTo(0, centerVertical - i * 1000);
             context.lineTo(canvasWidth, centerVertical - i * 1000);
         }
         context.stroke();
 
         context.beginPath();
-        context.setLineDash([0.015 * canvasHeight, 0.015 * canvasHeight]);
-        // context.strokeStyle = 'blue';
-        context.lineWidth = 0.002 * canvasWidth;
+        context.setLineDash([0.007 * canvasHeight, 0.007 * canvasHeight]);
+        context.strokeStyle = 'black';
+        context.lineWidth = 0.001 * canvasWidth;
         for (let i = 1; i <= numberVerticalLines; i++) {
+            context.font = `${0.04 * canvasHeight}px Arial`;
+            context.fillStyle = "darkblue";
+            context.fillText(i.toFixed(1), canvasWidth / 2 + i * 1000 + 50, maxAxialForce, 0.045 * canvasWidth);
             context.moveTo(canvasWidth / 2 + i * 1000, 0);
             context.lineTo(canvasWidth / 2 + i * 1000, canvasHeight);
 
+            context.fillText((-i).toFixed(1), canvasWidth / 2 - i * 1000 + 50, maxAxialForce, 0.055 * canvasWidth);
             context.moveTo(canvasWidth / 2 - i * 1000, 0);
             context.lineTo(canvasWidth / 2 - i * 1000, canvasHeight);
         }
-
         context.stroke();
+
+        context.font = `${0.033 * canvasHeight}px Arial`;
+        context.fillStyle = "darkred";
+        context.fillText("-M (x1000) [kN.m]", 0.01 * canvasWidth, 1.08 * maxAxialForce, 0.19 * canvasWidth);
+        context.fillText("+M (x1000) [kN.m]", 0.8 * canvasWidth, 1.08 * maxAxialForce, 0.19 * canvasWidth);
+        context.fillText("+N (x1000) [kN]", 0.51 * canvasWidth, 0.08 * canvasHeight, 0.17 * canvasWidth);
+        context.fillText("[0;0]", 0.51 * canvasWidth, 1.08 * maxAxialForce, 0.06 * canvasWidth);
 
     }, [width, length, d1, rebarAreaEndZone, rebarAreaMiddleZone, fcd, fyd, steelModulus])
 
@@ -308,8 +324,8 @@ const WallCanvas = (props) => {
 const CanvasStyled = styled.canvas`
 display: block;
 border:solid 1px;
-width:750px;
-height:500px;
+width:850px;
+height:600px;
 margin: auto;
 `;
 
