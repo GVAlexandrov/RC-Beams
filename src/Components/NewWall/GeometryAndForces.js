@@ -23,9 +23,9 @@ const GeometryAndForces = (props) => {
     let numberOfMiddleAreas = 3;
     let singleMiddleArea = (length - 2 * endArea) / numberOfMiddleAreas;
 
-    setD2((endArea + 0.5 * singleMiddleArea).toFixed(0));
-    setD3((endArea + 1.5 * singleMiddleArea).toFixed(0));
-    setD4((endArea + 2.5 * singleMiddleArea).toFixed(0));
+    setD2(endArea + 0.5 * singleMiddleArea);
+    setD3(endArea + 1.5 * singleMiddleArea);
+    setD4(endArea + 2.5 * singleMiddleArea);
     setD5(length - d1);
 
 
@@ -97,7 +97,7 @@ const GeometryAndForces = (props) => {
                             type="number"
                             placeholder="1"
                             min="1"
-                            step="0.2"
+                            step="0.5"
                             onChange={e => setRebarAreaEndZone(Number(e.target.value))}
                             value={rebarAreaEndZone}
                         />
@@ -143,19 +143,19 @@ const GeometryAndForces = (props) => {
                     </TdStyled>
 
                     <TdStyled>
-                        {d2}
+                        {d2.toFixed(0)}
                     </TdStyled>
 
                     <TdStyled>
-                        {d3}
+                        {d3.toFixed(0)}
                     </TdStyled>
 
                     <TdStyled>
-                        {d4}
+                        {d4.toFixed(0)}
                     </TdStyled>
 
                     <TdStyled>
-                        {d5}
+                        {d5.toFixed(0)}
                     </TdStyled>
                 </tr>
             </tbody>
