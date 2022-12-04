@@ -8,17 +8,18 @@ const WallCanvas = (props) => {
 
     let width = props.width;
     let length = props.length;
-    let d1 = props.d1;
-    let d2 = props.d2;
-    let d3 = props.d3;
-    let d4 = props.d4;
-    let d5 = props.d5;
+    let d1 = Number(props.d1);
+    let d2 = Number(props.d2);
+    let d3 = Number(props.d3);
+    let d4 = Number(props.d4);
+    let d5 = Number(props.d5);
     let fyd = props.fyd;
     let fcd = props.fcd;
     let steelModulus = props.steelModulus;
     let rebarAreaEndZone = props.rebarAreaEndZone;
     let rebarAreaMiddleZone = props.rebarAreaMiddleZone;
-    // console.log(d1, d2, d3, d4, d5);
+    let epsilonYD = props.epsilonYD;
+    console.log(epsilonYD / 1000);
 
 
     useEffect(() => {
@@ -31,7 +32,7 @@ const WallCanvas = (props) => {
         let epsilonUD = 67.5 / 1000;
         let epsilonC3 = 1.75 / 1000;
         let epsilonCU3 = 3.5 / 1000;
-        let epsilonSYD = 2.17 / 1000;
+        let epsilonSYD = epsilonYD / 1000;
         let epsilonS1Arr = [];
         let epsilonS2Arr = [];
         let epsilonS3Arr = [];
@@ -207,8 +208,22 @@ const WallCanvas = (props) => {
             let momentAs3 = (rebarAreaMiddleZone * 100 * sigmaS3[i] * (length / 2 - d3)) / (1000 * 1000);
             let momentAs4 = (rebarAreaMiddleZone * 100 * sigmaS4[i] * (length / 2 - d4)) / (1000 * 1000);
             let momentAs5 = (rebarAreaEndZone * 100 * sigmaS5[i] * (length / 2 - d5)) / (1000 * 1000);
-
             let totalMoment = momentConcrete + momentAs1 + momentAs2 + momentAs3 + momentAs4 + momentAs5;
+
+            console.log(`Moment Concrete => ${momentConcrete.toFixed(0)}`);
+            console.log(`Moment As1 => ${momentAs1.toFixed(0)}`);
+            console.log(`Moment As2 => ${momentAs2.toFixed(0)}`);
+            console.log(`Moment As3 => ${momentAs3.toFixed(0)}`);
+            console.log(`Moment As4 => ${momentAs4.toFixed(0)}`);
+            console.log(`Moment As5 => ${momentAs5.toFixed(0)}`);
+            console.log(`TOTAL MOMENT ====================> ${totalMoment.toFixed(0)}`);
+            console.log(`Sigma S1 => ${sigmaS1[i].toFixed(0)}`);
+            console.log(`Sigma S5 => ${sigmaS5[i].toFixed(0)}`);
+            console.log(`d1 => ${d1}`);
+            console.log(`d2 => ${d2}`);
+            console.log(`d3 => ${d3}`);
+            console.log(`d4 => ${d4}`);
+            console.log(`d5 => ${d5}`);
 
             momentJArr.push(totalMoment);
         }
@@ -216,11 +231,16 @@ const WallCanvas = (props) => {
         console.log('Mmax = ' + Math.max(...momentJArr).toFixed(0));
         console.log('Nmax = ' + Math.max(...axialForceJArr).toFixed(0));
         console.log('Nmin = ' + Math.min(...axialForceJArr).toFixed(0));
-        // momentJArr.forEach(m => console.log('Moment arr => ', m.toFixed(0)));
-        // axialForceJArr.forEach(n => console.log('Axial force arr => ', n.toFixed(0)));
+        console.log(`Moment arr => ${momentJArr.join(';   ')}`);
+        console.log(`Axial force arr => ${axialForceJArr.join(';   ')}`);
+        // console.log(`Sigma S1 arr => ${sigmaS1.join(';   ')}`);
+        // console.log(`Sigma S2 arr => ${sigmaS2.join(';   ')}`);
+        // console.log(`Sigma S3 arr => ${sigmaS3.join(';   ')}`);
+        // console.log(`Sigma S4 arr => ${sigmaS4.join(';   ')}`);
+        // console.log(`Sigma S5 arr => ${sigmaS5.join(';   ')}`);
 
 
-        canvasWidth = canvas.width = Number(Math.max(...momentJArr) * 2.1);
+        canvasWidth = canvas.width = Number(Math.max(...momentJArr) * 2.);
         canvasHeight = canvas.height = Number(Math.max(...axialForceJArr) - Math.min(...axialForceJArr)) * 1.05;
         let centerHorizontal = canvasWidth / 2;
         let centerVertical = Math.max(...axialForceJArr) * 1.025;
@@ -238,16 +258,16 @@ const WallCanvas = (props) => {
         context.moveTo(centerHorizontal, centerVertical - axialForceJArr[0]);
         context.lineWidth = 0.005 * canvasWidth;
 
-        for (let i = 0; i <= 125; i += 5) {
+        for (let i = 0; i <= 125; i += 1) {
             context.lineTo(momentJArr[i] + centerHorizontal, centerVertical - axialForceJArr[i]);
         }
 
-        for (let i = 125; i >= 0; i -= 5) {
+        for (let i = 125; i >= 0; i -= 1) {
             context.lineTo(centerHorizontal - momentJArr[i], centerVertical - axialForceJArr[i]);
         }
 
         context.closePath();
-        context.fillStyle = 'gray';
+        context.fillStyle = 'lightgray';
         context.fill();
         context.stroke();
 
@@ -310,7 +330,7 @@ const WallCanvas = (props) => {
         context.fillText("+N (x1000) [kN]", 0.51 * canvasWidth, 0.08 * canvasHeight, 0.17 * canvasWidth);
         context.fillText("[0;0]", 0.51 * canvasWidth, 1.08 * maxAxialForce, 0.06 * canvasWidth);
 
-    }, [width, length, d1, rebarAreaEndZone, rebarAreaMiddleZone, fcd, fyd, steelModulus])
+    }, [width, d5, rebarAreaEndZone, rebarAreaMiddleZone, fcd, fyd, epsilonYD])
 
 
     return (
