@@ -135,7 +135,7 @@ const GeometryAndForces = (props) => {
                             type="number"
                             placeholder="1"
                             min="0"
-                            step="1"
+                            step="5"
                             max={length / 8}
                             onChange={e => setD1(Number(e.target.value))}
                             value={d1}
