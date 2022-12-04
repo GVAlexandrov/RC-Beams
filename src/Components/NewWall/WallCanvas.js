@@ -310,7 +310,7 @@ display: block;
 border:solid 1px;
 width:750px;
 height:500px;
-margin: 50px 0px;
+margin: auto;
 `;
 
 const DivCanvasWrapperStyled = styled.div`
