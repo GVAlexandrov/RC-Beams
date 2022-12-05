@@ -6,6 +6,7 @@ import WallInfo from './WallInfo';
 import WallCanvas from './WallCanvas';
 import MaterialsInfo from '../NewBeam2/MaterialsInfo01';
 import GeometryAndForces from './GeometryAndForces';
+import GeometryCanvas from './GeometryCanvas';
 
 import { fcdCalculate, fcmCalculate, fctmCalculate, fydCalculate, } from '../../services/formulas';
 
@@ -122,6 +123,18 @@ const NewWall = () => {
                 d5={d5}
             />
 
+            <GeometryCanvas
+                width={width}
+                length={length}
+                d1={d1}
+                d2={d2}
+                d3={d3}
+                d4={d4}
+                d5={d5}
+                rebarAreaEndZone={rebarAreaEndZone}
+                rebarAreaMiddleZone={rebarAreaMiddleZone}
+            />
+
             <WallCanvas
                 width={width}
                 length={length}
@@ -137,7 +150,6 @@ const NewWall = () => {
                 rebarAreaMiddleZone={rebarAreaMiddleZone}
                 epsilonYD={epsilonYD}
             />
-
         </>
     )
 }
