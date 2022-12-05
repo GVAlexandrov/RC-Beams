@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 
@@ -21,36 +20,35 @@ const WallCanvas = (props) => {
     let epsilonYD = props.epsilonYD;
     console.log(epsilonYD / 1000);
 
+    let epsilonUD = 67.5 / 1000;
+    let epsilonC3 = 1.75 / 1000;
+    let epsilonCU3 = 3.5 / 1000;
+    let epsilonSYD = epsilonYD / 1000;
+    let epsilonS1Arr = [];
+    let epsilonS2Arr = [];
+    let epsilonS3Arr = [];
+    let epsilonS4Arr = [];
+    let epsilonS5Arr = [];
+    let sigmaS1 = [];
+    let sigmaS2 = [];
+    let sigmaS3 = [];
+    let sigmaS4 = [];
+    let sigmaS5 = [];
+    let momentJArr = [];
+    let axialForceJArr = [];
+    let lambda = 0.8;
+
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
         let canvasWidth = 0;
         let canvasHeight = 0;
-
-        // console.log(canvas);
-        let epsilonUD = 67.5 / 1000;
-        let epsilonC3 = 1.75 / 1000;
-        let epsilonCU3 = 3.5 / 1000;
-        let epsilonSYD = epsilonYD / 1000;
-        let epsilonS1Arr = [];
-        let epsilonS2Arr = [];
-        let epsilonS3Arr = [];
-        let epsilonS4Arr = [];
-        let epsilonS5Arr = [];
-        let sigmaS1 = [];
-        let sigmaS2 = [];
-        let sigmaS3 = [];
-        let sigmaS4 = [];
-        let sigmaS5 = [];
-        let momentJArr = [];
-        let axialForceJArr = [];
-        let lambda = 0.8;
-
-
         const context = canvas.getContext('2d');
         if (!context) return;
 
+
+        // EPSILON ARR
         for (let i = 0; i <= 125; i += 1) {
             if (length === 0 || width === 0) {
                 console.log('Lenght and width are needed');
@@ -59,7 +57,6 @@ const WallCanvas = (props) => {
 
             let xJ = (i / 100) * length;
 
-
             if (xJ === 0) {
                 epsilonS1Arr.push(-epsilonSYD);
                 epsilonS2Arr.push(-epsilonSYD);
@@ -67,7 +64,6 @@ const WallCanvas = (props) => {
                 epsilonS4Arr.push(-epsilonSYD);
                 epsilonS5Arr.push(-epsilonSYD);
             }
-
 
             if (xJ > 0 && xJ < (125 / 100) * length) {
                 if ((-epsilonCU3 * (d1 - xJ) / xJ) <= -epsilonUD) {
@@ -89,7 +85,6 @@ const WallCanvas = (props) => {
                 }
             }
 
-
             if (xJ === (125 / 100) * length) {
                 epsilonS1Arr.push(epsilonC3);
                 epsilonS2Arr.push(epsilonC3);
@@ -99,6 +94,8 @@ const WallCanvas = (props) => {
             }
         }
 
+
+        // SIGMA ARRs
         epsilonS1Arr.forEach(epsilonI => {
             if (fyd === 0 || steelModulus === 0) {
                 console.log('Fyd or Steel modulus needed');
@@ -185,6 +182,8 @@ const WallCanvas = (props) => {
             }
         })
 
+
+        // MOMENTS AND AXIAL FORCES
         for (let i = 0; i <= 125; i++) {
             let xJ = (i / 100) * length;
 
@@ -197,7 +196,6 @@ const WallCanvas = (props) => {
 
 
             let totalAxialForce = axialForceConcrete + axialForceAs1 + axialForceAs2 + axialForceAs3 + axialForceAs4 + axialForceAs5;
-            // console.log(totalAxialForce.toFixed(0));
 
             axialForceJArr.push(totalAxialForce);
 
@@ -210,37 +208,12 @@ const WallCanvas = (props) => {
             let momentAs5 = (rebarAreaEndZone * 100 * sigmaS5[i] * (length / 2 - d5)) / (1000 * 1000);
             let totalMoment = momentConcrete + momentAs1 + momentAs2 + momentAs3 + momentAs4 + momentAs5;
 
-            console.log(`Moment Concrete => ${momentConcrete.toFixed(0)}`);
-            console.log(`Moment As1 => ${momentAs1.toFixed(0)}`);
-            console.log(`Moment As2 => ${momentAs2.toFixed(0)}`);
-            console.log(`Moment As3 => ${momentAs3.toFixed(0)}`);
-            console.log(`Moment As4 => ${momentAs4.toFixed(0)}`);
-            console.log(`Moment As5 => ${momentAs5.toFixed(0)}`);
-            console.log(`TOTAL MOMENT ====================> ${totalMoment.toFixed(0)}`);
-            console.log(`Sigma S1 => ${sigmaS1[i].toFixed(0)}`);
-            console.log(`Sigma S5 => ${sigmaS5[i].toFixed(0)}`);
-            console.log(`d1 => ${d1}`);
-            console.log(`d2 => ${d2}`);
-            console.log(`d3 => ${d3}`);
-            console.log(`d4 => ${d4}`);
-            console.log(`d5 => ${d5}`);
-
             momentJArr.push(totalMoment);
         }
 
-        console.log('Mmax = ' + Math.max(...momentJArr).toFixed(0));
-        console.log('Nmax = ' + Math.max(...axialForceJArr).toFixed(0));
-        console.log('Nmin = ' + Math.min(...axialForceJArr).toFixed(0));
-        console.log(`Moment arr => ${momentJArr.join(';   ')}`);
-        console.log(`Axial force arr => ${axialForceJArr.join(';   ')}`);
-        // console.log(`Sigma S1 arr => ${sigmaS1.join(';   ')}`);
-        // console.log(`Sigma S2 arr => ${sigmaS2.join(';   ')}`);
-        // console.log(`Sigma S3 arr => ${sigmaS3.join(';   ')}`);
-        // console.log(`Sigma S4 arr => ${sigmaS4.join(';   ')}`);
-        // console.log(`Sigma S5 arr => ${sigmaS5.join(';   ')}`);
 
-
-        canvasWidth = canvas.width = Number(Math.max(...momentJArr) * 2.);
+        // CANVAS
+        canvasWidth = canvas.width = Number(Math.max(...momentJArr) * 2.05);
         canvasHeight = canvas.height = Number(Math.max(...axialForceJArr) - Math.min(...axialForceJArr)) * 1.05;
         let centerHorizontal = canvasWidth / 2;
         let centerVertical = Math.max(...axialForceJArr) * 1.025;
@@ -252,8 +225,7 @@ const WallCanvas = (props) => {
         let numberVerticalLines = Math.floor(maxMoment / 1000);
 
 
-
-        // GRAPH-----------------------------
+        // CHART-----------------------------
         context.beginPath();
         context.moveTo(centerHorizontal, centerVertical - axialForceJArr[0]);
         context.lineWidth = 0.005 * canvasWidth;
@@ -300,7 +272,7 @@ const WallCanvas = (props) => {
         for (let i = -1; i >= numberHorizontalLinesBelowZero; i--) {
             context.font = `${0.04 * canvasHeight}px Arial`;
             context.fillStyle = "darkblue";
-            context.fillText(i.toFixed(1), 0.87 * canvasWidth / 2, centerVertical - i * 1000 - 100, 0.055 * canvasWidth);
+            context.fillText(i.toFixed(1), 0.87 * canvasWidth / 2, centerVertical - i * 1000 - 50, 0.055 * canvasWidth);
             context.moveTo(0, centerVertical - i * 1000);
             context.lineTo(canvasWidth, centerVertical - i * 1000);
         }
@@ -335,7 +307,7 @@ const WallCanvas = (props) => {
 
     return (
         <DivCanvasWrapperStyled>
-            <h2>Graph M-N</h2>
+            <h2>Chart M-N</h2>
             <CanvasStyled ref={canvasRef} />
         </DivCanvasWrapperStyled>
     )
