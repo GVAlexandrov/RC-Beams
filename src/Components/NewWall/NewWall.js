@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 
 import * as structuralData from '../../services/structuralData';
 
@@ -32,6 +33,9 @@ const NewWall = () => {
     let [d5, setD5] = useState(0);
 
     // console.log(fck);
+    const onSubmitHandler = (e) => {
+        console.log(e);
+    }
 
     let fck = 0;
     let fcd = 0;
@@ -150,8 +154,32 @@ const NewWall = () => {
                 rebarAreaMiddleZone={rebarAreaMiddleZone}
                 epsilonYD={epsilonYD}
             />
+
+            <ButtonStyled onClick={onSubmitHandler}>Save</ButtonStyled>
         </>
     )
 }
+
+
+const ButtonStyled = styled.button`
+display: block;
+margin:20px auto;
+margin-bottom:20px;
+font-size:16px;
+background:#bdbbb7;
+padding: 10px 50px;
+border-radius:5px;
+border-color:black;
+cursor: pointer;
+&:hover{
+background-color:#969592;
+}
+&:active {
+background-color:#bdbbb7;
+/* background-color:black;
+color:red;
+border-color:red; */
+}
+`;
 
 export default NewWall;
