@@ -262,17 +262,17 @@ const WallCanvas = (props) => {
         context.strokeStyle = 'black';
         context.lineWidth = 0.0025 * canvasHeight;
         for (let i = 1; i <= numberHorizontalLinesAboveZero; i++) {
-            context.font = `${0.04 * canvasHeight}px Arial`;
+            context.font = `${0.03 * canvasHeight}px Arial`;
             context.fillStyle = "darkblue";
-            context.fillText(i.toFixed(1), 0.89 * canvasWidth / 2, centerVertical - i * 1000 - 100, 0.045 * canvasWidth);
+            context.fillText(i.toFixed(1), 0.9 * canvasWidth / 2, centerVertical - i * 1000 - 90, 0.035 * canvasWidth);
             context.moveTo(0, centerVertical - i * 1000);
             context.lineTo(canvasWidth, centerVertical - i * 1000);
         }
 
         for (let i = -1; i >= numberHorizontalLinesBelowZero; i--) {
-            context.font = `${0.04 * canvasHeight}px Arial`;
+            context.font = `${0.03 * canvasHeight}px Arial`;
             context.fillStyle = "darkblue";
-            context.fillText(i.toFixed(1), 0.87 * canvasWidth / 2, centerVertical - i * 1000 - 50, 0.055 * canvasWidth);
+            context.fillText(i.toFixed(1), 0.89 * canvasWidth / 2, centerVertical - i * 1000 - 50, 0.045 * canvasWidth);
             context.moveTo(0, centerVertical - i * 1000);
             context.lineTo(canvasWidth, centerVertical - i * 1000);
         }
@@ -283,13 +283,13 @@ const WallCanvas = (props) => {
         context.strokeStyle = 'black';
         context.lineWidth = 0.001 * canvasWidth;
         for (let i = 1; i <= numberVerticalLines; i++) {
-            context.font = `${0.04 * canvasHeight}px Arial`;
+            context.font = `${0.03 * canvasHeight}px Arial`;
             context.fillStyle = "darkblue";
-            context.fillText(i.toFixed(1), canvasWidth / 2 + i * 1000 + 50, maxAxialForce, 0.045 * canvasWidth);
+            context.fillText(i.toFixed(1), canvasWidth / 2 + i * 1000 + 50, maxAxialForce, 0.035 * canvasWidth);
             context.moveTo(canvasWidth / 2 + i * 1000, 0);
             context.lineTo(canvasWidth / 2 + i * 1000, canvasHeight);
 
-            context.fillText((-i).toFixed(1), canvasWidth / 2 - i * 1000 + 50, maxAxialForce, 0.055 * canvasWidth);
+            context.fillText((-i).toFixed(1), canvasWidth / 2 - i * 1000 + 50, maxAxialForce, 0.045 * canvasWidth);
             context.moveTo(canvasWidth / 2 - i * 1000, 0);
             context.lineTo(canvasWidth / 2 - i * 1000, canvasHeight);
         }
@@ -316,8 +316,8 @@ const WallCanvas = (props) => {
 const CanvasStyled = styled.canvas`
 display: block;
 border:solid 1px;
-width:850px;
-height:600px;
+width:700px;
+height:500px;
 margin: auto;
 `;
 
