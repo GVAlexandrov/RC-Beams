@@ -10,8 +10,15 @@ const GeometryCanvas = (props) => {
     let d3 = Number(props.d3);
     let d4 = Number(props.d4);
     let d5 = Number(props.d5);
+    let rebarXPositions = [d1, d2, d3, d4, d5];
     let rebarAreaEndZone = props.rebarAreaEndZone;
     let rebarAreaMiddleZone = props.rebarAreaMiddleZone;
+
+    let bottomDimensionsLengths = [50, 200, 400, 600, 750, 800];
+    let bottomDimensionsHeights = [20, 60, 100, 140, 180, 220];
+    let bottomDimensionsTextX = [100, 150, 270, 370, 410, 440];
+    let bottomDimensionsTextY = [110, 150, 190, 230, 270, 310];
+
 
     useEffect(() => {
         const canvas = canvasRef2.current;
@@ -33,52 +40,27 @@ const GeometryCanvas = (props) => {
         context.fillText(`Width = ${width} mm`, 0, 0);
         context.restore();
 
+
         // BOTTOM DIMENSIONs
-        context.beginPath();
-        context.lineWidth = "1";
-        context.strokeStyle = "black";
-        context.rect(95, 75, 50, 20);
-        context.stroke();
-        context.fillText(`d1 = ${d1.toFixed(0)} mm`, 100, 110);
+        for (let i = 0; i <= 5; i++) {
+            context.beginPath();
+            context.lineWidth = "1";
+            context.strokeStyle = "black";
+            context.rect(95, 75, bottomDimensionsLengths[i], bottomDimensionsHeights[i]);
+            context.stroke();
 
-        context.beginPath();
-        context.lineWidth = "1";
-        context.strokeStyle = "black";
-        context.rect(95, 75, 200, 60);
-        context.stroke();
-        context.fillText(`d2 = ${d2.toFixed(0)} mm`, 150, 150);
+            if (i < 5) {
+                context.fillText(`d${i + 1} = ${rebarXPositions[i]?.toFixed(0)} mm`, bottomDimensionsTextX[i], bottomDimensionsTextY[i]);
+            } else {
+                context.fillText(`Length = ${length?.toFixed(0)} mm`, bottomDimensionsTextX[i], bottomDimensionsTextY[i]);
+            }
 
-        context.beginPath();
-        context.lineWidth = "1";
-        context.strokeStyle = "black";
-        context.rect(95, 75, 400, 100);
-        context.stroke();
-        context.fillText(`d3 = ${d3.toFixed(0)} mm`, 270, 190);
+        }
 
-        context.beginPath();
-        context.lineWidth = "1";
-        context.strokeStyle = "black";
-        context.rect(95, 75, 600, 140);
-        context.stroke();
-        context.fillText(`d4 = ${d4.toFixed(0)} mm`, 370, 230);
-
-        context.beginPath();
-        context.lineWidth = "1";
-        context.strokeStyle = "black";
-        context.rect(95, 75, 750, 180);
-        context.stroke();
-        context.fillText(`d5 = ${d5.toFixed(0)} mm`, 410, 270);
-
-        context.beginPath();
-        context.lineWidth = "1";
-        context.strokeStyle = "black";
-        context.rect(95, 75, 800, 220);
-        context.stroke();
-        context.fillText(`Length = ${length} mm`, 440, 310);
 
         // WALL CONTOUR
         context.beginPath();
-        context.lineWidth = "5";
+        context.lineWidth = "4";
         context.strokeStyle = "black";
         context.rect(95, 5, 800, 70);
         context.stroke();
@@ -87,7 +69,7 @@ const GeometryCanvas = (props) => {
         context.beginPath();
         context.lineWidth = "2";
         context.strokeStyle = "black";
-        context.fillRect(135, 15, 20, 50);
+        context.fillRect(137.5, 15, 15, 50);
         context.stroke();
         context.fillText(`As1`, 160, 35);
         context.fillText(`${rebarAreaEndZone.toFixed(1)} cm²`, 160, 55);
@@ -119,10 +101,10 @@ const GeometryCanvas = (props) => {
         context.beginPath();
         context.lineWidth = "2";
         context.strokeStyle = "black";
-        context.fillRect(835, 15, 20, 50);
+        context.fillRect(837.5, 15, 15, 50);
         context.stroke();
-        context.fillText(`As5`, 790, 35);
-        context.fillText(`${rebarAreaEndZone.toFixed(1)} cm²`, 750, 55);
+        context.fillText(`As5`, 770, 35);
+        context.fillText(`${rebarAreaEndZone.toFixed(1)} cm²`, 770, 55);
     }, [width, length, d5, rebarAreaEndZone, rebarAreaMiddleZone])
 
 
