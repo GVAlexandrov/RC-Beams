@@ -148,3 +148,47 @@ export const editBeam = (
             })
         })
 }
+
+
+export const addNewWall = (
+    projectName,
+    wallLevel,
+    wallNumberString,
+    concrete,
+    alphaCC,
+    gammaMC,
+    steel,
+    gammaMS,
+    steelModulus,
+    width,
+    length,
+    d1,
+    rebarAreaEndZone,
+    rebarAreaMiddleZone
+) => {
+    let newWall = {
+        projectName,
+        wallLevel,
+        wallNumberString,
+        concrete,
+        alphaCC,
+        gammaMC,
+        steel,
+        gammaMS,
+        steelModulus,
+        width,
+        length,
+        d1,
+        rebarAreaEndZone,
+        rebarAreaMiddleZone
+    }
+    uid = localStorage.uid;
+
+    return auth.currentUser.getIdToken(false)
+        .then((token) => {
+            return fetch(`${URL}walls/${uid}/.json?auth=${token}`, {
+                method: "POST",
+                body: JSON.stringify(newWall)
+            })
+        })
+}
