@@ -1,13 +1,18 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 import * as structuralData from '../../services/structuralData';
+import * as wallService from '../../services/services';
 
 import WallInfo from './WallInfo';
 import WallCanvas from './WallCanvas';
 import MaterialsInfo from '../NewBeam2/MaterialsInfo01';
 import GeometryAndForces from './GeometryAndForces';
 import GeometryCanvas from './GeometryCanvas';
+
+import validateNewElements from '../../validations/newDataValidations';
 
 import { fcdCalculate, fcmCalculate, fctmCalculate, fydCalculate, } from '../../services/formulas';
 
@@ -32,10 +37,9 @@ const NewWall = () => {
     let [d4, setD4] = useState(0);
     let [d5, setD5] = useState(0);
 
-    // console.log(fck);
-    const onSubmitHandler = (e) => {
-        console.log(e);
-    }
+    let [error, setError] = useState('');
+
+    const navigate = useNavigate();
 
     let fck = 0;
     let fcd = 0;
@@ -71,6 +75,87 @@ const NewWall = () => {
         ? '-'
         : (fyd / steelModulus);
 
+
+    const onSubmitHandler = (e) => {
+        const projectNameTextError = validateNewElements.projectName(projectName);
+        const wallLevelTextError = validateNewElements.beamLevel(wallLevel);
+        const wallNumberTextError = validateNewElements.beamNumber(wallNumberString);
+        const concreteTextError = validateNewElements.concrete(fck);
+        const alphaCCTextError = validateNewElements.alphaCC(alphaCC);
+        const gammaMCTextError = validateNewElements.gammaMC(gammaMC);
+        const steelTextError = validateNewElements.steel(fy);
+        const gammaMSTextError = validateNewElements.gammaMS(gammaMS);
+        const EsTextError = validateNewElements.Es(steelModulus);
+        const lengthTextError = validateNewElements.height(length.valueOf());
+        const widthTextError = validateNewElements.width(width.valueOf());
+        const d1TextError = validateNewElements.d1(d1.valueOf());
+        const rebarAreaEndZoneTextError = validateNewElements.rebarArea(rebarAreaEndZone.valueOf());
+        const rebarAreaMiddleZoneTextError = validateNewElements.rebarArea(rebarAreaMiddleZone.valueOf());
+
+
+        if (projectNameTextError ||
+            wallLevelTextError ||
+            wallNumberTextError ||
+            concreteTextError ||
+            alphaCCTextError ||
+            gammaMCTextError ||
+            steelTextError ||
+            gammaMSTextError ||
+            EsTextError ||
+            lengthTextError ||
+            widthTextError ||
+            d1TextError ||
+            rebarAreaEndZoneTextError ||
+            rebarAreaMiddleZoneTextError
+        ) {
+            setError(projectNameTextError ||
+                wallLevelTextError ||
+                wallNumberTextError ||
+                concreteTextError ||
+                steelTextError ||
+                alphaCCTextError ||
+                gammaMCTextError ||
+                gammaMSTextError ||
+                EsTextError ||
+                widthTextError ||
+                lengthTextError ||
+                d1TextError ||
+                rebarAreaEndZoneTextError ||
+                rebarAreaMiddleZoneTextError
+            );
+
+            setTimeout(() => {
+                setError('');
+            }, 5000);
+
+            return;
+        };
+
+
+        wallService
+            .addNewWall(
+                projectName,
+                Number(wallLevel),
+                wallNumberString,
+                concreteGrade,
+                Number(alphaCC),
+                Number(gammaMC),
+                steelGrade,
+                Number(gammaMS),
+                Number(steelModulus),
+                Number(width),
+                Number(length),
+                Number(d1),
+                Number(rebarAreaEndZone),
+                Number(rebarAreaMiddleZone)
+            )
+            .then(responce => {
+                if (responce.statusText === 'OK') {
+                    navigate('/');
+                }
+            })
+            .catch(console.log);
+    }
 
     return (
         <>
@@ -155,14 +240,25 @@ const NewWall = () => {
                 epsilonYD={epsilonYD}
             />
 
+            {error
+                ? (
+                    <DivErrorStyled >
+                        <PErrorStyled>{error}</PErrorStyled>
+                    </DivErrorStyled>
+                )
+                : (<></>)
+            }
+
+            <br></br>
             <ButtonStyled onClick={onSubmitHandler}>Save</ButtonStyled>
+            <ButtonStyled >Cancel</ButtonStyled>
         </>
     )
 }
 
 
 const ButtonStyled = styled.button`
-display: block;
+display: inline-block;
 margin:20px auto;
 margin-bottom:20px;
 font-size:16px;
@@ -180,6 +276,23 @@ background-color:#bdbbb7;
 color:red;
 border-color:red; */
 }
+`;
+
+
+const DivErrorStyled = styled.span`
+color:red;
+background-color:white;
+font-size:20px;
+/* font-weight: bold; */
+border: 1.5px solid red;
+border-top-right-radius:15px;
+border-bottom-left-radius:15px;
+display: inline-block;
+`;
+
+const PErrorStyled = styled.p`
+margin:auto;
+padding:10px;
 `;
 
 export default NewWall;
