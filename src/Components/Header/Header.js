@@ -21,6 +21,7 @@ const Header = ({
         { menuName: "Login", path: "/login", isAuth: false },
         { menuName: "RC Beams", path: "/beams", isAuth: true },
         { menuName: "New Beam", path: "/beams/new-beam", isAuth: true },
+        { menuName: "Walls", path: "/walls", isAuth: true },
         { menuName: "New Wall", path: "/walls/new-wall", isAuth: true },
     ]
 
