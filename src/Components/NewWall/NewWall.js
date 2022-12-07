@@ -151,7 +151,7 @@ const NewWall = () => {
             )
             .then(responce => {
                 if (responce.statusText === 'OK') {
-                    navigate('/');
+                    navigate('/walls');
                 }
             })
             .catch(console.log);
