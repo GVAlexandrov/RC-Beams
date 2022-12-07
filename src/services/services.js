@@ -67,6 +67,17 @@ export const getAllBeams = () => {
 
 
 
+export const getAllWalls = () => {
+    uid = localStorage.uid;
+    return fetch(`${URL}walls/${uid}/.json`)
+        .then(response => response.json())
+        .then(result => {
+            return result;
+        })
+        .catch(error => console.log(error));
+}
+
+
 export const getOneBeam = (beamId) => {
     uid = localStorage.uid;
     return fetch(`${URL}beams/${uid}/${beamId}/.json`)
