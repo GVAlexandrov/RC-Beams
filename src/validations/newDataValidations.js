@@ -69,13 +69,19 @@ const validateNewElements = {
 
     height(height) {
         if (height < 150 || isNaN(Number(height))) {
-            return 'Heigh should be an integer, larger than or equal to 150 mm!';
+            return 'Heigh/length should be an integer, larger than or equal to 150 mm!';
         }
     },
 
     d1(d1) {
         if (d1 < 25 || isNaN(Number(d1))) {
             return 'd1 should be an integer, larger than or equal to 25 mm!';
+        }
+    },
+
+    rebarArea(rebarArea) {
+        if (rebarArea <= 0 || isNaN(Number(rebarArea))) {
+            return 'Rebar area (As1/As2) should be an integer, larger than 0 cm²!';
         }
     },
 
