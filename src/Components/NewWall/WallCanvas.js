@@ -18,7 +18,6 @@ const WallCanvas = (props) => {
     let rebarAreaEndZone = props.rebarAreaEndZone;
     let rebarAreaMiddleZone = props.rebarAreaMiddleZone;
     let epsilonYD = props.epsilonYD;
-    console.log(epsilonYD / 1000);
 
     let epsilonUD = 67.5 / 1000;
     let epsilonC3 = 1.75 / 1000;
