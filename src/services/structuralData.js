@@ -36,6 +36,19 @@ const tableHeadingsArr = [
     '',
     ''
 ];
+
+const tableHeadingsWallArr = [
+    'Project\'s name',
+    'Level',
+    'Wall',
+    'Length',
+    'Width',
+    'Concrete',
+    'Steel',
+    '',
+    ''
+];
+
 const tableHeadingsDimensionsArr = [
     '[-]',
     '[-]',
@@ -48,6 +61,18 @@ const tableHeadingsDimensionsArr = [
     '[Grade]',
     '[Grade]',
     '[mm]',
+    '',
+    ''
+];
+
+const tableHeadingsDimensionsWallArr = [
+    '[-]',
+    '[-]',
+    '[№]',
+    '[mm]',
+    '[mm]',
+    '[Grade]',
+    '[Grade]',
     '',
     ''
 ];
@@ -72,7 +97,9 @@ export {
     steelArr,
     rebarArr,
     tableHeadingsArr,
+    tableHeadingsWallArr,
     tableHeadingsDimensionsArr,
+    tableHeadingsDimensionsWallArr,
     alphaCCArr,
     gammaMCArr,
     gammaMSArr,
