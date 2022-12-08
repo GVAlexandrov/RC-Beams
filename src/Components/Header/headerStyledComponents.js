@@ -65,6 +65,10 @@ height:100%;
 const NavLinkStyled = styled(NavLink)`
   text-decoration:none;
   color: white;
+
+  &.active {
+    color: red;
+  }
   
   &:hover{
     color:red;
