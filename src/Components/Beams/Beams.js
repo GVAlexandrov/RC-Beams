@@ -59,7 +59,7 @@ const Beams = () => {
                 .map(a => Number(a[1].beamLevel))
                 .sort((a, b) => b - a)])
             : new Set([...beamsArr
-                .map(a => a[1].beamLevel)
+                .map(a => Number(a[1].beamLevel))
                 .sort((a, b) => b - a)]);
     }
 
@@ -152,15 +152,15 @@ const Beams = () => {
 
                         </TableStyled>
                     </>)
-                : ''
+                : <h1 >No RC Beams designed so far...</h1>
             }
 
-            {!beamsArrCopy.length
+            {/* {!beamsArrCopy.length
                 ? (
                     <h1 >No RC Beams designed so far...</h1>
                 )
                 : ''
-            }
+            } */}
 
         </>
     );
