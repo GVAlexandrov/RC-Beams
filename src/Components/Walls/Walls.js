@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import * as structuralData from '../../services/structuralData';
+import ExistingWall from '../ExistingWall/ExistingWall';
 
-
+import {
+    TableStyled,
+    THeadStyledMain,
+    TrStyled,
+    TrStyled2
+} from '../Beams/beamsStyledComponents';
 import * as services from '../../services/services';
 
 const Walls = () => {
@@ -20,8 +27,6 @@ const Walls = () => {
                 setWalls(res);
             })
     }, []);
-
-    console.log(walls);
 
     function refresh() {
         services.getAllWalls()
@@ -57,58 +62,103 @@ const Walls = () => {
                 .sort((a, b) => b - a)]);
     }
 
+    function deleteOrEditWall(event) {
+        let elementId = event.target.id;
+
+        if (event.target.textContent === 'X') {
+            if (window.confirm('Are you sure you want to DELETE this item?')) {
+                services.deleteOneWall(event, elementId, refresh);
+            };
+        } else if (event.target.textContent === 'Edit') {
+            navigate(`/walls/edit-wall/${elementId}`);
+        }
+    }
 
     return (
-        <>
-
-            <label htmlFor="project">Project</label>
-            <select
-                name="project"
-                id="project"
-                onChange={e => setProject(e.target.value)}
-            >
-                <option selected value="all" >
-                    All
-                </option>
-
-                {(Array
-                    .from(projectsSet)
-                    .map((project) => {
-                        return <option key={project} value={project}>{project}</option>
-                    }))}
-            </select>
-
-
-            <label htmlFor="level">Level</label>
-            <select
-                name="level"
-                id="level"
-                onChange={e => setLevel(e.target.value)}>
-                <option selected value="all" >
-                    All
-                </option>
-
-                {(Array
-                    .from(levelsSet)
-                    .map((level) => {
-                        return (
-                            <option
-                                key={level}
-                                value={level}
-                            >
-                                {Number(level).toFixed(2)}
-                            </option>
-                        )
-                    }))}
-            </select>
-
-
-            {!wallsArrCopy.length
+        <>{
+            wallsArrCopy.length
                 ? (
-                    <h1 >No Walls designed so far...</h1>
-                )
-                : ''
-            }
+                    <>
+                        <label htmlFor="project">Project</label>
+                        <select
+                            name="project"
+                            id="project"
+                            onChange={e => setProject(e.target.value)}
+                        >
+                            <option selected value="all" >
+                                All
+                            </option>
+
+                            {(Array
+                                .from(projectsSet)
+                                .map((project) => {
+                                    return <option key={project} value={project}>{project}</option>
+                                }))}
+                        </select>
+
+
+                        <label htmlFor="level">Level</label>
+                        <select
+                            name="level"
+                            id="level"
+                            onChange={e => setLevel(e.target.value)}>
+                            <option selected value="all" >
+                                All
+                            </option>
+
+                            {(Array
+                                .from(levelsSet)
+                                .map((level) => {
+                                    return (
+                                        <option
+                                            key={level}
+                                            value={level}
+                                        >
+                                            {Number(level).toFixed(2)}
+                                        </option>
+                                    )
+                                }))}
+                        </select>
+
+                        <TableStyled >
+                            <THeadStyledMain>
+                                <TrStyled>
+                                    {
+                                        structuralData.tableHeadingsWallArr.map((heading) => {
+                                            return <th key={heading}>{heading}</th>;
+                                        })
+                                    }
+                                </TrStyled>
+
+                                <TrStyled2>
+                                    {
+                                        structuralData.tableHeadingsDimensionsWallArr.map((dimension, index) => {
+                                            return <th key={index}>{dimension}</th>;
+                                        })
+                                    }
+                                </TrStyled2>
+                            </THeadStyledMain>
+
+
+                            <tbody onClick={deleteOrEditWall} >
+                                {wallsArrCopy
+                                    .filter(a => {
+                                        return project === 'all' || !project
+                                            ? a
+                                            : (a[1].projectName) === (project);
+                                    })
+                                    .filter(a => {
+                                        return level === 'all' || !level
+                                            ? a
+                                            : Number(a[1].wallLevel) === Number(level);
+                                    })
+                                    .map((wall) => <ExistingWall key={wall[0]} wall={wall} />)}
+                            </tbody>
+
+                        </TableStyled>
+                    </>)
+                : (<h1 >No Walls designed so far...</h1>)
+        }
         </>
     )
 }
