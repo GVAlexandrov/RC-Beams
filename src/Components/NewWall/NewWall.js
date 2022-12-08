@@ -159,7 +159,7 @@ const NewWall = () => {
 
     return (
         <>
-            <h1>Wall Info</h1>
+            <h1>New Wall</h1>
 
             <WallInfo
                 setProjectName={setProjectName}
