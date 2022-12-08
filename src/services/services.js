@@ -108,7 +108,19 @@ export const deleteOneBeam = (event, elementId, refresh) => {
     // })    
 }
 
+export const deleteOneWall = (event, elementId, refresh) => {
+    uid = localStorage.uid;
 
+    return auth.currentUser.getIdToken(false)
+        .then((token) => {
+            return fetch(`${URL}walls/${uid}/${elementId}/.json?auth=${token}`, {
+                method: "DELETE",
+            })
+        })
+        .then(() => {
+            refresh();
+        })
+}
 
 export const editBeam = (
     projectName,
