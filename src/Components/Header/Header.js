@@ -65,7 +65,7 @@ const Header = ({
                                 )
                             } else if (userEmail === null && !link.isAuth) {
                                 return (
-                                    <LiStyled key={link.menuName}><NavLinkStyled to={link.path}>{link.menuName}</NavLinkStyled></LiStyled>
+                                    <LiStyled key={link.menuName}><NavLinkStyled to={link.path} >{link.menuName}</NavLinkStyled></LiStyled>
                                 )
                             }
 
