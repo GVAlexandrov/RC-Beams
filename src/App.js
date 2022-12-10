@@ -14,6 +14,7 @@ import EditBeam2 from './Components/EditBeam2/EditBeam2';
 import Footer from './Components/Footer/Footer';
 import Walls from './Components/Walls/Walls';
 import NewWall from './Components/NewWall/NewWall';
+import EditWall from './Components/EditWall/EditWall';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
 
           <Route path='/walls' element={<Walls />} />
           <Route path='/walls/new-wall' element={<NewWall />} />
+          <Route path='/walls/edit-wall/:wallID' element={<EditWall />} />
         </Routes>
       </MainStyled>
 
