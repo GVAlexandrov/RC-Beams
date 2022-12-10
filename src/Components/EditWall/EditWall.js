@@ -61,13 +61,13 @@ const EditWall = () => {
         setGammaMS(wall?.gammaMS || 0);
         setSteelModulus(wall?.steelModulus || 0);
         setWidth(wall?.width || 0);
-        setLength(wall?.height || 0);
+        setLength(wall?.length || 0);
         setD1(wall?.d1 || 0);
         setRebarAreaEndZone(wall?.rebarAreaEndZone || 0);
         setRebarAreaMiddleZone(wall?.rebarAreaMiddleZone || 0);
     }, [wall]);
 
-    console.log(wall);
+    console.log(length);
 
 
     let fck = 0;
@@ -106,6 +106,8 @@ const EditWall = () => {
 
 
     const onSubmitHandler = (e) => {
+        e.preventDefault();
+
         const projectNameTextError = validateNewElements.projectName(projectName);
         const wallLevelTextError = validateNewElements.beamLevel(wallLevel);
         const wallNumberTextError = validateNewElements.beamNumber(wallNumberString);
@@ -161,8 +163,13 @@ const EditWall = () => {
         };
 
 
+        if (!window.confirm('Are you sure you want to EDIT this item?')) {
+            return;
+        };
+
+
         wallService
-            .addNewWall(
+            .editWall(
                 projectName,
                 Number(wallLevel),
                 wallNumberString,
