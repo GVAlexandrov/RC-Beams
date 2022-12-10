@@ -44,7 +44,6 @@ const EditWall = () => {
     const navigate = useNavigate();
 
     let { wallID } = useParams();
-    console.log(wallID);
 
     useEffect(() => {
         wallService.getOneWall(wallID)
@@ -67,8 +66,6 @@ const EditWall = () => {
         setRebarAreaEndZone(wall?.rebarAreaEndZone || 0);
         setRebarAreaMiddleZone(wall?.rebarAreaMiddleZone || 0);
     }, [wall]);
-
-    console.log(wall);
 
 
     let fck = 0;
@@ -210,6 +207,7 @@ const EditWall = () => {
                 setSteelGrade={setSteelGrade}
                 steelGrade={steelGrade}
                 structuralData={structuralData}
+                wall={wall}
             />
 
             <MaterialsInfo
@@ -226,6 +224,7 @@ const EditWall = () => {
                 Ecm={Ecm}
                 setSteelModulus={setSteelModulus}
                 epsilonYD={epsilonYD}
+                wall={wall}
             />
 
             <GeometryAndForces
