@@ -19,6 +19,7 @@ const BeamInfo = (props) => {
     let setSteelModulus = props.setSteelModulus;
     let epsilonYD = props.epsilonYD;
     let beamObj = props.beam ? props.beam : null;
+    let wallObj = props.wall ? props.wall : null;
 
     return (
         <TableStyled>
@@ -62,7 +63,7 @@ const BeamInfo = (props) => {
                         <select name="alphaCC" id="alphaCC" onChange={e => setAlphaCC(e.target.value)}>
 
                             {structuralData.alphaCCArr.map((alphaCC) => {
-                                return (beamObj?.alphaCC === alphaCC
+                                return (beamObj?.alphaCC === alphaCC || wallObj?.alphaCC === alphaCC
                                     ? <option selected value={alphaCC}>{Number(alphaCC).toFixed(2)}</option>
                                     : <option value={alphaCC}>{Number(alphaCC).toFixed(2)}</option>)
                             })}
@@ -74,7 +75,7 @@ const BeamInfo = (props) => {
                         <select name="gammaMC" id="gammaMC" onChange={e => setGammaMC(e.target.value)}>
 
                             {structuralData.gammaMCArr.map((gammaMC) => {
-                                return (beamObj?.gammaMC === gammaMC
+                                return (beamObj?.gammaMC === gammaMC || wallObj?.gammaMC === gammaMC
                                     ? <option selected value={gammaMC}>{Number(gammaMC).toFixed(2)}</option>
                                     : <option value={gammaMC}>{Number(gammaMC).toFixed(2)}</option>)
                             })}
@@ -87,7 +88,7 @@ const BeamInfo = (props) => {
                         >
 
                             {structuralData.gammaMSArr.map((gammaMS) => {
-                                return (beamObj?.gammaMS === gammaMS
+                                return (beamObj?.gammaMS === gammaMS || wallObj?.gammaMS === gammaMS
                                     ? <option selected value={gammaMS}>{Number(gammaMS).toFixed(2)}</option>
                                     : <option value={gammaMS}>{Number(gammaMS).toFixed(2)}</option>)
                             })}
@@ -134,7 +135,7 @@ const BeamInfo = (props) => {
                         <select name="steelModulus" id="steelModulus" onChange={e => setSteelModulus(e.target.value)} >
 
                             {structuralData.steelModulusArr.map((modulus) => {
-                                return (beamObj?.steelModulus === modulus
+                                return (beamObj?.steelModulus === modulus || wallObj?.steelModulus === modulus
                                     ? <option selected value={modulus}>{Number(modulus).toFixed(2)}</option>
                                     : <option value={modulus}>{Number(modulus).toFixed(2)}</option>)
                             })}
