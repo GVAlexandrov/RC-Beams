@@ -88,7 +88,15 @@ export const getOneBeam = (beamId) => {
         .catch(error => console.log(error));
 }
 
-
+export const getOneWall = (wallId) => {
+    uid = localStorage.uid;
+    return fetch(`${URL}walls/${uid}/${wallId}/.json`)
+        .then(response => response.json())
+        .then(result => {
+            return result;
+        })
+        .catch(error => console.log(error));
+}
 
 export const deleteOneBeam = (event, elementId, refresh) => {
     // let parentNode = event.target.nodeName === 'TD' ? event.target.parentNode.parentNode : event.target.parentNode.parentNode.parentNode;
