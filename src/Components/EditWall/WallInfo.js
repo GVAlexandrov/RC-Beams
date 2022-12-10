@@ -14,6 +14,10 @@ const WallInfo = (props) => {
     // let steelGrade = props.steelGrade;
     let structuralData = props.structuralData;
 
+    let wallObj = props.wall ? props.wall : null;
+    console.log(wallObj);
+
+
 
     return (
         <TableStyled>
@@ -93,8 +97,11 @@ const WallInfo = (props) => {
                             {structuralData
                                 .concreteArr
                                 .map((concreteGrade) => {
-                                    return (
-                                        <option value={concreteGrade} >
+                                    return (wallObj?.concrete === concreteGrade
+                                        ? <option selected value={wallObj.concrete}>
+                                            {wallObj.concrete}
+                                        </option>
+                                        : <option value={concreteGrade} >
                                             {concreteGrade}
                                         </option>
                                     )
@@ -121,8 +128,11 @@ const WallInfo = (props) => {
                             {structuralData
                                 .steelArr
                                 .map((steelGrade) => {
-                                    return (
-                                        <option value={steelGrade} >
+                                    return (wallObj?.steel === steelGrade
+                                        ? <option selected value={wallObj.steel}>
+                                            {wallObj.steel}
+                                        </option>
+                                        : <option value={steelGrade} >
                                             {steelGrade}
                                         </option>
                                     )
