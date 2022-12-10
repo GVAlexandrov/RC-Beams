@@ -9,7 +9,7 @@ import * as wallService from '../../services/services';
 
 import WallInfo from './WallInfo';
 import WallCanvas from './WallCanvas';
-import MaterialsInfo from '../NewBeam2/MaterialsInfo01';
+import MaterialsInfo from '../EditBeam2/MaterialsInfo';
 import GeometryAndForces from './GeometryAndForces';
 import GeometryCanvas from './GeometryCanvas';
 
