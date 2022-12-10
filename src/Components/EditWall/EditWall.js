@@ -44,6 +44,7 @@ const EditWall = () => {
     const navigate = useNavigate();
 
     let { wallID } = useParams();
+    console.log(wallID);
 
     useEffect(() => {
         wallService.getOneWall(wallID)
@@ -67,7 +68,7 @@ const EditWall = () => {
         setRebarAreaMiddleZone(wall?.rebarAreaMiddleZone || 0);
     }, [wall]);
 
-    console.log(length);
+    console.log(wall);
 
 
     let fck = 0;
@@ -167,7 +168,6 @@ const EditWall = () => {
             return;
         };
 
-
         wallService
             .editWall(
                 projectName,
@@ -183,7 +183,8 @@ const EditWall = () => {
                 Number(length),
                 Number(d1),
                 Number(rebarAreaEndZone),
-                Number(rebarAreaMiddleZone)
+                Number(rebarAreaMiddleZone),
+                wallID
             )
             .then(responce => {
                 if (responce.statusText === 'OK') {
