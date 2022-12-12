@@ -61,11 +61,15 @@ const Header = ({
                         links.map(link => {
                             if (userEmail !== null && link.isAuth) {
                                 return (
-                                    <LiStyled key={link.menuName}><NavLinkStyled to={link.path}>{link.menuName}</NavLinkStyled></LiStyled>
+                                    <LiStyled key={link.menuName}>
+                                        <NavLinkStyled to={link.path}>{link.menuName}</NavLinkStyled>
+                                    </LiStyled>
                                 )
                             } else if (userEmail === null && !link.isAuth) {
                                 return (
-                                    <LiStyled key={link.menuName}><NavLinkStyled to={link.path} >{link.menuName}</NavLinkStyled></LiStyled>
+                                    <LiStyled key={link.menuName}>
+                                        <NavLinkStyled to={link.path} >{link.menuName}</NavLinkStyled>
+                                    </LiStyled>
                                 )
                             }
 
@@ -74,7 +78,9 @@ const Header = ({
                     }
 
                     {(userEmail !== null)
-                        ? <LiStyled><NavLinkStyled onClick={logoutHandler} to="/">Logout</NavLinkStyled></LiStyled>
+                        ? <LiStyled>
+                            <NavLinkStyled onClick={logoutHandler} to="/">Logout</NavLinkStyled>
+                        </LiStyled>
                         : ''
                     }
 

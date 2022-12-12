@@ -4,8 +4,6 @@ import styled from 'styled-components';
 const ExistingWall = (wallObj) => {
     const { projectName, wallLevel, wallNumberString, length, width, concrete, steel } = wallObj.wall[1];
 
-    console.log(wallObj.wall[1]);
-
     const wallArr = [projectName, Number(wallLevel).toFixed(2), wallNumberString, length, width, concrete, steel];
 
     return (
