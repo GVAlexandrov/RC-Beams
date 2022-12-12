@@ -9,15 +9,10 @@ const WallInfo = (props) => {
     let setWallNumberString = props.setWallNumberString;
     let wallNumberString = props.wallNumberString;
     let setConcreteGrade = props.setConcreteGrade;
-    // let concreteGrade = props.concreteGrade;
     let setSteelGrade = props.setSteelGrade;
-    // let steelGrade = props.steelGrade;
     let structuralData = props.structuralData;
 
     let wallObj = props.wall ? props.wall : null;
-    console.log(wallObj);
-
-
 
     return (
         <TableStyled>
