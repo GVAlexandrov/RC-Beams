@@ -4,7 +4,7 @@ import {
     TdStyledDimensions,
 } from './newBeam2Styled';
 
-const BeamInfo = (props) => {
+const MaterialsInfo = (props) => {
     let structuralData = props.structuralData;
     let setAlphaCC = props.setAlphaCC;
     let setGammaMC = props.setGammaMC;
@@ -18,6 +18,7 @@ const BeamInfo = (props) => {
     let Ecm = props.Ecm;
     let setSteelModulus = props.setSteelModulus;
     let epsilonYD = props.epsilonYD;
+
     let beamObj = props.beam ? props.beam : null;
     let wallObj = props.wall ? props.wall : null;
 
@@ -62,11 +63,22 @@ const BeamInfo = (props) => {
                     <TdStyled>
                         <select name="alphaCC" id="alphaCC" onChange={e => setAlphaCC(e.target.value)}>
 
-                            {structuralData.alphaCCArr.map((alphaCC) => {
-                                return (beamObj?.alphaCC === alphaCC || wallObj?.alphaCC === alphaCC
-                                    ? <option selected value={alphaCC}>{Number(alphaCC).toFixed(2)}</option>
-                                    : <option value={alphaCC}>{Number(alphaCC).toFixed(2)}</option>)
-                            })}
+                            <option
+                                disabled
+                                selected
+                                hidden
+                                value="default"
+                            >
+                                -
+                            </option>
+
+                            {structuralData
+                                .alphaCCArr
+                                .map((alphaCC) => {
+                                    return (beamObj?.alphaCC === alphaCC || wallObj?.alphaCC === alphaCC
+                                        ? <option selected value={alphaCC}>{Number(alphaCC).toFixed(2)}</option>
+                                        : <option value={alphaCC}>{Number(alphaCC).toFixed(2)}</option>)
+                                })}
                         </select>
                     </TdStyled>
 
@@ -74,24 +86,45 @@ const BeamInfo = (props) => {
                     <TdStyled>
                         <select name="gammaMC" id="gammaMC" onChange={e => setGammaMC(e.target.value)}>
 
-                            {structuralData.gammaMCArr.map((gammaMC) => {
-                                return (beamObj?.gammaMC === gammaMC || wallObj?.gammaMC === gammaMC
-                                    ? <option selected value={gammaMC}>{Number(gammaMC).toFixed(2)}</option>
-                                    : <option value={gammaMC}>{Number(gammaMC).toFixed(2)}</option>)
-                            })}
+                            <option
+                                disabled
+                                selected
+                                hidden
+                                value="default"
+                            >
+                                -
+                            </option>
+
+                            {structuralData
+                                .gammaMCArr
+                                .map((gammaMC) => {
+                                    return (beamObj?.gammaMC === gammaMC || wallObj?.gammaMC === gammaMC
+                                        ? <option selected value={gammaMC}>{Number(gammaMC).toFixed(2)}</option>
+                                        : <option value={gammaMC}>{Number(gammaMC).toFixed(2)}</option>)
+                                })}
                         </select>
                     </TdStyled>
 
 
                     <TdStyled>
-                        <select name="gammaMS" id="gammaMS" onChange={e => setGammaMS(e.target.value)}
-                        >
+                        <select name="gammaMS" id="gammaMS" onChange={e => setGammaMS(e.target.value)}>
 
-                            {structuralData.gammaMSArr.map((gammaMS) => {
-                                return (beamObj?.gammaMS === gammaMS || wallObj?.gammaMS === gammaMS
-                                    ? <option selected value={gammaMS}>{Number(gammaMS).toFixed(2)}</option>
-                                    : <option value={gammaMS}>{Number(gammaMS).toFixed(2)}</option>)
-                            })}
+                            <option
+                                disabled
+                                selected
+                                hidden
+                                value="default"
+                            >
+                                -
+                            </option>
+
+                            {structuralData
+                                .gammaMSArr
+                                .map((gammaMS) => {
+                                    return (beamObj?.gammaMS === gammaMS || wallObj?.gammaMS === gammaMS
+                                        ? <option selected value={gammaMS}>{Number(gammaMS).toFixed(2)}</option>
+                                        : <option value={gammaMS}>{Number(gammaMS).toFixed(2)}</option>)
+                                })}
                         </select>
                     </TdStyled>
 
@@ -134,11 +167,21 @@ const BeamInfo = (props) => {
                     <TdStyled>
                         <select name="steelModulus" id="steelModulus" onChange={e => setSteelModulus(e.target.value)} >
 
-                            {structuralData.steelModulusArr.map((modulus) => {
-                                return (beamObj?.steelModulus === modulus || wallObj?.steelModulus === modulus
-                                    ? <option selected value={modulus}>{Number(modulus).toFixed(2)}</option>
-                                    : <option value={modulus}>{Number(modulus).toFixed(2)}</option>)
-                            })}
+                            <option
+                                disabled
+                                selected
+                                hidden
+                            >
+                                -
+                            </option>
+
+                            {structuralData
+                                .steelModulusArr
+                                .map((modulus) => {
+                                    return (beamObj?.steelModulus === modulus || wallObj?.steelModulus === modulus
+                                        ? <option selected value={modulus}>{Number(modulus).toFixed(2)}</option>
+                                        : <option value={modulus}>{Number(modulus).toFixed(2)}</option>)
+                                })}
                         </select>
                     </TdStyled>
 
@@ -155,4 +198,4 @@ const BeamInfo = (props) => {
     )
 }
 
-export default BeamInfo;
+export default MaterialsInfo;
