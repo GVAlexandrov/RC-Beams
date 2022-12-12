@@ -11,10 +11,10 @@ import BeamInfo from './BeamInfo';
 import MaterialsInfo from './MaterialsInfo';
 import GeometryAndForces from './GeometryAndForces.js.js';
 import BendingCalcs01 from './BendingCalcs01';
+import BendingCalcs02 from './BendingCalcs02';
 
 import { fcdCalculate, fcmCalculate, fctmCalculate, fydCalculate, miuCalculate, ksiCalculate } from '../../services/formulas';
 import validateNewElements from '../../validations/newDataValidations';
-import BendingCalcs02 from './BendingCalcs02';
 
 
 const EditBeam2 = () => {
