@@ -29,8 +29,7 @@ function App() {
       <Header userEmail={userEmail} setUserEmail={setUserEmail} />
 
       <MainStyled>
-        <h1 style={{ 'color': 'red' }}>This webpage is still under construction</h1>
-        <h3 style={{ 'color': 'red' }}>Some of the features might not work</h3>
+        <h3 style={{ 'color': 'darkred', 'font-style': 'italic' }}>This webpage is still under construction. Some of the features might not work properly.</h3>
 
         <Routes>
           <Route path='/' element={<Home />} />
