@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
+let canvasHeight = 280;
+
 const GeometryCanvas = (props) => {
     const canvasRef2 = useRef(null);
     let width = props.width;
@@ -15,15 +17,15 @@ const GeometryCanvas = (props) => {
     let rebarAreaMiddleZone = props.rebarAreaMiddleZone;
 
     let bottomDimensionsLengths = [50, 200, 400, 600, 750, 800];
-    let bottomDimensionsHeights = [20, 60, 100, 140, 180, 220];
+    let bottomDimensionsHeights = [20, 50, 80, 110, 140, 170];
     let bottomDimensionsTextX = [100, 150, 270, 370, 410, 440];
-    let bottomDimensionsTextY = [110, 150, 190, 230, 270, 310];
+    let bottomDimensionsTextY = [110, 140, 170, 200, 230, 260];
 
 
     useEffect(() => {
         const canvas = canvasRef2.current;
         canvas.width = 900;
-        canvas.height = 320;
+        canvas.height = canvasHeight;
         const context = canvas.getContext('2d');
 
         // LEFT DIMENSION
@@ -121,7 +123,7 @@ const CanvasStyled = styled.canvas`
 display: block;
 /* border:solid 1px; */
 width:900px;
-height:320px;
+height:${canvasHeight}px;
 margin: auto;
 `;
 
