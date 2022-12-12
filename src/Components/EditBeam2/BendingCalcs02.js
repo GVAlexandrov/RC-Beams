@@ -19,6 +19,7 @@ const BendingCalcs02 = (props) => {
     let width = props.width;
     let height = props.height;
     let structuralData = props.structuralData;
+
     let beamObj = props?.beam || null;
 
 
@@ -65,7 +66,17 @@ const BendingCalcs02 = (props) => {
                     <TdStyled>
                         <select name="rebar" id="rebar" onChange={e => setRebarDiameter(e.target.value)}>
 
-                            {structuralData.rebarArr
+                            <option
+                                disabled
+                                selected
+                                hidden
+                                value="default"
+                            >
+                                diam.
+                            </option>
+
+                            {structuralData
+                                .rebarArr
                                 .map((rebarDiameterFromDB) => {
                                     return (beamObj?.rebar === rebarDiameterFromDB
                                         ? <option selected value={rebarDiameterFromDB}>{rebarDiameterFromDB}</option>
