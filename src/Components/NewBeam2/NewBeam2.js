@@ -6,14 +6,14 @@ import * as beamService from '../../services/services';
 
 import { ButtonStyled, DivErrorStyled, PErrorStyled } from './newBeam2Styled';
 
-import BeamInfo from './BeamInfo';
-import MaterialsInfo from './MaterialsInfo01';
-import GeometryAndForces from './GeometryAndForces.js';
-import BendingCalcs01 from './BendingCalcs01';
+import BeamInfo from '../EditBeam2/BeamInfo';
+import MaterialsInfo from '../EditBeam2/MaterialsInfo';
+import GeometryAndForces from '../EditBeam2/GeometryAndForces.js';
+import BendingCalcs01 from '../EditBeam2/BendingCalcs01';
+import BendingCalcs02 from '../EditBeam2/BendingCalcs02';
 
 import { fcdCalculate, fcmCalculate, fctmCalculate, fydCalculate, miuCalculate, ksiCalculate } from '../../services/formulas';
 import validateNewElements from '../../validations/newDataValidations';
-import BendingCalcs02 from './BendingCalcs02';
 
 
 const NewBeam2 = () => {
@@ -168,9 +168,9 @@ const NewBeam2 = () => {
         const beamNumberTextError = validateNewElements.beamNumber(beamNumberString);
         const rebarPositionTextError = validateNewElements.rebarPosition(rebarPosition);
         const concreteTextError = validateNewElements.concrete(fck);
+        const steelTextError = validateNewElements.steel(fy);
         const alphaCCTextError = validateNewElements.alphaCC(alphaCC);
         const gammaMCTextError = validateNewElements.gammaMC(gammaMC);
-        const steelTextError = validateNewElements.steel(fy);
         const gammaMSTextError = validateNewElements.gammaMS(gammaMS);
         const EsTextError = validateNewElements.Es(steelModulus);
         const heightTextError = validateNewElements.height(height.valueOf());
