@@ -50,7 +50,6 @@ const WallCanvas = (props) => {
         // EPSILON ARR
         for (let i = 0; i <= 125; i += 1) {
             if (length === 0 || width === 0) {
-                console.log('Lenght and width are needed');
                 return;
             }
 
