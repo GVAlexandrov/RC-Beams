@@ -91,8 +91,8 @@ const Beams = () => {
 
                             {(Array
                                 .from(projectsSet)
-                                .map((project) => {
-                                    return <option key={project} value={project}>{project}</option>
+                                .map((project, i) => {
+                                    return <option key={project + i} value={project}>{project}</option>
                                 }))}
                         </select>
 
@@ -108,8 +108,8 @@ const Beams = () => {
 
                             {(Array
                                 .from(levelsSet)
-                                .map((level) => {
-                                    return <option key={level} value={level}>{Number(level).toFixed(2)}</option>
+                                .map((level, i) => {
+                                    return <option key={level + i} value={level}>{Number(level).toFixed(2)}</option>
                                 }))}
                         </select>
 
@@ -119,16 +119,16 @@ const Beams = () => {
                             <THeadStyledMain>
                                 <TrStyled>
                                     {
-                                        structuralData.tableHeadingsArr.map((heading) => {
-                                            return <th key={heading}>{heading}</th>;
+                                        structuralData.tableHeadingsArr.map((heading, i) => {
+                                            return <th key={heading + i}>{heading}</th>;
                                         })
                                     }
                                 </TrStyled>
 
                                 <TrStyled2>
                                     {
-                                        structuralData.tableHeadingsDimensionsArr.map((dimension, index) => {
-                                            return <th key={index}>{dimension}</th>;
+                                        structuralData.tableHeadingsDimensionsArr.map((dimension, i) => {
+                                            return <th key={dimension + i}>{dimension}</th>;
                                         })
                                     }
                                 </TrStyled2>
@@ -147,7 +147,7 @@ const Beams = () => {
                                             ? a
                                             : Number(a[1].beamLevel) === Number(level);
                                     })
-                                    .map((beam) => <ExistingBeam key={beam[0]} beam={beam} />)}
+                                    .map((beam, i) => <ExistingBeam key={beam[0] + i} beam={beam} />)}
                             </tbody>
 
                         </TableStyled>
