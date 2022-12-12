@@ -20,7 +20,7 @@ const validateNewElements = {
     },
 
     rebarPosition(positionAsString) {
-        if (positionAsString !== 'top' && positionAsString !== 'bottom') {
+        if (positionAsString.toLowerCase() !== 'top' && positionAsString.toLowerCase() !== 'bottom') {
             return 'You should choose a reinforcement\'s position!';
         }
     },

@@ -91,8 +91,8 @@ const Walls = () => {
 
                             {(Array
                                 .from(projectsSet)
-                                .map((project) => {
-                                    return <option key={project} value={project}>{project}</option>
+                                .map((project, i) => {
+                                    return <option key={project + i} value={project}>{project}</option>
                                 }))}
                         </select>
 
@@ -108,10 +108,10 @@ const Walls = () => {
 
                             {(Array
                                 .from(levelsSet)
-                                .map((level) => {
+                                .map((level, i) => {
                                     return (
                                         <option
-                                            key={level}
+                                            key={level + i}
                                             value={level}
                                         >
                                             {Number(level).toFixed(2)}
@@ -124,16 +124,16 @@ const Walls = () => {
                             <THeadStyledMain>
                                 <TrStyled>
                                     {
-                                        structuralData.tableHeadingsWallArr.map((heading) => {
-                                            return <th key={heading}>{heading}</th>;
+                                        structuralData.tableHeadingsWallArr.map((heading, i) => {
+                                            return <th key={heading + i}>{heading}</th>;
                                         })
                                     }
                                 </TrStyled>
 
                                 <TrStyled2>
                                     {
-                                        structuralData.tableHeadingsDimensionsWallArr.map((dimension, index) => {
-                                            return <th key={index}>{dimension}</th>;
+                                        structuralData.tableHeadingsDimensionsWallArr.map((dimension, i) => {
+                                            return <th key={dimension + i}>{dimension}</th>;
                                         })
                                     }
                                 </TrStyled2>
@@ -152,7 +152,7 @@ const Walls = () => {
                                             ? a
                                             : Number(a[1].wallLevel) === Number(level);
                                     })
-                                    .map((wall) => <ExistingWall key={wall[0]} wall={wall} />)}
+                                    .map((wall, i) => <ExistingWall key={wall[0] + i} wall={wall} />)}
                             </tbody>
 
                         </TableStyled>
