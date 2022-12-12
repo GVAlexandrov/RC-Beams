@@ -6,11 +6,11 @@ import styled from 'styled-components';
 import * as structuralData from '../../services/structuralData';
 import * as wallService from '../../services/services';
 
-import WallInfo from './WallInfo';
-import WallCanvas from './WallCanvas';
-import MaterialsInfo from '../NewBeam2/MaterialsInfo01';
-import GeometryAndForces from './GeometryAndForces';
-import GeometryCanvas from './GeometryCanvas';
+import WallInfo from '../EditWall/WallInfo';
+import WallCanvas from '../EditWall/WallCanvas';
+import MaterialsInfo from '../EditBeam2/MaterialsInfo';
+import GeometryAndForces from '../EditWall/GeometryAndForces';
+import GeometryCanvas from '../EditWall/GeometryCanvas';
 
 import validateNewElements from '../../validations/newDataValidations';
 
