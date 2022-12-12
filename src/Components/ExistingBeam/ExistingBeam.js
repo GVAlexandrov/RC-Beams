@@ -9,9 +9,9 @@ const ExistingBeam = (beamObj) => {
     return (
         <TrStyled key={beamObj.beam[0]} id={beamObj.beam[0]}>
             {
-                beamArr.map((x) => {
+                beamArr.map((x, i) => {
                     return (
-                        <TdStyled key={x}>
+                        <TdStyled key={x + i}>
                             <p>{x}</p>
                         </TdStyled>
                     )
