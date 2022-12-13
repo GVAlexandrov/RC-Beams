@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
-import styled from 'styled-components';
-
 import * as structuralData from '../../services/structuralData';
 import * as wallService from '../../services/services';
+
+import { ButtonStyled, DivErrorStyled, PErrorStyled } from './editWallStyled';
 
 import WallInfo from './WallInfo';
 import WallCanvas from './WallCanvas';
@@ -103,7 +103,7 @@ const EditWall = () => {
         : (fyd / steelModulus);
 
 
-    const onSubmitHandler = (e) => {
+    const onSaveSubmitHandler = (e) => {
         e.preventDefault();
 
         const projectNameTextError = validateNewElements.projectName(projectName);
@@ -189,6 +189,10 @@ const EditWall = () => {
                 }
             })
             .catch(console.log);
+    }
+
+    const onCancelSubmitHandler = (e) => {
+        navigate('/walls');
     }
 
     return (
@@ -286,49 +290,10 @@ const EditWall = () => {
             }
 
             <br></br>
-            <ButtonStyled onClick={onSubmitHandler}>Save</ButtonStyled>
-            <ButtonStyled >Cancel</ButtonStyled>
+            <ButtonStyled onClick={onSaveSubmitHandler}>Save</ButtonStyled>
+            <ButtonStyled onClick={onCancelSubmitHandler}>Cancel</ButtonStyled>
         </>
     )
 }
-
-
-const ButtonStyled = styled.button`
-display: inline-block;
-margin:20px auto;
-margin-bottom:20px;
-font-size:16px;
-background:#bdbbb7;
-padding: 10px 50px;
-border-radius:5px;
-border-color:black;
-cursor: pointer;
-&:hover{
-background-color:#969592;
-}
-&:active {
-background-color:#bdbbb7;
-/* background-color:black;
-color:red;
-border-color:red; */
-}
-`;
-
-
-const DivErrorStyled = styled.span`
-color:red;
-background-color:white;
-font-size:20px;
-/* font-weight: bold; */
-border: 1.5px solid red;
-border-top-right-radius:15px;
-border-bottom-left-radius:15px;
-display: inline-block;
-`;
-
-const PErrorStyled = styled.p`
-margin:auto;
-padding:10px;
-`;
 
 export default EditWall;
