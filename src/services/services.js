@@ -53,23 +53,54 @@ export const addNewBeam = (
         })
 }
 
-
-
-export const getAllBeams = () => {
+export const addNewWall = (
+    projectName,
+    wallLevel,
+    wallNumberString,
+    concrete,
+    alphaCC,
+    gammaMC,
+    steel,
+    gammaMS,
+    steelModulus,
+    width,
+    length,
+    d1,
+    rebarAreaEndZone,
+    rebarAreaMiddleZone
+) => {
+    let newWall = {
+        projectName,
+        wallLevel,
+        wallNumberString,
+        concrete,
+        alphaCC,
+        gammaMC,
+        steel,
+        gammaMS,
+        steelModulus,
+        width,
+        length,
+        d1,
+        rebarAreaEndZone,
+        rebarAreaMiddleZone
+    }
     uid = localStorage.uid;
-    return fetch(`${URL}beams/${uid}/.json`)
-        .then(response => response.json())
-        .then(result => {
-            return result;
+
+    return auth.currentUser.getIdToken(false)
+        .then((token) => {
+            return fetch(`${URL}walls/${uid}/.json?auth=${token}`, {
+                method: "POST",
+                body: JSON.stringify(newWall)
+            })
         })
-        .catch(error => console.log(error));
 }
 
 
-
-export const getAllWalls = () => {
+export const getAllElements = (typeOfElement) => {
     uid = localStorage.uid;
-    return fetch(`${URL}walls/${uid}/.json`)
+
+    return fetch(`${URL}${typeOfElement}/${uid}/.json`)
         .then(response => response.json())
         .then(result => {
             return result;
@@ -88,6 +119,7 @@ export const getOneBeam = (beamId) => {
         .catch(error => console.log(error));
 }
 
+
 export const getOneWall = (wallId) => {
     uid = localStorage.uid;
     return fetch(`${URL}walls/${uid}/${wallId}/.json`)
@@ -97,6 +129,7 @@ export const getOneWall = (wallId) => {
         })
         .catch(error => console.log(error));
 }
+
 
 export const deleteOneBeam = (event, elementId, refresh) => {
     // let parentNode = event.target.nodeName === 'TD' ? event.target.parentNode.parentNode : event.target.parentNode.parentNode.parentNode;
@@ -116,6 +149,7 @@ export const deleteOneBeam = (event, elementId, refresh) => {
     // })    
 }
 
+
 export const deleteOneWall = (event, elementId, refresh) => {
     uid = localStorage.uid;
 
@@ -129,6 +163,7 @@ export const deleteOneWall = (event, elementId, refresh) => {
             refresh();
         })
 }
+
 
 export const editBeam = (
     projectName,
@@ -226,45 +261,3 @@ export const editWall = (
 }
 
 
-export const addNewWall = (
-    projectName,
-    wallLevel,
-    wallNumberString,
-    concrete,
-    alphaCC,
-    gammaMC,
-    steel,
-    gammaMS,
-    steelModulus,
-    width,
-    length,
-    d1,
-    rebarAreaEndZone,
-    rebarAreaMiddleZone
-) => {
-    let newWall = {
-        projectName,
-        wallLevel,
-        wallNumberString,
-        concrete,
-        alphaCC,
-        gammaMC,
-        steel,
-        gammaMS,
-        steelModulus,
-        width,
-        length,
-        d1,
-        rebarAreaEndZone,
-        rebarAreaMiddleZone
-    }
-    uid = localStorage.uid;
-
-    return auth.currentUser.getIdToken(false)
-        .then((token) => {
-            return fetch(`${URL}walls/${uid}/.json?auth=${token}`, {
-                method: "POST",
-                body: JSON.stringify(newWall)
-            })
-        })
-}
