@@ -22,14 +22,14 @@ const Walls = () => {
     let levelsSet = new Set([]);
 
     useEffect(() => {
-        services.getAllWalls()
+        services.getAllElements('walls')
             .then(res => {
                 setWalls(res);
             })
     }, []);
 
     function refresh() {
-        services.getAllWalls()
+        services.getAllElements('walls')
             .then(res => {
                 setWalls(res);
             })
