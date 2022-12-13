@@ -84,7 +84,7 @@ const LoginRegister = () => {
                 activeUser(res.user.uid, res.user.email);
                 return;
             })
-            .then(() => navigate('/beams'))
+            .then(() => navigate('/home'))
             .catch(error => console.log(error));
     }
 
