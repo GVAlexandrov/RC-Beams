@@ -26,6 +26,7 @@ function App() {
 
   return (
     <WrapperDivStyled>
+
       <Header userEmail={userEmail} setUserEmail={setUserEmail} />
 
       <MainStyled>
@@ -33,21 +34,22 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/login' element={<LoginRegister />} />
           <Route path='/register' element={<LoginRegister />} />
 
           <Route path='/beams' element={<Beams />} />
-          <Route path='/beams/new-beam' element={<NewBeam2 />} />
+          <Route path='/new-beam' element={<NewBeam2 />} />
           <Route path='/beams/edit-beam/:beamId' element={<EditBeam2 />} />
 
           <Route path='/walls' element={<Walls />} />
-          <Route path='/walls/new-wall' element={<NewWall />} />
+          <Route path='/new-wall' element={<NewWall />} />
           <Route path='/walls/edit-wall/:wallID' element={<EditWall />} />
         </Routes>
       </MainStyled>
 
-
       <Footer />
+
     </WrapperDivStyled>
   );
 }
