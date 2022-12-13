@@ -20,9 +20,9 @@ const Header = ({
         { menuName: "Register", path: "/register", isAuth: false },
         { menuName: "Login", path: "/login", isAuth: false },
         { menuName: "Beams", path: "/beams", isAuth: true },
-        { menuName: "New Beam", path: "/beams/new-beam", isAuth: true },
+        { menuName: "New Beam", path: "/new-beam", isAuth: true },
         { menuName: "Walls", path: "/walls", isAuth: true },
-        { menuName: "New Wall", path: "/walls/new-wall", isAuth: true },
+        { menuName: "New Wall", path: "/new-wall", isAuth: true },
     ]
 
     const navigate = useNavigate();
@@ -53,7 +53,7 @@ const Header = ({
 
                 <UlStyled id='MenuUL'>
                     {(userEmail !== null)
-                        ? <NavLinkStyled to='/'><LiStyled>Hello, {localStorage.getItem('email')}</LiStyled></NavLinkStyled>
+                        ? <NavLinkStyled to='/home'><LiStyled>Hello, {localStorage.getItem('email')}</LiStyled></NavLinkStyled>
                         : ''
                     }
 
