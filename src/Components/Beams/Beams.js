@@ -23,14 +23,14 @@ const Beams = () => {
     let levelsSet = new Set([]);
 
     useEffect(() => {
-        services.getAllBeams()
+        services.getAllElements('beams')
             .then(res => {
                 setBeams(res);
             })
     }, []);
 
     function refresh() {
-        services.getAllBeams()
+        services.getAllElements('beams')
             .then(res => {
                 setBeams(res);
             })
