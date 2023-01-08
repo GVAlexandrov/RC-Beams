@@ -26,7 +26,7 @@ const MaterialsInfo = (props) => {
         <TableStyled>
             <thead>
                 <tr>
-                    <TdStyled>αcc</TdStyled>
+                    <TdStyled><abbr title='coefficient'>αcc</abbr></TdStyled>
                     <TdStyled>γm,c</TdStyled>
                     <TdStyled>γm,s</TdStyled>
                     <TdStyled>fcd</TdStyled>
@@ -35,7 +35,7 @@ const MaterialsInfo = (props) => {
                     <TdStyled>fctm</TdStyled>
                     <TdStyled>fctk,05</TdStyled>
                     <TdStyled>fctk,95</TdStyled>
-                    <TdStyled>Ecm</TdStyled>
+                    <TdStyled><abbr title='Modulus of elasticity of concrete, mean'>Ecm</abbr></TdStyled>
                     <TdStyled>Es</TdStyled>
                     <TdStyled>εyd</TdStyled>
                 </tr>
