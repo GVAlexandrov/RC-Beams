@@ -125,7 +125,7 @@ const Walls = () => {
                                 <TrStyled>
                                     {
                                         structuralData.tableHeadingsWallArr.map((heading, i) => {
-                                            return <th key={heading + i}>{heading}</th>;
+                                            return <th scope='column' key={heading + i}>{heading}</th>;
                                         })
                                     }
                                 </TrStyled>
@@ -133,7 +133,7 @@ const Walls = () => {
                                 <TrStyled2>
                                     {
                                         structuralData.tableHeadingsDimensionsWallArr.map((dimension, i) => {
-                                            return <th key={dimension + i}>{dimension}</th>;
+                                            return <th scope='column' key={dimension + i}>{dimension}</th>;
                                         })
                                     }
                                 </TrStyled2>
