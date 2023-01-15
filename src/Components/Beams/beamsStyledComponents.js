@@ -21,7 +21,7 @@ top:70px;
 text-transform:capitalize;
 font-size:18px;
 z-index:100;
-background:#bdbbb7;
+/* background:#bdbbb7; */
 `
 
 const TrStyled = styled.tr`
