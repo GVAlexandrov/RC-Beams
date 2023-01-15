@@ -7,6 +7,7 @@ left:0px;
 width:100%;
 /* min-height:90vh; */
 background-color: #bdbbb7;
+background-image:radial-gradient(whitesmoke,hsl(0, 0%, 20%));
 text-align: center;
 display:flex;
 flex-direction: column;    
