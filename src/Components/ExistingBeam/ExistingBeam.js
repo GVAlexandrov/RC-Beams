@@ -35,7 +35,7 @@ const TrStyled = styled.tr`
 position:relative;
 height:10px;
 margin:0;
-background:#bdbbb7;
+/* background:#bdbbb7; */
 /* transition: all 500ms ease-out ; */
 /* outline: thin solid #585858; */
 /* transition: color 500ms ease-out step-end; */
