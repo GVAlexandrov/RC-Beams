@@ -71,7 +71,9 @@ const NavLinkStyled = styled(NavLink)`
   }
   
   &:hover{
-    color:red;
+    color:blue;
+    transition-property:color;
+    transition-duration:0.5s;
 }
 `;
 
