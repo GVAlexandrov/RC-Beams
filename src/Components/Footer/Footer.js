@@ -19,31 +19,34 @@ const Footer = () => {
 }
 
 const FooterStyled = styled.footer`
-position:relative;
-/* margin-top:20px; */
-height:100px;
-display:inline-block;
-padding-top:10px;
-padding-bottom:10px;
-background:black;
-color:white;
-left:0px;
-width:100%;
-border:1px;
-border-top-right-radius:80px;
+    position:relative;
+    /* margin-top:20px; */
+    height:100px;
+    display:inline-block;
+    padding-top:10px;
+    padding-bottom:10px;
+    background:black;
+    color:white;
+    left:0px;
+    width:100%;
+    border:0px;
+    border-top-right-radius:80px;
 
-&:hover{
-    color:red;    
-}
+    &:hover{
+        color:red;    
+    }
 `;
 
 const AStyled = styled.a`
-vertical-align:middle;
-color:white;
-text-decoration:none;
-&:hover{
-    color:red;    
-}
+    vertical-align:middle;
+    color:white;
+    text-decoration:none;
+    display:inline-block;
+    width:100%;
+
+    &:hover{
+        color:red;    
+    }
 `;
 
 export default Footer;
